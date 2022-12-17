@@ -16,6 +16,7 @@ def NewFormView(request):
         NewForm = CreateFormForm(data=request.POST)
         if NewForm.is_valid():
             new_dash = NewForm.save(commit=False)
+            new_dash.title = new_dash.created_on
             new_dash.author = author
             new_dash.save()
             return redirect("/") 
@@ -24,3 +25,11 @@ def NewFormView(request):
         "NewForm":NewForm,
     }
     return render(request, "pages/new.html", context)
+
+def RequestFormView(request, pk):
+
+    pk = Form.objects.get(created_on=pk)
+    context = {
+        "pk":pk
+    }
+    return render(request, 'pages/formView.html', context)

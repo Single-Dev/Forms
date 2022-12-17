@@ -8,6 +8,7 @@ class CustomUser(AbstractUser):
 
 class Form(models.Model):
     title = models.CharField(max_length=50)
+    # slug = models.SlugField(unique=True)
     author = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='form')
     is_public = models.BooleanField(default=True)
     created_on = models.DateTimeField(("created on"), default=timezone.now)

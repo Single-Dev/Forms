@@ -5,5 +5,6 @@ app_name = 'base'
 
 urlpatterns = [
     path('', home, name="home"),
-    path('new/', NewFormView, name='new')
+    path('new/', NewFormView, name='new'),
+    path("form/<str:pk>/", RequestFormView, name='request_form_view')
 ]
