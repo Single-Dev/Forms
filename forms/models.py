@@ -13,5 +13,15 @@ class Form(models.Model):
     created_on = models.DateTimeField(("created on"), default=timezone.now)
     message = models.TextField(max_length=300)
     anonim_requests = models.BooleanField(default=False)
+
     def __str__(self):
         return f'id: {self.id} Created on: {self.created_on}'
+
+class FormRequest(models.Model):
+    form = models.ForeignKey(Form, on_delete=models.CASCADE)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, null=True, blank=True)
+    full_name = models.CharField(max_length=32)
+    email = models.EmailField()
+
+    def __str__(self):
+        return f'id: {self.id}'
