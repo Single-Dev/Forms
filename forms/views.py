@@ -16,7 +16,7 @@ def NewFormView(request):
         NewForm = CreateFormForm(data=request.POST)
         if NewForm.is_valid():
             new_dash = NewForm.save(commit=False)
-            new_dash.slug = new_dash.created_on.strftime("%H%M%S%Y")
+            new_dash.slug = new_dash.created_on.strftime("%f%S%M%H%d%m%Y")
             new_dash.author = author
             new_dash.save()
             return redirect("/") 
@@ -26,10 +26,10 @@ def NewFormView(request):
     }
     return render(request, "pages/new.html", context)
 
-def RequestFormView(request, slug):
+def SingleView(request, slug):
 
     single = Form.objects.get(slug=slug)
     context = {
         "single":single
     }
-    return render(request, 'pages/formView.html', context)
+    return render(request, 'pages/single.html', context)
