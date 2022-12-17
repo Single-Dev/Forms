@@ -18,5 +18,9 @@ class CreateAccountForm(UserCreationForm):
 class CreateFormForm(forms.ModelForm):
     class Meta:
         model = Form
-        fields = '__all__'
-        
+        fields = ['title', 'is_public', 'anonim_requests', 'message']
+    
+class CreateFormRequestTest(forms.ModelForm):
+    class Meta:
+        model = FormRequest
+        fields = ['is_public', 'full_name', 'email']

@@ -8,7 +8,7 @@ class CustomUser(AbstractUser):
 
 class Form(models.Model):
     title = models.CharField(max_length=50)
-    author = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    author = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='form')
     is_public = models.BooleanField(default=True)
     created_on = models.DateTimeField(("created on"), default=timezone.now)
     message = models.TextField(max_length=300)
@@ -18,8 +18,8 @@ class Form(models.Model):
         return f'id: {self.id} Created on: {self.created_on}'
 
 class FormRequest(models.Model):
-    form = models.ForeignKey(Form, on_delete=models.CASCADE)
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, null=True, blank=True)
+    form = models.ForeignKey(Form, on_delete=models.CASCADE, related_name='request')
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, null=True, blank=True, related_name='user')
     is_public = models.BooleanField(default=False)
     full_name = models.CharField(max_length=32)
     email = models.EmailField()

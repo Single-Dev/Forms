@@ -4,5 +4,6 @@ from .views import *
 app_name = 'base'
 
 urlpatterns = [
-    path('', home, name="home")
+    path('', home, name="home"),
+    path('new/', NewFormView, name='new')
 ]
