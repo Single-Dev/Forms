@@ -20,6 +20,7 @@ class Form(models.Model):
 class FormRequest(models.Model):
     form = models.ForeignKey(Form, on_delete=models.CASCADE)
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, null=True, blank=True)
+    is_public = models.BooleanField(default=False)
     full_name = models.CharField(max_length=32)
     email = models.EmailField()
 
