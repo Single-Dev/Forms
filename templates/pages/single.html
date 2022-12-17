@@ -7,6 +7,12 @@
     <title>{{ single.title }}</title>
 </head>
 <body>
+    {% if single.is_public %}
+    <span>Public</span>
+    {% else %}
+    <span>Private</span>
+    {% endif %}
+    <br>
     {{ single.message }}
 </body>
 </html>

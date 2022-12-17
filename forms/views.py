@@ -6,10 +6,9 @@ from forms.form import *
 def home(request):
     return render(request, 'pages/home.html')
 
-@login_required(login_url='app:login')
+@login_required(login_url='/')
 def NewFormView(request):
     author = get_object_or_404(CustomUser, username=request.user)
-    # dash = author.form.all()
     new_dash = None
     NewForm = CreateFormForm()
     if request.method == 'POST':
@@ -27,8 +26,8 @@ def NewFormView(request):
     return render(request, "pages/new.html", context)
 
 def SingleView(request, slug):
-
     single = Form.objects.get(slug=slug)
+    
     context = {
         "single":single
     }
