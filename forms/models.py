@@ -1,6 +1,17 @@
-from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.utils import timezone
+from django.db import models
 
 class CustomUser(AbstractUser):
     is_organiser = models.BooleanField(default=False)
     is_agent = models.BooleanField(default=False)
+
+class Form(models.Model):
+    title = models.CharField(max_length=50)
+    author = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    is_public = models.BooleanField(default=True)
+    created_on = models.DateTimeField(("created on"), default=timezone.now)
+    message = models.TextField(max_length=300)
+    anonim_requests = models.BooleanField(default=False)
+    def __str__(self):
+        return f'id: {self.id} Created on: {self.created_on}'
