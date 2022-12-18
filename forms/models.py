@@ -16,7 +16,7 @@ class Form(models.Model):
     anonim_requests = models.BooleanField(default=False)
 
     def __str__(self):
-        return f'id: {self.id} Created on: {self.created_on}'
+        return f'id: {self.id} Created on: {self.created_on.strftime("%T")}'
 
 class FormRequest(models.Model):
     form = models.ForeignKey(Form, on_delete=models.CASCADE, related_name='request')

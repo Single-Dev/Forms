@@ -6,16 +6,19 @@ from forms.form import *
 def home(request):
     return render(request, 'pages/home.html')
 
-@login_required(login_url='/')
+# @login_required(login_url='/')
 def NewFormView(request):
+    # if request.user.is_authenticated:
     author = get_object_or_404(CustomUser, username=request.user)
+    # else:
+    #     author = get_object_or_404(CustomUser, username='anonim')
     new_dash = None
     NewForm = CreateFormForm()
     if request.method == 'POST':
         NewForm = CreateFormForm(data=request.POST)
         if NewForm.is_valid():
-            new_dash = NewForm.save(commit=False)
-            new_dash.slug = new_dash.created_on.strftime("%f%S%M%H%d%m%Y")
+            new_dash = NewForm.save(commit=False)     
+            new_dash.slug = new_dash.created_on.strftime("%Y%m%d%H%M%S%f")
             new_dash.author = author
             new_dash.save()
             return redirect("/") 
