@@ -13,6 +13,9 @@
     <span>Private</span>
     {% endif %}
     <br>
+    {% if single.anonim_requests %}
+    <h2>Siz akauntdan chqib turib anonim xabar yuborsez bo'ladi</h2>
+    {% endif %}
     {{ single.message }}
 
     <form method="post">
