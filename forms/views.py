@@ -7,15 +7,27 @@ from forms.form import *
 def home(request):
     return render(request, 'pages/home.html')
 
-
+# Account Create
 class CreateAccountView(generic.CreateView):
     template_name = 'registration/signup.html'
     form_class = CreateAccountForm
 
     def get_success_url(self):
-        return reverse("login")
+        return reverse("base:login")
 
 CreateAccountView = CreateAccountView.as_view()
+
+# Profile View
+
+def ProfileView(request, username):
+    user_p = User.objects.get(username=username)
+    author = get_object_or_404(User, username=username)
+
+    context = {
+        "user_p": user_p,    
+    }
+    return render(request, 'pages/profile.html', context)
+
 
 # @login_required(login_url='/')
 def NewFormView(request):
