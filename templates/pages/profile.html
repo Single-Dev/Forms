@@ -7,6 +7,14 @@
     <title>@{{user_p.username}}</title>
 </head>
 <body>
-    
+    {% for x in user_forms %}
+    {{ x.title }}
+    <br>
+    {% endfor %}
+    {% for x in user_requests %}
+    <span style="color: red;">{{ x.form }}</span>
+    <br>
+    {{ x.email }}
+    {% endfor %}
 </body>
 </html>

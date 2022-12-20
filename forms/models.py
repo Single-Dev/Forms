@@ -19,8 +19,8 @@ class Form(models.Model):
         return f'id: {self.id} Created on: {self.created_on.strftime("%T")}'
 
 class FormRequest(models.Model):
-    form = models.ForeignKey(Form, on_delete=models.CASCADE, related_name='request')
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, null=True, blank=True, related_name='user')
+    form = models.ForeignKey(Form, on_delete=models.CASCADE, )
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, null=True, blank=True, related_name='user_request')
     is_public = models.BooleanField(default=False)
     full_name = models.CharField(max_length=32)
     email = models.EmailField()

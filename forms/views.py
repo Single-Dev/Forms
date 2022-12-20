@@ -21,10 +21,18 @@ CreateAccountView = CreateAccountView.as_view()
 
 def ProfileView(request, username):
     user_p = User.objects.get(username=username)
-    author = get_object_or_404(User, username=username)
-
-    context = {
+    user_forms = None
+    user_requests = None
+    if user_p.username == request.user.username:
+        user_forms = user_p.form.all()
+        user_requests = user_p.user_request.all()
+    else:
+        user_forms = user_p.form.filter(is_public=True)
+        user_requests = user_p.user_request.filter(is_public=True)
+    context = { 
         "user_p": user_p,    
+        "user_forms":user_forms,
+        "user_requests":user_requests
     }
     return render(request, 'pages/profile.html', context)
 
