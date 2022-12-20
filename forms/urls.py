@@ -6,5 +6,6 @@ app_name = 'base'
 urlpatterns = [
     path('', home, name="home"),
     path('new/', NewFormView, name='new'),
-    path("form/<str:slug>/", SingleView, name='single')
+    path("form/<str:slug>/", SingleView, name='single'),
+    path('signup/', CreateAccountView, name="signup")
 ]

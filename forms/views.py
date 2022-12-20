@@ -1,10 +1,21 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.contrib.auth.decorators import login_required
+from django.views import generic
 from .models import *
 from forms.form import *
 
 def home(request):
     return render(request, 'pages/home.html')
+
+
+class CreateAccountView(generic.CreateView):
+    template_name = 'registration/signup.html'
+    form_class = CreateAccountForm
+
+    def get_success_url(self):
+        return reverse("login")
+
+CreateAccountView = CreateAccountView.as_view()
 
 # @login_required(login_url='/')
 def NewFormView(request):
