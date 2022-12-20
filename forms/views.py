@@ -37,6 +37,7 @@ def ProfileView(request, username):
     return render(request, 'pages/profile.html', context)
 
 
+# Create Form View
 # @login_required(login_url='/')
 def NewFormView(request):
     author = get_object_or_404(CustomUser, username=request.user)
@@ -56,6 +57,7 @@ def NewFormView(request):
     }
     return render(request, "pages/new.html", context)
 
+# Yagona Forma ko'rish manzili
 def SingleView(request, slug):
     single = Form.objects.get(slug=slug)
     form_q = get_object_or_404(Form, slug=slug)
@@ -70,7 +72,7 @@ def SingleView(request, slug):
             user_r = get_object_or_404(CustomUser, username=request.user)
         else:
             user_r = get_object_or_404(CustomUser, username='anonim')
-    form_requests_count = form_q.request.count()
+    form_requests_count = form_q.form_requests.count()
     new_request = None
     if request.method == 'POST':
         request_form = CreateFormRequestTest(data=request.POST)
@@ -79,7 +81,7 @@ def SingleView(request, slug):
             new_request.form = form_q
             new_request.user = user_r
             new_request.save()
-            return redirect("base:single", slug) # redirect to this url
+            return redirect("base:submit_success", slug) # redirect to this url
     else:
         request_form = CreateFormRequestTest()
     context = {
@@ -88,3 +90,11 @@ def SingleView(request, slug):
         "request_form":request_form
     }
     return render(request, 'pages/single.html', context)
+
+
+def SubmitSuccessView(request, slug):
+    single = Form.objects.get(slug=slug)
+    context ={
+        "single":single
+    }
+    return render(request, 'pages/helpers/success.html', context)
