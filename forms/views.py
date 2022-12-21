@@ -21,6 +21,8 @@ CreateAccountView = CreateAccountView.as_view()
 
 def ProfileView(request, username):
     user_p = User.objects.get(username=username)
+
+    # ----------------------- Tab ----------------------- #
     user_forms = None
     user_requests = None
     title = f'@{user_p.username}'
@@ -39,6 +41,8 @@ def ProfileView(request, username):
         elif tab == 'requests':
             user_requests = user_p.user_request.filter(is_public=True)
             title = f"@{user_p.username}'s - requests"
+    # ----------------------- Tab End ----------------------- #
+
     context = { 
         "user_p": user_p,    
         "user_forms":user_forms,
@@ -92,11 +96,7 @@ def SingleView(request, slug):
             new_request.form = form_q
             new_request.user = user_r
             new_request.save()
-            if single.submit_success_form in form_q:
-                return redirect("base:submit_success", slug)
-            else:
-                return redirect('base:home')
-                # return redirect("base:submit_success", slug)
+            return redirect("base:single", slug)
     else:
         request_form = CreateFormRequestTest()
     context = {
@@ -113,3 +113,6 @@ def SubmitSuccessView(request, slug):
         "single":single
     }
     return render(request, 'pages/helpers/success.html', context)
+
+def NotificationsView(request):
+    pass
