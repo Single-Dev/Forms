@@ -8,12 +8,14 @@
 </head>
 <body>
     {% for x in new_requests %}
+    {% if x.form.author.username == request.user.username %}
     <h1><a href="{% url 'base:single_request' x.id %}">{{ x.full_name }}</a><a href="{% url 'base:single' x.form.slug %}">{{ x.form.title }}</a></h1>
     <br>
     {{ x.email }}
     <br>
     <br>
     <hr>
+    {% endif %}
     {% endfor %}
 </body>
 </html>
