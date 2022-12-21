@@ -123,3 +123,10 @@ def NotificationsView(request):
         "new_requests":new_requests
     }
     return render(request, 'pages/notifications.html', context)
+
+def SingleRequestView(request, pk):
+    single_request = FormRequest.objects.get(id=pk)
+    context = {
+        'single_request':single_request
+    }
+    return render(request, 'pages/single_request.html', context)

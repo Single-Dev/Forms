@@ -12,5 +12,6 @@ urlpatterns = [
     path("login/", LoginView.as_view(), name="login"),
     path('@<str:username>/', ProfileView, name="profile"),
     path('submit-success/<str:slug>/', SubmitSuccessView, name="submit_success"),
-    path('notifications/', NotificationsView, name='notifications')
+    path('notifications/', NotificationsView, name='notifications'),
+    path('request/<int:pk>/', SingleRequestView, name='single_request')
 ]
