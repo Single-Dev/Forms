@@ -23,21 +23,27 @@ def ProfileView(request, username):
     user_p = User.objects.get(username=username)
     user_forms = None
     user_requests = None
+    title = f'@{user_p.username}'
     tab = request.GET.get('tab')
     if user_p.username == request.user.username:
         if tab == 'forms':
             user_forms = user_p.form.all()
+            title = f"Your forms"
         elif tab =='requests':
             user_requests = user_p.user_request.all()
+            title = f"Your requests"
     else:
         if tab == 'forms':
             user_forms = user_p.form.filter(is_public=True)
+            title = f"@{user_p.username}'s - forms"
         elif tab == 'requests':
             user_requests = user_p.user_request.filter(is_public=True)
+            title = f"@{user_p.username}'s - requests"
     context = { 
         "user_p": user_p,    
         "user_forms":user_forms,
-        "user_requests":user_requests
+        "user_requests":user_requests,
+        "title": title
     }
     return render(request, 'pages/profile.html', context)
 
