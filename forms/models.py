@@ -19,7 +19,7 @@ class Form(models.Model):
         return f'id: {self.id} Created on: {self.created_on.strftime("%T")}'
 
 class SubmitSuccessMessage(models.Model):
-    form = models.OneToOneField(Form, on_delete=models.CASCADE, related_name='submit_success_form')
+    form = models.ForeignKey(Form, on_delete=models.CASCADE, related_name='submit_success_form')
     author = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='submit_success')
     title = models.CharField(max_length=50)
     message = models.TextField(max_length=700)

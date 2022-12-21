@@ -23,12 +23,17 @@ def ProfileView(request, username):
     user_p = User.objects.get(username=username)
     user_forms = None
     user_requests = None
+    tab = request.GET.get('tab')
     if user_p.username == request.user.username:
-        user_forms = user_p.form.all()
-        user_requests = user_p.user_request.all()
+        if tab == 'forms':
+            user_forms = user_p.form.all()
+        elif tab =='requests':
+            user_requests = user_p.user_request.all()
     else:
-        user_forms = user_p.form.filter(is_public=True)
-        user_requests = user_p.user_request.filter(is_public=True)
+        if tab == 'forms':
+            user_forms = user_p.form.filter(is_public=True)
+        elif tab == 'requests':
+            user_requests = user_p.user_request.filter(is_public=True)
     context = { 
         "user_p": user_p,    
         "user_forms":user_forms,
@@ -81,7 +86,11 @@ def SingleView(request, slug):
             new_request.form = form_q
             new_request.user = user_r
             new_request.save()
-            return redirect("base:submit_success", slug) # redirect to this url
+            if single.submit_success_form in form_q:
+                return redirect("base:submit_success", slug)
+            else:
+                return redirect('base:home')
+                # return redirect("base:submit_success", slug)
     else:
         request_form = CreateFormRequestTest()
     context = {
