@@ -11,5 +11,6 @@ urlpatterns = [
     path('signup/', CreateAccountView, name="signup"),
     path("login/", LoginView.as_view(), name="login"),
     path('@<str:username>/', ProfileView, name="profile"),
-    path('submit-success/<str:slug>/', SubmitSuccessView, name="submit_success")
+    path('submit-success/<str:slug>/', SubmitSuccessView, name="submit_success"),
+    path('notifications/', NotificationsView, name='notifications')
 ]
