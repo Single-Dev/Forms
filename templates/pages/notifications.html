@@ -1,21 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>notifications</title>
 </head>
+
 <body>
     {% for x in new_requests %}
     {% if x.form.author.username == request.user.username %}
-    <h1><a href="{% url 'base:single_request' x.id %}">{{ x.full_name }}</a><a href="{% url 'base:single' x.form.slug %}">{{ x.form.title }}</a></h1>
-    <br>
-    {{ x.email }}
-    <br>
-    <br>
-    <hr>
+    <div id="msg">
+        <h1><a href="{% url 'base:single_request' x.id %}">{{ x.full_name }}</a> / <a
+                href="{% url 'base:single' x.form.slug %}">{{ x.form.title }}</a></h1>
+        <br>
+        {{ x.email }}
+        <a href="{% url 'base:profile' x.user.username %}">{{ x.user.username }}</a>
+        <br>
+        <br>
+        <hr>
+    </div>
     {% endif %}
     {% endfor %}
+    <div id="response"></div>
+    <script>
+        let msg_div = document.getElementById('msg')
+        let response = document.getElementById('response')
+        if (msg_div){}else{
+            response.innerHTML = "Asosiy jild top toza!"
+        }
+    </script>
 </body>
+
 </html>
