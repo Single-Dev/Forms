@@ -115,8 +115,6 @@ def SubmitSuccessView(request, slug):
     return render(request, 'pages/helpers/success.html', context)
 
 def NotificationsView(request):
-    # user = get_object_or_404(CustomUser, username=request.user)
-    user = CustomUser.objects.get(username=request.user.username)
     new_requests = FormRequest.objects.filter(view=False)
     context = {
         "new_requests":new_requests
