@@ -15,6 +15,7 @@
     <hr>
     {% for x in user_forms %}
     {{ x.title }}
+    <a href="{% url 'base:single' x.slug %}">{{ x.slug }}</a>
     <br>
     {% endfor %}
     {% for x in user_requests %}

@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
 from django.views import generic
 from .models import *
 from forms.form import *
@@ -18,7 +19,7 @@ class CreateAccountView(generic.CreateView):
 CreateAccountView = CreateAccountView.as_view()
 
 # Profile View
-
+@login_required(login_url='base:login')
 def ProfileView(request, username):
     user_p = User.objects.get(username=username)
 
@@ -51,9 +52,12 @@ def ProfileView(request, username):
     }
     return render(request, 'pages/profile.html', context)
 
+def logoutView(request):
+    logout(request)
+    return redirect("base:home")
 
 # Create Form View
-# @login_required(login_url='/')
+@login_required(login_url='base:login')
 def NewFormView(request):
     author = get_object_or_404(CustomUser, username=request.user)
     new_dash = None
@@ -114,6 +118,7 @@ def SubmitSuccessView(request, slug):
     }
     return render(request, 'pages/helpers/success.html', context)
 
+@login_required(login_url='base:login')
 def NotificationsView(request):
     new_requests = FormRequest.objects.filter(view=False)
     context = {
