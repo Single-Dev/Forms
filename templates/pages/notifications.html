@@ -11,7 +11,7 @@
 <body>
     {% for x in new_requests %}
     {% if x.form.author.username == request.user.username %}
-    <div id="msg">
+    <div id="requests">
         <h1><a href="{% url 'base:single_request' x.id %}">{{ x.full_name }}</a> / <a
                 href="{% url 'base:single' x.form.slug %}">{{ x.form.title }}</a></h1>
         <br>
@@ -23,12 +23,18 @@
     </div>
     {% endif %}
     {% endfor %}
+   
     <div id="response"></div>
     <script>
-        let msg_div = document.getElementById('msg')
+        let requests = document.querySelectorAll('#requests')
         let response = document.getElementById('response')
-        if (msg_div){}else{
-            response.innerHTML = "Asosiy jild top toza!"
+        if (requests) {
+            if ( requests.length > 0 ){
+                document.head.querySelector('title').innerHTML = `notifications (${requests.length})`
+            }
+            else if(requests.length <= 0){
+                response.innerHTML = "<h1>Asosiy jild top toza!</h1>"
+            }    
         }
     </script>
 </body>
