@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseRedirect
 from django.contrib.auth import logout
 from django.views import generic
 from .models import *
@@ -79,34 +80,43 @@ def NewFormView(request):
 # Yagona Forma ko'rish manzili
 def SingleView(request, slug):
     single = Form.objects.get(slug=slug)
-    form_q = get_object_or_404(Form, slug=slug)
+    # shu formaga kelgan sorovlarni ko'rish
+    tab = request.GET.get('tab')
+    requests_ = None
+    if tab == "requests":
+        requests_ = single.form_requests.all()
+    # Sorov Yubirish uchun Forma tayyorlash
+    form_ = get_object_or_404(Form, slug=slug)
     user_r = None
     if single.anonim_requests == False:
         if request.user.is_authenticated:
             user_r = get_object_or_404(CustomUser, username=request.user)
         else:
-            return redirect('/')
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     else:
         if request.user.is_authenticated:
             user_r = get_object_or_404(CustomUser, username=request.user)
         else:
             user_r = get_object_or_404(CustomUser, username='anonim')
-    form_requests_count = form_q.form_requests.count()
+    form_requests_count = form_.form_requests.count()
     new_request = None
     if request.method == 'POST':
         request_form = CreateFormRequestTest(data=request.POST)
         if request_form.is_valid():
             new_request = request_form.save(commit=False)
-            new_request.form = form_q
+            new_request.form = form_
             new_request.user = user_r
             new_request.save()
-            return redirect("base:single", slug)
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     else:
         request_form = CreateFormRequestTest()
+    # Sorov Yubirish uchun Forma tayyorlash
+
     context = {
         "single":single,
         "form_requests_count":form_requests_count,
-        "request_form":request_form
+        "request_form":request_form,
+        "requests_":requests_
     }
     return render(request, 'pages/single.html', context)
 
@@ -122,7 +132,7 @@ def SubmitSuccessView(request, slug):
 def NotificationsView(request):
     new_requests = FormRequest.objects.filter(view=False)
     context = {
-        "new_requests":new_requests
+        "new_requests":new_requests,
     }
     return render(request, 'pages/notifications.html', context)
 

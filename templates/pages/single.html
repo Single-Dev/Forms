@@ -23,5 +23,9 @@
         {{ request_form }}        
         <button type="submit">Submit</button>
     </form>
+    <a href="?tab=requests">requests_</a>
+    {% for y in requests_ %}
+    {{ y.email }}
+    {% endfor %}
 </body>
 </html>
