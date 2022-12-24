@@ -152,9 +152,9 @@ def SingleRequestView(request, slug, pk):
             pass
         else:
             return redirect('base:home')
-    
-    single_request.view = True
-    single_request.save()
+    if single_form.author.username == user_.username:
+        single_request.view = True
+        single_request.save()
     context = {
         'single_request':single_request,
         'single_form':single_form
