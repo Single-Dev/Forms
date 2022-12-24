@@ -14,5 +14,5 @@ urlpatterns = [
     path("form/<str:slug>/", SingleView, name='single'),
     path('submit-success/<str:slug>/', SubmitSuccessView, name="submit_success"),
     path('notifications/', NotificationsView, name='notifications'),
-    path('request/<int:pk>/', SingleRequestView, name='single_request')
+    path('request/<str:slug>/<int:pk>/', SingleRequestView, name='single_request')
 ]

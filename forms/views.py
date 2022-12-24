@@ -24,7 +24,7 @@ CreateAccountView = CreateAccountView.as_view()
 def ProfileView(request, username):
     user_p = User.objects.get(username=username)
 
-    # ----------------------- Tab ----------------------- #
+    # ----------------------- Profile Tab ----------------------- #
     user_forms = None
     user_requests = None
     title = f'@{user_p.username}'
@@ -43,7 +43,7 @@ def ProfileView(request, username):
         elif tab == 'requests':
             user_requests = user_p.user_request.filter(is_public=True)
             title = f"@{user_p.username}'s - requests"
-    # ----------------------- Tab End ----------------------- #
+    # ----------------------- Profile Tab End ----------------------- #
 
     context = { 
         "user_p": user_p,    
@@ -80,7 +80,7 @@ def NewFormView(request):
 # Yagona Forma ko'rish manzili
 def SingleView(request, slug):
     single = Form.objects.get(slug=slug)
-    # shu formaga kelgan sorovlarni ko'rish
+    # ----------------------- shu formaga kelgan sorovlarni ko'rish ----------------------- #
     tab = request.GET.get('tab')
     requests_ = None
     if tab == "requests":
@@ -88,7 +88,8 @@ def SingleView(request, slug):
             requests_ = single.form_requests.all()
         else:
             requests_ = single.form_requests.filter(is_public=True)
-    # Sorov Yubirish uchun Forma tayyorlash
+    # ----------------------- shu formaga kelgan sorovlarni ko'rish ----------------------- #
+    # ----------------------- Sorov Yubirish uchun Forma tayyorlash ----------------------- #
     form_ = get_object_or_404(Form, slug=slug)
     user_r = None
     if single.anonim_requests == False:
@@ -113,7 +114,7 @@ def SingleView(request, slug):
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     else:
         request_form = CreateFormRequestTest()
-    # Sorov Yubirish uchun Forma tayyorlash
+    # ----------------------- Sorov Yubirish uchun Forma tayyorlash ----------------------- #
 
     context = {
         "single":single,
@@ -139,11 +140,23 @@ def NotificationsView(request):
     }
     return render(request, 'pages/notifications.html', context)
 
-def SingleRequestView(request, pk):
+@login_required(login_url='base:login')
+def SingleRequestView(request, slug, pk):
+    single_form = Form.objects.get(slug=slug)
     single_request = FormRequest.objects.get(id=pk)
+    user_ = get_object_or_404(CustomUser, username=request.user)
+    if single_request.is_public == True:
+            pass
+    else:
+        if user_.username == single_form.author.username or user_.username == single_request.user.username:
+            pass
+        else:
+            return redirect('base:home')
+    
     single_request.view = True
     single_request.save()
     context = {
-        'single_request':single_request
+        'single_request':single_request,
+        'single_form':single_form
     }
     return render(request, 'pages/single_request.html', context)
