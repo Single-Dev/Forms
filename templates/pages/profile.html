@@ -20,7 +20,7 @@
     {% endfor %}
     {% for x in user_requests %}
     <span style="color: red;">{{ x.form }}</span>
-    <a href="{% rul 'base:single_request' x.form.slug x.id %}">{{ x.full_name }}</a>
+    <a href="{% url 'base:single_request' x.form.slug x.id %}">{{ x.full_name }}</a>
     <br>
     {{ x.email }}
     {% endfor %}
