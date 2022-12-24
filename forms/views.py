@@ -84,7 +84,10 @@ def SingleView(request, slug):
     tab = request.GET.get('tab')
     requests_ = None
     if tab == "requests":
-        requests_ = single.form_requests.all()
+        if request.user.username == single.author.username:
+            requests_ = single.form_requests.all()
+        else:
+            requests_ = single.form_requests.filter(is_public=True)
     # Sorov Yubirish uchun Forma tayyorlash
     form_ = get_object_or_404(Form, slug=slug)
     user_r = None
