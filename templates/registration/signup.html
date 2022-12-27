@@ -1,16 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SignUp</title>
-</head>
-<body>
-    <form style="width: 300px;" method="post">
-        {% csrf_token %}
-        {{ form }}
-        <button type="submit">Create Acccount</button>
-    </form>
-</body>
-</html>
+{% extends 'base/base.html' %}
+{% block title %}Signup{% endblock title %}
+{% block content %}
+
+    <!-- ======= Breadcrumbs ======= -->
+    <section id="breadcrumbs" class="breadcrumbs">
+        <div class="container">
+
+            <ol>
+                <li><a href="{% url 'base:home' %}">Home</a></li>
+                <li>SignUp</li>
+            </ol>
+            <h2>Create Account</h2>
+
+        </div>
+    </section><!-- End Breadcrumbs -->
+
+    <section class="inner-page">
+        <div class="container">
+            <form method="post">
+                {% csrf_token %}
+                {{ form }}
+                <button type="submit">Create Account</button>
+            </form>
+        </div>
+    </section>
+
+{% endblock content %}

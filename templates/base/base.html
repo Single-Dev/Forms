@@ -7,7 +7,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{% endblock title %}</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link href="{% static 'assets/vendor/aos/aos.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/remixicon/remixicon.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
 </head>
 
 <body>
@@ -16,8 +23,16 @@
     {% block content %}
 
     {% endblock content %}
+    <div id="preloader"></div>
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>  
     {% include 'includes/footer.html' %}
-
+    <script src="{% static  'assets/vendor/aos/aos.js' %}"></script>
+    <script src="{% static  'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static  'assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+    <script src="{% static  'assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+    <script src="{% static  'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+    <script src="{% static  'assets/vendor/waypoints/noframework.waypoints.js' %}"></script>
+    <script src="{% static  'assets/js/main.js' %}"></script>
 </body>
 
 </html>

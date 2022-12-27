@@ -2,5 +2,15 @@
 {% block title %}Home{% endblock title %}
 
 {% block content %}
-<a href="{% url 'base:new' %}">New Form</a>
+{% include 'includes/hero.html' %}
+{% include 'includes/about.html' %}
+{% include 'includes/why-us.html' %}
+{% include 'includes/skills.html' %}
+{% include 'includes/services.html' %}
+{% include 'includes/cta.html' %}
+{% include 'includes/portfolio.html' %}
+{% include 'includes/pricing.html' %}
+{% include 'includes/faq.html' %}
+{% include 'includes/contact.html' %}
+{% include 'includes/footer-links.html' %}
 {% endblock content %}
