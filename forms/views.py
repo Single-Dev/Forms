@@ -78,7 +78,7 @@ def NewFormView(request):
     return render(request, "pages/new.html", context)
 
 # Yagona Forma ko'rish manzili
-def SingleView(request, slug):
+def SingleFormView(request, slug):
     single = Form.objects.get(slug=slug)
     # ----------------------- shu formaga kelgan sorovlarni ko'rish ----------------------- #
     tab = request.GET.get('tab')
@@ -111,18 +111,18 @@ def SingleView(request, slug):
             new_request.form = form_
             new_request.user = user_r
             new_request.save()
-            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+            return redirect("base:submit_success", slug)
     else:
         request_form = CreateFormRequestTest()
     # ----------------------- Sorov Yubirish uchun Forma tayyorlash ----------------------- #
-
     context = {
         "single":single,
         "form_requests_count":form_requests_count,
         "request_form":request_form,
-        "requests_":requests_
+        "requests_":requests_,
     }
-    return render(request, 'pages/single.html', context)
+    return render(request, 'pages/single-form.html', context)
+
 
 
 def SubmitSuccessView(request, slug):
@@ -130,8 +130,9 @@ def SubmitSuccessView(request, slug):
     context ={
         "single":single
     }
-    return render(request, 'pages/helpers/success.html', context)
+    return render(request, 'pages/success.html', context)
 
+# ----------------------- Notifications view ----------------------- #
 @login_required(login_url='base:login')
 def NotificationsView(request):
     new_requests = FormRequest.objects.filter(view=False)
@@ -139,7 +140,9 @@ def NotificationsView(request):
         "new_requests":new_requests,
     }
     return render(request, 'pages/notifications.html', context)
+# ----------------------- notifications view ----------------------- #
 
+# ----------------------- Request view ----------------------- #
 @login_required(login_url='base:login')
 def SingleRequestView(request, slug, pk):
     single_form = Form.objects.get(slug=slug)
@@ -160,3 +163,4 @@ def SingleRequestView(request, slug, pk):
         'single_form':single_form
     }
     return render(request, 'pages/single_request.html', context)
+# ----------------------- request view ----------------------- #
