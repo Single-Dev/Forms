@@ -11,10 +11,10 @@
 
     {% if single_request.user == request.user %}
     {% if request.user.username == single_request.user.username and single_request.view %}
-    <h2>admin ko'rgan</h2>
+    <h2>{{single_request.form.author}} ko'rgan</h2>
     {% endif %}
     {% if single_request.view == False %}
-    <h2>Yetib borgan</h2>
+    <h2>{{single_request.form.author}}ga Yetib borgan</h2>
     {% endif %}
     {% endif %}
     <h3>sender: {{ single_request.full_name }}</h3>
