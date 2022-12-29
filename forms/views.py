@@ -81,7 +81,7 @@ def NewFormView(request):
 def SingleFormView(request, slug):
     single = Form.objects.get(slug=slug)
     # ----------------------- shu formaga kelgan sorovlarni ko'rish ----------------------- #
-    tab = request.GET.get('tab')
+    tab = request.GET.get('form')
     requests_ = None
     if tab == "requests":
         if request.user.username == single.author.username:
@@ -92,16 +92,16 @@ def SingleFormView(request, slug):
     # ----------------------- Sorov Yubirish uchun Forma tayyorlash ----------------------- #
     form_ = get_object_or_404(Form, slug=slug)
     user_r = None
+    # Agar Anonim Sorovlaar uchun ruxsat etilmagan bo'lsa
     if single.anonim_requests == False:
         if request.user.is_authenticated:
             user_r = get_object_or_404(CustomUser, username=request.user)
         else:
-            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+            return redirect(f"/login/?next={request.path}")
     else:
-        if request.user.is_authenticated:
-            user_r = get_object_or_404(CustomUser, username=request.user)
-        else:
+        if not request.user.is_authenticated:
             user_r = get_object_or_404(CustomUser, username='anonim')
+    # Agar Anonim Sorovlaar uchun ruxsat etilmagan bo'lsa
     form_requests_count = form_.form_requests.count()
     new_request = None
     if request.method == 'POST':
@@ -109,6 +109,15 @@ def SingleFormView(request, slug):
         if request_form.is_valid():
             new_request = request_form.save(commit=False)
             new_request.form = form_
+
+            # -------------- Agar Anonim Sorovlaar uchun ruxsat etilgan bo'lsa
+            if single.anonim_requests == True and request.user.is_authenticated:
+                if new_request.as_anonim == False:
+                    user_r = get_object_or_404(CustomUser, username=request.user)
+                else:
+                    user_r = get_object_or_404(CustomUser, username='anonim')
+            # -------------- Agar Anonim Sorovlaar uchun ruxsat etilgan bo'lsa
+            
             new_request.user = user_r
             new_request.save()
             return redirect("base:submit_success", slug)

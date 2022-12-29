@@ -1,34 +1,56 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ single.title }} ({{ form_requests_count }})</title>
+    <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
 </head>
 <body>
     {% if single.is_public %}
-    <span>Public</span>
+    <span>This Form Public</span>
     {% else %}
-    <span>Private</span>
+    <span>This Form Private</span>
     {% endif %}
-    <br>
-    {% if single.anonim_requests %}
-    <h2>Siz akauntdan chqib turib anonim xabar yuborsez bo'ladi</h2>
-    {% endif %}
-    {{ single.message }}
 
-    <form method="post">
-        {% csrf_token %}
-        {{ request_form }}        
-        <button type="submit">Submit</button>
-    </form>
-    <a href="?tab=requests">requests_</a>
+    <a href="?form=requests">requests_</a>
     <br>
     {% for y in requests_ %}
     <br>
     {{ y.full_name }}
     <br>
     {% endfor %}
+
+    <div class="container w-50 mt-4">
+        <h4>Submit Request to <a target="_blank" href="{% url 'base:profile' single.author %}" class="text-dark">@{{ single.author }}</a></h4>
+        <form method="post" class="mt-4">
+            {% csrf_token %}
+            {% load widget_tweaks %}
+            <label for="full_name">Full Name</label>
+            {% render_field request_form.full_name type="text" id="full_name" class="form-control mt-2 mb-2" placeholder="Full name" %}
+            <label for="email">Email</label>
+            {% render_field request_form.email type="email" class="form-control mt-2 mb-2" id="email" placeholder="Enter Valid email addres" %}
+            <span class="d-flex">
+                <label for="is_public" style="margin-right: 10px;">Public: </label>
+                {% render_field request_form.is_public id="is_public" %}
+            </span>
+            {% if single.anonim_requests == True and request.user.is_authenticated %}
+            <span class="d-flex">
+                <label for="as_anonim" style="margin-right: 10px;">Anonim: </label>
+                {% render_field request_form.as_anonim id="as_anonim" %}
+            </span>
+            {% else %}
+            {% if request.user.is_authenticated %}
+            <span>Bu Sorov <a href="{% url 'base:profile' request.user %}" class="text-dark">@{{request.user}}</a>dan yuboriladi</span>
+            {% else %}
+            <span>Bu Sorov Anonim Tarzda Yuboriladi</span>
+            {% endif %}
+            {% endif %}
+            <button class="btn btn-info w-100 mt-4" type="submit">Submit request</button>
+        </form>
+    </div>
 </body>
 </html>
