@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'forms',
 
     'rest_framework',
+    "widget_tweaks"
 ]
 
 MIDDLEWARE = [

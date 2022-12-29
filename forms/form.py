@@ -15,7 +15,7 @@ class CreateAccountForm(UserCreationForm):
 
         return lowercase_username
 
-class CreateFormForm(forms.ModelForm):
+class CreateCreationFormForm(forms.ModelForm):
     class Meta:
         model = Form
         fields = ['title', 'is_public', 'anonim_requests', 'message']

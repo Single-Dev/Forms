@@ -62,9 +62,9 @@ def logoutView(request):
 def NewFormView(request):
     author = get_object_or_404(CustomUser, username=request.user)
     new_dash = None
-    NewForm = CreateFormForm()
+    NewForm = CreateCreationFormForm()
     if request.method == 'POST':
-        NewForm = CreateFormForm(data=request.POST)
+        NewForm = CreateCreationFormForm(data=request.POST)
         if NewForm.is_valid():
             new_dash = NewForm.save(commit=False)     
             new_dash.slug = new_dash.created_on.strftime("%Y%m%d%H%M%S%f")

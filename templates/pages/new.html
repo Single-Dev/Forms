@@ -1,16 +1,38 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Create Form</title>
+    <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
 </head>
+
 <body>
-    <form method="post">
-        {% csrf_token %}
-        {{ NewForm }}
-        <input type="submit">
-    </form>
+    <div class="container w-50 mt-4">
+        {% if NewChart.errors %}
+        {% for key, value in NewForm.errors.items %} {{ value }} {% endfor %}
+        {% endif %}
+        <h3>Create Form</h3>
+        <form method="post" class="mt-4">
+            {% csrf_token %}
+            {% load widget_tweaks %}
+            {% render_field NewForm.title type="text" class="form-control mt-2 mb-2" placeholder="Form Title" %}
+            <span class="d-flex" style="align-items: center;">
+                <label for="is_public" style="margin-right: 10px;">Public:</label>
+                {% render_field NewForm.is_public type="checkbox" id="is_public" class="mt-2 mb-2" %}
+            </span>
+            <span class="d-flex" style="align-items: center;">
+                <label for="anonim_requests" style="margin-right: 10px;">Anonim Requests:</label>
+                {% render_field NewForm.anonim_requests class="mt-2 mb-2" id="anonim_requests" %}
+            </span>
+            {% render_field NewForm.message type="text" class="form-control mt-2 mb-2" placeholder="Succsess Submit Message" %}
+            <input type="submit" class="btn btn-info w-100">
+        </form>
+    </div>
 </body>
+
 </html>
