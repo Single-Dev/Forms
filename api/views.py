@@ -10,8 +10,8 @@ from rest_framework import permissions, filters, generics
 @api_view(["GET"])
 @permission_classes((permissions.AllowAny, ))
 def UsersApiView(request):
-    user = CustomUser.objects.all()
-    serializer = UsersApi(user, many=True)
+    users = CustomUser.objects.all()
+    serializer = UsersApi(users, many=True)
     return Response(serializer.data)
 # ----------------------------- All User API
 # ----------------------------- View User
@@ -23,3 +23,21 @@ def UserProfileApi(request, username):
     return Response(serializer.data)
 # ----------------------------- View User
 # ----------------------------- Users API ----------------------------- #
+# ----------------------------- Forms API ----------------------------- #
+# ----------------------------- All Form API
+@api_view(["GET"])
+@permission_classes((permissions.AllowAny, ))
+def FormsApiView(request):
+    forms = Form.objects.all()
+    serializer = FormsApi(forms, many=True)
+    return Response(serializer.data)
+# ----------------------------- All Form API
+# ----------------------------- One Form API
+@api_view(['GET'])
+@permission_classes((permissions.AllowAny,))
+def OneFormApiView(request, slug):
+    form = Form.objects.get(slug=slug)
+    serializer = FormsApi(form, many=False)
+    return Response(serializer.data)
+# ----------------------------- One Form API
+# ----------------------------- Forms API ----------------------------- #
