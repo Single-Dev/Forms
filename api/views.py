@@ -23,6 +23,7 @@ def UserProfileApi(request, username):
     return Response(serializer.data)
 # ----------------------------- View User
 # ----------------------------- Users API ----------------------------- #
+
 # ----------------------------- Forms API ----------------------------- #
 # ----------------------------- All Form API
 @api_view(["GET"])
@@ -41,3 +42,14 @@ def OneFormApiView(request, slug):
     return Response(serializer.data)
 # ----------------------------- One Form API
 # ----------------------------- Forms API ----------------------------- #
+
+# ----------------------------- Form Request API ----------------------------- #
+# ----------------------------- Requests View
+@api_view(["GET"])
+@permission_classes((permissions.AllowAny, ))
+def RequestsApiView(request):
+    requests = FormRequest.objects.all()
+    serializer = RequestsApi(requests, many=True)
+    return Response(serializer.data)
+# ----------------------------- Requests View
+# ----------------------------- Form Request API ----------------------------- #

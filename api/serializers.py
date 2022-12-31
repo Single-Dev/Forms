@@ -15,3 +15,9 @@ class FormsApi(serializers.ModelSerializer):
     class Meta:
         model = Form
         fields = '__all__'
+
+# User API
+class RequestsApi(serializers.ModelSerializer):
+    class Meta:
+        model = FormRequest
+        fields = '__all__'
