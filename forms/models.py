@@ -14,7 +14,6 @@ class Form(models.Model):
     created_on = models.DateTimeField(("created on"), default=timezone.now)
     message = models.TextField(max_length=300)
     anonim_requests = models.BooleanField(default=False)
-    submit_success = models.TextField(max_length=700)
     def __str__(self):
         return f'id: {self.id}, Created on: {self.created_on.strftime("%T")}, author: {self.author}'
 

@@ -8,5 +8,5 @@ urlpatterns = [
     path("user/<str:username>/", UserProfileApi, name="user_profile"),
     path("forms/", FormsApiView, name='forms'),
     path("form/<str:slug>/", OneFormApiView, name="one_form"),
-    path("requests/", RequestsApiView, name="requests")
+    path("requests/", RequestsApiView, name="requests"),
 ]

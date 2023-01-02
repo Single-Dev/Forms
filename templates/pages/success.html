@@ -1,13 +1,58 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Submit to {{single.author}}</title>
+    <title>Success Submit Your Request</title>
+    <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
 </head>
+
 <body>
-    ThankYou {{ request.user.username }}
-    {{ single.message }}
+    <style>
+        body {
+            background-color: #000000;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 1600 800'%3E%3Cg %3E%3Cpolygon fill='%23220000' points='1600 160 0 460 0 350 1600 50'/%3E%3Cpolygon fill='%23440000' points='1600 260 0 560 0 450 1600 150'/%3E%3Cpolygon fill='%23660000' points='1600 360 0 660 0 550 1600 250'/%3E%3Cpolygon fill='%23880000' points='1600 460 0 760 0 650 1600 350'/%3E%3Cpolygon fill='%23A00' points='1600 800 0 800 0 750 1600 450'/%3E%3C/g%3E%3C/svg%3E");
+            background-attachment: fixed;
+            background-size: cover;
+            display: grid;
+            place-items: center;
+            min-height: 100vh;
+        }
+
+        .go-home {
+            text-decoration: none;
+            color: #fff;
+            font-size: 2rem;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: 0.5s all;
+        }
+
+        .go-home:hover {
+            box-shadow: inset 0px -100px #fff;
+            color: #330033;
+        }
+
+        .author {
+            text-decoration: none;
+            transition: 0.2s all;
+            color: #fff;
+        }
+        .author:hover{
+            color: #3d3d3d;
+        }
+    </style>
+
+    <div class="text-center">
+        <h1 class="text-light">Your request <span class="text-danger">successfully</span> submit to <a class="author "
+                href="{% url 'base:profile' single.author %}">@{{single.author}}</a>*</h1>
+        <h2 class="text-light">{{single.message}}</h2>
+        <a class="go-home" href="{% url 'base:home' %}">Go Home</a>
+    </div>
 </body>
+
 </html>
