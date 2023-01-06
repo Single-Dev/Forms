@@ -43,12 +43,30 @@ def ProfileView(request, username):
             user_requests = user_p.user_request.filter(is_public=True)
             title = f"@{user_p.username}'s - requests"
     # ----------------------- Profile Tab End ----------------------- #
-
+    # ----------------------- Update Profile ----------------------- #
+    user_form = None
+    profile_form = None
+    if request.user.is_authenticated:
+        user_form = UpdateUserForm(instance=request.user)
+        profile_form = UpdateProfileForm(instance=request.user.profile)
+        if request.method == 'POST':
+            user_form = UpdateUserForm(request.POST, instance=request.user)
+            profile_form = UpdateProfileForm(request.POST,
+                                            request.FILES,
+                                            instance=request.user.profile)
+            if user_form.is_valid() and profile_form.is_valid():
+                user_name = user_form.cleaned_data.get('username')
+                user_form.save()
+                profile_form.save()
+                return redirect("base:profile", user_name)
+    # ----------------------- Update Profile ----------------------- #
     context = { 
         "user_p": user_p,    
         "user_forms":user_forms,
         "user_requests":user_requests,
-        "title": title
+        "title": title,
+        "user_form":user_form,
+        "profile_form":profile_form
     }
     return render(request, 'pages/profile.html', context)
 

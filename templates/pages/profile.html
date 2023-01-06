@@ -7,7 +7,7 @@
     <title>{{title}}</title>
 </head>
 <body>
-    <img src="{{ user_p.profile.image.url }}" alt="sad">
+    <img src="{{ user_p.profile.image.url }}" alt="sad" width="200">
     <a href="?tab=requests">requests</a>
     <a href="?tab=forms">Forms</a>
     <br>
@@ -25,5 +25,11 @@
     <br>
     {{ x.email }}
     {% endfor %}
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ profile_form }}
+        {{ user_form }}
+        <button type="submit">Submit</button>
+    </form>
 </body>
 </html>
