@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'forms',
     'api',
+    "admin",
 
     'rest_framework',
     "widget_tweaks"
