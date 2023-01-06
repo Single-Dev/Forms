@@ -6,6 +6,18 @@ class CustomUser(AbstractUser):
     is_organiser = models.BooleanField(default=False)
     is_agent = models.BooleanField(default=False)
 
+class Profile(models.Model):
+    class Meta:
+        verbose_name = "My Profile"
+        verbose_name_plural = "Profile"
+    custom_user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+    image = models.ImageField(default="profile/profile.jpg", upload_to="profile")
+    bio = models.CharField(max_length=100, null=True, blank=True, default="")
+    is_online = models.BooleanField(default=False)
+    is_verify = models.BooleanField(default=False)
+    def __str__(self):
+        return f"id: {self.id}, {self.custom_user}"
+
 class Form(models.Model):
     title = models.CharField(max_length=50)
     slug = models.SlugField(unique=True)

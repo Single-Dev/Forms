@@ -20,7 +20,6 @@ class CreateAccountView(generic.CreateView):
 CreateAccountView = CreateAccountView.as_view()
 
 # Profile View
-@login_required(login_url='base:login')
 def ProfileView(request, username):
     user_p = User.objects.get(username=username)
 

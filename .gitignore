@@ -1,2 +1,3 @@
 .venv
 desktop.ini
+db.sqlite3
