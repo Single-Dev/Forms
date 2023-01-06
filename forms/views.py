@@ -47,18 +47,19 @@ def ProfileView(request, username):
     user_form = None
     profile_form = None
     if request.user.is_authenticated:
-        user_form = UpdateUserForm(instance=request.user)
-        profile_form = UpdateProfileForm(instance=request.user.profile)
-        if request.method == 'POST':
-            user_form = UpdateUserForm(request.POST, instance=request.user)
-            profile_form = UpdateProfileForm(request.POST,
-                                            request.FILES,
-                                            instance=request.user.profile)
-            if user_form.is_valid() and profile_form.is_valid():
-                user_name = user_form.cleaned_data.get('username')
-                user_form.save()
-                profile_form.save()
-                return redirect("base:profile", user_name)
+        if request.user == user_p:
+            user_form = UpdateUserForm(instance=request.user)
+            profile_form = UpdateProfileForm(instance=request.user.profile)
+            if request.method == 'POST':
+                user_form = UpdateUserForm(request.POST, instance=request.user)
+                profile_form = UpdateProfileForm(request.POST,
+                                                request.FILES,
+                                                instance=request.user.profile)
+                if user_form.is_valid() and profile_form.is_valid():
+                    user_name = user_form.cleaned_data.get('username')
+                    user_form.save()
+                    profile_form.save()
+                    return redirect("base:profile", user_name)
     # ----------------------- Update Profile ----------------------- #
     context = { 
         "user_p": user_p,    
