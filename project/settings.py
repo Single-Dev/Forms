@@ -27,10 +27,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'forms',
     'api',
-    "admin",
+    "admin_panel",
 
     'rest_framework',
-    "widget_tweaks"
+    "widget_tweaks",
 ]
 
 MIDDLEWARE = [
