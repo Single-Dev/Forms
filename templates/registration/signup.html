@@ -1,28 +1,41 @@
-{% extends 'base/base.html' %}
-{% block title %}Signup{% endblock title %}
-{% block content %}
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <title>Sign Up</title>
+</head>
 
-    <!-- ======= Breadcrumbs ======= -->
-    <section id="breadcrumbs" class="breadcrumbs">
-        <div class="container">
+<body>
+    <div class="login-box">
+        <h2>SignUp</h2>
+        <form method="post">
+            {% csrf_token %}
+            {% load widget_tweaks %}
+            <div class="user-box">
+                {% render_field form.username id="username" %}
+                <label>Username</label>
+            </div>
+            <div class="user-box">
+                {% render_field form.password1 id="username"  %}
+                <label>Password</label>
+            </div>
+            <div class="user-box">
+                {% render_field form.password2 id="username"  %}
+                <label>Password Conifirm</label>
+            </div>
+            <button>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                Create Account
+            </button>
+        </form>
+    </div>
+</body>
 
-            <ol>
-                <li><a href="{% url 'base:home' %}">Home</a></li>
-                <li>SignUp</li>
-            </ol>
-            <h2>Create Account</h2>
-
-        </div>
-    </section><!-- End Breadcrumbs -->
-
-    <section class="inner-page">
-        <div class="container">
-            <form method="post">
-                {% csrf_token %}
-                {{ form }}
-                <button type="submit">Create Account</button>
-            </form>
-        </div>
-    </section>
-
-{% endblock content %}
+</html>
