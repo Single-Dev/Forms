@@ -11,8 +11,9 @@ def home(request):
 
 # Account Create
 def CreateAccountView(request):
-    profile_form= UpdateProfileForm()
     create_user_form = CreateAccountForm()
+    get_username = create_user_form.cleaned_data.get('username')
+    profile_form = UpdateProfileForm(instance=get_username)
     if request.method == 'POST':
         if profile_form.is_valid() and create_user_form.is_valid() :
             profile_form.save()
@@ -20,7 +21,7 @@ def CreateAccountView(request):
             return redirect("base:login")
     context={
         "cuf":create_user_form,
-        "profile_form":profile_form,
+        "pf":profile_form,
     }
     return render(request, 'registration/signup.html', context)
 
