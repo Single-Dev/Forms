@@ -10,14 +10,20 @@ def home(request):
     return render(request, 'pages/home.html')
 
 # Account Create
-class CreateAccountView(generic.CreateView):
-    template_name = 'registration/signup.html'
-    form_class = CreateAccountForm
+def CreateAccountView(request):
+    profile_form= UpdateProfileForm()
+    create_user_form = CreateAccountForm()
+    if request.method == 'POST':
+        if profile_form.is_valid() and create_user_form.is_valid() :
+            profile_form.save()
+            create_user_form.save()
+            return redirect("base:login")
+    context={
+        "cuf":create_user_form,
+        "profile_form":profile_form,
+    }
+    return render(request, 'registration/signup.html', context)
 
-    def get_success_url(self):
-        return reverse("base:login")
-
-CreateAccountView = CreateAccountView.as_view()
 
 # Profile View
 def ProfileView(request, username):
