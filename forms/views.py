@@ -1,7 +1,10 @@
 from django.shortcuts import render, get_object_or_404, redirect, reverse
+from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import AuthenticationForm
 from django.http import HttpResponseRedirect
 from django.contrib.auth import logout
+from django.contrib import messages
 from django.views import generic
 from .models import *
 from forms.form import *
@@ -12,16 +15,32 @@ def home(request):
 # Account Create
 def CreateAccountView(request):
     create_user_form = CreateAccountForm()
-    get_username = create_user_form.cleaned_data.get('username')
-    profile_form = UpdateProfileForm(instance=get_username)
+    login_form = AuthenticationForm()
     if request.method == 'POST':
-        if profile_form.is_valid() and create_user_form.is_valid() :
-            profile_form.save()
+        # ------------------------ User Login
+        login_form = AuthenticationForm(request, data=request.POST)
+        if login_form.is_valid():
+            username = login_form.cleaned_data.get('username')
+            password = login_form.cleaned_data.get('password')
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                login(request, user)
+                messages.info(request, f"Siz {username} orqali ro'yhatdan o'tdingiz.")
+                return redirect("base:profile", username)
+            else:
+                messages.error(request,"Foydalanuvchi nomi yoki parol xato")
+                login_form = AuthenticationForm()
+        # ------------------------ User Login
+        # ------------------------ Signup
+        create_user_form = CreateAccountForm(request, data=request.POST)
+        if create_user_form.is_valid():
             create_user_form.save()
             return redirect("base:login")
+        # ------------------------ Signup
+
     context={
         "cuf":create_user_form,
-        "pf":profile_form,
+        "login_form":login_form
     }
     return render(request, 'registration/signup.html', context)
 
