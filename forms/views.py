@@ -32,7 +32,7 @@ def CreateAccountView(request):
                 login_form = AuthenticationForm()
         # ------------------------ User Login
         # ------------------------ Signup
-        create_user_form = CreateAccountForm(request, data=request.POST)
+        create_user_form = CreateAccountForm(data=request.POST)
         if create_user_form.is_valid():
             create_user_form.save()
             return redirect("base:login")

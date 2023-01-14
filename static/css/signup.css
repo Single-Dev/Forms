@@ -20,7 +20,7 @@
 body {
     align-items: center;
     background-color: var(--white);
-    background: url("https://res.cloudinary.com/dci1eujqw/image/upload/v1616769558/Codepen/waldemar-brandt-aThdSdgx0YM-unsplash_cnq4sb.jpg");
+    background: url("../imgs/mountain.jpg");
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
