@@ -15,6 +15,12 @@ class Profile(models.Model):
     bio = models.CharField(max_length=100, null=True, blank=True, default="")
     is_online = models.BooleanField(default=False)
     is_verify = models.BooleanField(default=False)
+    twitter = models.URLField(null=True, blank=True)
+    telegram = models.URLField(null=True, blank=True)
+    instagram = models.URLField(null=True, blank=True)
+    gplus = models.URLField(null=True, blank=True)
+    address = models.CharField(max_length=250)
+    phone = models.CharField(max_length=250)
     def __str__(self):
         return f"id: {self.id}; user id: {self.custom_user.id}"
 
