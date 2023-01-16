@@ -19,6 +19,8 @@ class Profile(models.Model):
     telegram = models.URLField(null=True, blank=True)
     instagram = models.URLField(null=True, blank=True)
     gplus = models.URLField(null=True, blank=True)
+    github = models.URLField(null=True, blank=True)
+    link = models.URLField(null=True, blank=True)
     address = models.CharField(max_length=250, null=True, blank=True)
     phone = models.CharField(max_length=250, null=True, blank=True)
     def __str__(self):

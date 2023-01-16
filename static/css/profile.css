@@ -149,7 +149,7 @@ a:hover {
     justify-content: center;
     flex-wrap: wrap;
     align-items: flex-start;
-    margin-top: 35px;
+    margin-top: 20px;
 }
 
 .profile-card-inf__item {
@@ -257,7 +257,7 @@ a:hover {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 40px;
+    margin-top: 20px;
 }
 
 @media screen and (max-width: 576px) {
