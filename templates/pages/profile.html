@@ -22,18 +22,22 @@
             <div class="profile-card__cnt js-profile-cnt">
                 <div class="profile-card__name">{{ user_p.first_name }} {{ user_p.last_name }}</div>
                 <div class="profile-card__txt">{{ user_p.profile.bio }}</div>
+                {% if user_p.profile.address %}
                 <div class="profile-card-loc">
                     <span class="profile-card-loc__icon">
                         <svg class="icon">
                             <use xlink:href="#icon-location"></use>
                         </svg>
                     </span>
-
                     <span class="profile-card-loc__txt">{{user_p.profile.address}}</span>
                 </div>
+                {% endif %}
                 <div class="profile-card-ctr">
-                    <button class="profile-card__button button--blue js-message-btn">Message</button>
+                    {% if request.user.username == user_p.username %}
+                    <button class="profile-card__button button--blue js-message-btn">Edit Profile</button>
+                    {% else %}
                     <button class="profile-card__button button--orange">Follow</button>
+                    {% endif %}
                 </div>
                 <div class="profile-card-inf">
                     <div class="profile-card-inf__item">
@@ -102,9 +106,11 @@
             </div>
 
             <div class="profile-card-message js-message">
-                <form class="profile-card-form">
+                <form method="post" class="profile-card-form">
                     <div class="profile-card-form__container">
-                        <textarea placeholder="Say something..."></textarea>
+                        {% csrf_token %}
+                        {{ profile_form }}
+                        {{ user_form }}
                     </div>
 
                     <div class="profile-card-form__bottom">
