@@ -16,13 +16,13 @@
     <div class="wrapper">
         <div class="profile-card js-profile-card">
             <div class="profile-card__img">
-                <img src="https://res.cloudinary.com/muhammederdem/image/upload/v1537638518/Ba%C5%9Fl%C4%B1ks%C4%B1z-1.jpg"
-                    alt="profile card">
+                <img src="{{ user_p.profile.image.url }}"
+                    alt="{{ user_p.username }}">
             </div>
 
             <div class="profile-card__cnt js-profile-cnt">
-                <div class="profile-card__name">Muhammed Erdem</div>
-                <div class="profile-card__txt">Front-end Developer from <strong>Mesopotamia</strong></div>
+                <div class="profile-card__name">{{ user_p.first_name }} {{ user_p.last_name }}</div>
+                <div class="profile-card__txt">{{ user_p.profile.bio }}</div>
                 <div class="profile-card-loc">
                     <span class="profile-card-loc__icon">
                         <svg class="icon">
@@ -31,7 +31,7 @@
                     </span>
 
                     <span class="profile-card-loc__txt">
-                        Istanbul, Turkey
+                        {{user_p.profile.address}}
                     </span>
                 </div>
 
@@ -46,15 +46,15 @@
                         <div class="profile-card-inf__txt">Following</div>
                     </div>
 
-                    <div class="profile-card-inf__item">
-                        <div class="profile-card-inf__title">123</div>
-                        <div class="profile-card-inf__txt">Articles</div>
-                    </div>
+                    <a href="?tab=forms" class="profile-card-inf__item">
+                        <div class="profile-card-inf__title">{{user_p.form.count}}</div>
+                        <div class="profile-card-inf__txt">Forms</div>
+                    </a>
 
-                    <div class="profile-card-inf__item">
-                        <div class="profile-card-inf__title">85</div>
-                        <div class="profile-card-inf__txt">Works</div>
-                    </div>
+                    <a href="?tab=requests" class="profile-card-inf__item">
+                        <div class="profile-card-inf__title">{{user_p.user_request.count}}</div>
+                        <div class="profile-card-inf__txt">Requests</div>
+                    </a>
                 </div>
 
                 <div class="profile-card-social">
@@ -247,14 +247,6 @@
     </svg>
 
 
-
-    <img src="{{ user_p.profile.image.url }}" alt="sad" width="200">
-    <a href="?tab=requests">requests</a>
-    <a href="?tab=forms">Forms</a>
-    <br>
-    <br>
-    <br>
-    <hr>
     {% for x in user_forms %}
     {{ x.title }}
     <a href="{% url 'base:single' x.slug %}">{{ x.slug }}</a>
@@ -266,13 +258,7 @@
     <br>
     {{ x.email }}
     {% endfor %}
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ profile_form }}
-        {{ user_form }}
-        <button type="submit">Submit</button>
-    </form>
-    <script src="{% js/profile.js %}"></script>
+    <script src="{% static 'js/profile.js' %}"></script>
 </body>
 
 </html>
