@@ -12,6 +12,13 @@ html {
 body {
     font-family: 'Quicksand', sans-serif;
     color: #324e63;
+    height: 100vh;
+}
+
+.tab_page{
+    text-align: left !important;
+    align-items: flex-start;
+    margin-left: 70px;
 }
 
 a,
@@ -46,6 +53,9 @@ a:hover {
         height: auto;
         min-height: 100vh;
         padding-top: 100px;
+    }
+    .tab_page{
+        margin-left: 20px;
     }
 }
 

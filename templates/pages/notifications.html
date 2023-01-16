@@ -13,7 +13,7 @@
     {% if x.form.author.username == request.user.username %}
     <div id="requests">
         <h1><a href="{% url 'base:single_request' x.form.slug x.id %}">{{ x.full_name }}</a> / <a
-                href="{% url 'base:single' x.form.slug %}">{{ x.form.title }}</a></h1>
+                href="{% url 'base:form' x.form.slug %}">{{ x.form.title }}</a></h1>
         <br>
         {{ x.email }}
         <a href="{% url 'base:profile' x.user.username %}">{{ x.user.username }}</a>

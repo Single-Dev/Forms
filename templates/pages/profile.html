@@ -39,6 +39,7 @@
                     <button class="profile-card__button button--orange">Follow</button>
                     {% endif %}
                 </div>
+                
                 <div class="profile-card-inf">
                     <div class="profile-card-inf__item">
                         <div class="profile-card-inf__title">1598</div>
@@ -60,7 +61,7 @@
                         <div class="profile-card-inf__txt">Requests</div>
                     </a>
                 </div>
-
+                {% if not request.GET.tab %}
                 <div class="profile-card-social">
                     {% if user_p.profile.twitter %}
                     <a href="{{ user_p.profile.twitter }}" class="profile-card-social__item twitter"
@@ -101,22 +102,46 @@
                     </a>
                     {% endif %}
                 </div>
-
-               
+                {% endif %}
+                {% if user_forms %}
+                <div class="tab_page">
+                    <h2>User's forms</h2>
+                    {% for user_form in user_forms %}
+                    <div class="tab__item">
+                        <a href="{% url 'base:form' user_form.slug %}">{{ user_form.title }}</a>
+                        {% if user_form.is_public %}
+                        <span>Public</span>
+                        {% else %}
+                        <span>Private</span>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+                {% if user_requests %}
+                <div class="tab_page">
+                    <h2>User's Requests</h2>
+                    {% for user_request in user_requests %}
+                    <div class="tab__item">
+                        <a href="{% url 'base:single_request' user_request.form.slug user_request.id %}">{{ user_request.full_name }}</a>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
             </div>
 
             <div class="profile-card-message js-message">
                 <form method="post" class="profile-card-form">
                     <div class="profile-card-form__container">
                         {% csrf_token %}
-                        {{ profile_form }}
-                        {{ user_form }}
+                        {% load widget_tweaks %}
+                        {% render_field profile_form.image class="form-control mt-2 mb-2" id="profile_image" %}
                     </div>
 
                     <div class="profile-card-form__bottom">
-                        <button class="profile-card__button button--blue js-message-close">Send</button>
+                        <button type="button" class="profile-card__button button--gray js-message-close">Cancel</button>
+                        <button type="submit" class="profile-card__button button--blue js-message-close">Update Profile</button>
 
-                        <button class="profile-card__button button--gray js-message-close">Cancel</button>
                     </div>
                 </form>
 
@@ -200,18 +225,6 @@
         </defs>
     </svg>
 
-
-    {% for x in user_forms %}
-    {{ x.title }}
-    <a href="{% url 'base:single' x.slug %}">{{ x.slug }}</a>
-    <br>
-    {% endfor %}
-    {% for x in user_requests %}
-    <span style="color: red;">{{ x.form }}</span>
-    <a href="{% url 'base:single_request' x.form.slug x.id %}">{{ x.full_name }}</a>
-    <br>
-    {{ x.email }}
-    {% endfor %}
     <script src="{% static 'js/profile.js' %}"></script>
 </body>
 
