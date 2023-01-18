@@ -22,7 +22,8 @@
             </div>
 
             <div class="profile-card__cnt js-profile-cnt">
-                <a href="{% url 'base:profile' user_p.username %}" class="profile-card__name text-dark text-decoration-none">@{{ user_p.username }}</a>
+                <a href="{% url 'base:profile' user_p.username %}"
+                    class="profile-card__name text-dark text-decoration-none">@{{ user_p.username }}</a>
                 <div class="profile-card__name">{{ user_p.first_name }} {{ user_p.last_name }}</div>
                 <div class="profile-card__txt">{{ user_p.profile.bio }}</div>
                 {% if user_p.profile.address %}
@@ -42,7 +43,7 @@
                     <button class="profile-card__button button--orange">Follow</button>
                     {% endif %}
                 </div>
-                
+
                 <div class="profile-card-inf">
                     <a href="#" class="profile-card-inf__item text-dark text-decoration-none">
                         <div class="profile-card-inf__title">0</div>
@@ -67,8 +68,7 @@
                 {% if not request.GET.tab %}
                 <div class="profile-card-social">
                     {% if user_p.profile.twitter %}
-                    <a href="{{ user_p.profile.twitter }}" class="profile-card-social__item twitter"
-                        target="_blank">
+                    <a href="{{ user_p.profile.twitter }}" class="profile-card-social__item twitter" target="_blank">
                         <span class="icon-font">
                             <svg class="icon">
                                 <use xlink:href="#icon-twitter"></use>
@@ -77,8 +77,7 @@
                     </a>
                     {% endif %}
                     {% if user_p.profile.instagram %}
-                    <a href="{{user_p.profile.instagram}}" class="profile-card-social__item instagram"
-                        target="_blank">
+                    <a href="{{user_p.profile.instagram}}" class="profile-card-social__item instagram" target="_blank">
                         <span class="icon-font">
                             <svg class="icon">
                                 <use xlink:href="#icon-instagram"></use>
@@ -108,17 +107,17 @@
                 {% endif %}
                 {% if user_forms %}
                 <div class="tab_page">
-                    <h2>User's forms</h2>
-                    {% for user_form in user_forms %}
-                    <div class="tab__item">
-                        <a href="{% url 'base:form' user_form.slug %}">{{ user_form.title }}</a>
-                        {% if user_form.is_public %}
-                        <span>Public</span>
-                        {% else %}
-                        <span>Private</span>
-                        {% endif %}
+                    <div class="card">
+                        <h5 class="card-header">User's forms</h5>
+                        {% for uf in user_forms %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{uf.title}}<span>`{% if uf.is_public %}Public{% else %}Private{% endif %}`</span></h5>
+                            <p class="card-text">{{ uf.message }}</p>
+                            <a href="{% url 'base:form' uf.slug %}" class="text-dark text-decoration-none">{{ uf.slug }}</a>
+                        </div>
+                        <hr>
+                        {% endfor %}
                     </div>
-                    {% endfor %}
                 </div>
                 {% endif %}
                 {% if user_requests %}
@@ -126,7 +125,7 @@
                     <h2>User's Requests</h2>
                     {% for user_request in user_requests %}
                     <div class="tab__item">
-                        <a href="{% url 'base:single_request' user_request.form.slug user_request.id %}">{{ user_request.full_name }}</a>
+                        <a href="{% url 'base:single_request' user_request.form.slug user_request.id %}">{{user_request.full_name }}</a>
                     </div>
                     {% endfor %}
                 </div>
@@ -153,7 +152,8 @@
 
                     <div class="profile-card-form__bottom">
                         <button type="button" class="profile-card__button button--gray js-message-close">Cancel</button>
-                        <button type="submit" class="profile-card__button button--blue js-message-close">Update Profile</button>
+                        <button type="submit" class="profile-card__button button--blue js-message-close">Update
+                            Profile</button>
                     </div>
                 </form>
 
@@ -166,7 +166,7 @@
 
     <svg hidden="hidden">
         <defs>
-            
+
             <symbol id="icon-github" viewBox="0 0 32 32">
                 <title>github</title>
                 <path
