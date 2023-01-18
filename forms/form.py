@@ -30,7 +30,7 @@ class UpdateUserForm(forms.ModelForm):
 class UpdateProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = "__all__"
+        fields = ['image', "bio", "instagram", "github", "link", "address", "twitter"]
     
     def clean_avatar(self):
         avatar = self.cleaned_data['image']
