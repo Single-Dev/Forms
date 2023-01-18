@@ -137,14 +137,17 @@
                     <div class="profile-card-form__container">
                         {% csrf_token %}
                         {% load widget_tweaks %}
-                        {% render_field user_form.username class="form-control mt-2 mb-2" id="username_input" %}
-                        {% render_field user_form.first_name class="form-control mt-2 mb-2" id="first_name" %}
-                        {% render_field user_form.last_name class="form-control mt-2 mb-2" id="last_name" %}
-                        {% render_field user_form.email class="form-control mt-2 mb-2" id="email" %}
+                        {% render_field user_form.username class="form-control mt-2 mb-2" id="username_input" placeholder="@username" %}
+                        {% render_field user_form.first_name class="form-control mt-2 mb-2" id="first_name" placeholder="first"%}
+                        {% render_field user_form.last_name class="form-control mt-2 mb-2" id="last_name" placeholder="Last" %}
+                        {% render_field user_form.email class="form-control mt-2 mb-2" id="email" placeholder="Email" %}
                         {% render_field profile_form.image class="form-control mt-2 mb-2" id="profile_image" %}
-                        {% render_field profile_form.bio class="form-control mt-2 mb-2" id="bio" %}
-                        {% render_field profile_form.link class="form-control mt-2 mb-2" id="link" %}
-
+                        {% render_field profile_form.bio class="form-control mt-2 mb-2" id="bio" placeholder="bio" %}
+                        {% render_field profile_form.link class="form-control mt-2 mb-2" id="link" placeholder="link" %}
+                        {% render_field profile_form.telegram class="form-control mt-2 mb-2" id="telegram" placeholder="telegram" %}
+                        {% render_field profile_form.instagram class="form-control mt-2 mb-2" id="instagram" placeholder="instagram" %}
+                        {% render_field profile_form.github class="form-control mt-2 mb-2" id="github" placeholder="github" %}
+                        {% render_field profile_form.address class="form-control mt-2 mb-2" id="address" placeholder="address" %}
                     </div>
 
                     <div class="profile-card-form__bottom">
