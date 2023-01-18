@@ -16,13 +16,10 @@ class Profile(models.Model):
     is_online = models.BooleanField(default=False)
     is_verify = models.BooleanField(default=False)
     twitter = models.URLField(null=True, blank=True)
-    telegram = models.URLField(null=True, blank=True)
     instagram = models.URLField(null=True, blank=True)
-    gplus = models.URLField(null=True, blank=True)
     github = models.URLField(null=True, blank=True)
     link = models.URLField(null=True, blank=True)
     address = models.CharField(max_length=250, null=True, blank=True)
-    phone = models.CharField(max_length=250, null=True, blank=True)
     def __str__(self):
         return f"id: {self.id}; user id: {self.custom_user.id}"
 

@@ -8,6 +8,8 @@
     <meta name="viewport"
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+    <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
     <title>{{title}}</title>
 </head>
 
@@ -41,22 +43,22 @@
                 </div>
                 
                 <div class="profile-card-inf">
-                    <div class="profile-card-inf__item">
-                        <div class="profile-card-inf__title">1598</div>
+                    <a href="#" class="profile-card-inf__item text-dark text-decoration-none">
+                        <div class="profile-card-inf__title">0</div>
                         <div class="profile-card-inf__txt">Followers</div>
-                    </div>
+                    </a>
 
-                    <div class="profile-card-inf__item">
-                        <div class="profile-card-inf__title">65</div>
+                    <a href="#" class="profile-card-inf__item text-dark text-decoration-none">
+                        <div class="profile-card-inf__title">0</div>
                         <div class="profile-card-inf__txt">Following</div>
-                    </div>
+                    </a>
 
-                    <a href="?tab=forms" class="profile-card-inf__item">
+                    <a href="?tab=forms" class="profile-card-inf__item text-dark text-decoration-none">
                         <div class="profile-card-inf__title">{{user_p.form.count}}</div>
                         <div class="profile-card-inf__txt">Forms</div>
                     </a>
 
-                    <a href="?tab=requests" class="profile-card-inf__item">
+                    <a href="?tab=requests" class="profile-card-inf__item text-dark text-decoration-none">
                         <div class="profile-card-inf__title">{{user_p.user_request.count}}</div>
                         <div class="profile-card-inf__txt">Requests</div>
                     </a>
@@ -135,13 +137,19 @@
                     <div class="profile-card-form__container">
                         {% csrf_token %}
                         {% load widget_tweaks %}
+                        {% render_field user_form.username class="form-control mt-2 mb-2" id="username_input" %}
+                        {% render_field user_form.first_name class="form-control mt-2 mb-2" id="first_name" %}
+                        {% render_field user_form.last_name class="form-control mt-2 mb-2" id="last_name" %}
+                        {% render_field user_form.email class="form-control mt-2 mb-2" id="email" %}
                         {% render_field profile_form.image class="form-control mt-2 mb-2" id="profile_image" %}
+                        {% render_field profile_form.bio class="form-control mt-2 mb-2" id="bio" %}
+                        {% render_field profile_form.link class="form-control mt-2 mb-2" id="link" %}
+
                     </div>
 
                     <div class="profile-card-form__bottom">
                         <button type="button" class="profile-card__button button--gray js-message-close">Cancel</button>
                         <button type="submit" class="profile-card__button button--blue js-message-close">Update Profile</button>
-
                     </div>
                 </form>
 
