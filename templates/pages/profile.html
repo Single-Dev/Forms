@@ -128,8 +128,13 @@
                         {% for ur in user_requests %}
                         <div class="card-body">
                             <h5 class="card-title">`{% if ur.is_public %}Public{% else %}Private{% endif %}`</h5>
-                            <p class="card-text">{{ ur.email }}</p>
-                            <a href="{% url 'base:single_request' ur.form.slug ur.id %}" class="text-dark text-decoration-none">{{ ur.full_name }}</a>
+                            <h4>
+                                submited as
+                                {% if ur.as_anonim %}Anonim{% else %}
+                                <a href="{% url 'base:profile' user_p.username %}" class="text-dark text-decoration-none">@{{user_p.username}}</a>
+                                {% endif %}
+                            </h4>
+                            <a href="{% url 'base:single_request' ur.form.slug ur.id %}" class="text-dark text-decoration-none">Form: {{ ur.form.title }}</a>
                         </div>
                         <hr>
                         {% endfor %}
