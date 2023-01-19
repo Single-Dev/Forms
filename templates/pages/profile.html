@@ -121,13 +121,19 @@
                 </div>
                 {% endif %}
                 {% if user_requests %}
+
                 <div class="tab_page">
-                    <h2>User's Requests</h2>
-                    {% for user_request in user_requests %}
-                    <div class="tab__item">
-                        <a href="{% url 'base:single_request' user_request.form.slug user_request.id %}">{{user_request.full_name }}</a>
+                    <div class="card">
+                        <h5 class="card-header">User's forms</h5>
+                        {% for ur in user_requests %}
+                        <div class="card-body">
+                            <h5 class="card-title">`{% if ur.is_public %}Public{% else %}Private{% endif %}`</h5>
+                            <p class="card-text">{{ ur.email }}</p>
+                            <a href="{% url 'base:single_request' ur.form.slug ur.id %}" class="text-dark text-decoration-none">{{ ur.full_name }}</a>
+                        </div>
+                        <hr>
+                        {% endfor %}
                     </div>
-                    {% endfor %}
                 </div>
                 {% endif %}
             </div>
