@@ -124,21 +124,21 @@ def NewFormView(request):
 
 # Yagona Forma ko'rish manzili
 def SingleFormView(request, slug):
-    single = Form.objects.get(slug=slug)
+    forma = Form.objects.get(slug=slug)
     # ----------------------- shu formaga kelgan sorovlarni ko'rish ----------------------- #
     tab = request.GET.get('form')
     requests_ = None
     if tab == "requests":
-        if request.user.username == single.author.username:
-            requests_ = single.form_requests.all()
+        if request.user.username == forma.author.username:
+            requests_ = forma.form_requests.all()
         else:
-            requests_ = single.form_requests.filter(is_public=True)
+            requests_ = forma.form_requests.filter(is_public=True)
     # ----------------------- shu formaga kelgan sorovlarni ko'rish ----------------------- #
     # ----------------------- Sorov Yubirish uchun ----------------------- #
     form_ = get_object_or_404(Form, slug=slug)
     user_r = None
     # Agar Anonim Sorovlaar uchun ruxsat etilmagan bo'lsa
-    if single.anonim_requests == False:
+    if forma.anonim_requests == False:
         if request.user.is_authenticated:
             user_r = get_object_or_404(CustomUser, username=request.user)
         else:
@@ -153,25 +153,34 @@ def SingleFormView(request, slug):
     # Agar Anonim Sorovlaar uchun ruxsat etilgan bo'lsa
     form_requests_count = form_.form_requests.count()
     new_request = None
-    if request.method == 'POST':
-        request_form = CreateFormRequestTest(data=request.POST)
-        if request_form.is_valid():
-            new_request = request_form.save(commit=False)
-            new_request.form = form_            
-            new_request.user = user_r
-            new_request.save()
-            return redirect("base:submit_success", slug)
+    request_form = None
+    if form_.author == request.user:
+        pass
     else:
-        request_form = CreateFormRequestTest()
+        if request.method == 'POST':
+            request_form = CreateFormRequestTest(data=request.POST)
+            if request_form.is_valid():
+                new_request = request_form.save(commit=False)
+                new_request.form = form_            
+                new_request.user = user_r
+                new_request.save()
+                return redirect("base:submit_success", slug)
+        else:
+            request_form = CreateFormRequestTest()
     # ----------------------- Sorov Yubirish uchun ----------------------- #
     context = {
-        "single":single,
+        "forma":forma,
         "form_requests_count":form_requests_count,
         "request_form":request_form,
         "requests_":requests_,
     }
-    return render(request, 'pages/single-form.html', context)
+    return render(request, 'pages/form.html', context)
 
+# ----------------------- Dashboard Form  ----------------------- #
+def DashboardFromView(request, slug):
+    forma = Form.objects.get(slug=slug)
+    return render(request, "pages/dash_form.html")
+# ----------------------- Dashboard Form  ----------------------- #
 
 # ----------------------- Request view ----------------------- #
 @login_required(login_url='base:login')
@@ -204,16 +213,13 @@ def UpdateFormView(request, slug):
         update_chart_form = FormaForm(request.POST, instance=forma)
         if update_chart_form.is_valid():
             update_chart_form.save()
-            slug = update_chart_form.cleaned_data.get('slug')
-            return redirect("base:form", slug)
+            return redirect("base:profile", forma.author)
     context={
         "ufa":update_forma,
         "forma":forma,
     }
-    return render(request, "pages/update_chart.html", context)
+    return render(request, "pages/update_forma.html", context)
 # ----------------------- Update Form view ----------------------- #
-
-
 
 def SubmitSuccessView(request, slug):
     single = Form.objects.get(slug=slug)

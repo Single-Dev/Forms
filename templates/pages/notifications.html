@@ -16,7 +16,11 @@
                 href="{% url 'base:form' x.form.slug %}">{{ x.form.title }}</a></h1>
         <br>
         {{ x.email }}
+        {% if not x.as_anonim %}
         <a href="{% url 'base:profile' x.user.username %}">{{ x.user.username }}</a>
+        {% else %}
+        <a href="#">Anonim</a>
+        {% endif %}
         <br>
         <br>
         <hr>

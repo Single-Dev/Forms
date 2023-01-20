@@ -66,7 +66,7 @@ class FormaForm(forms.ModelForm):
     class Meta:
         model = Form
         fields = ['title', 'is_public', 'anonim_requests', 'message']
-    
+
 class CreateFormRequestTest(forms.ModelForm):
     class Meta:
         model = FormRequest

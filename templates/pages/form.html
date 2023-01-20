@@ -5,12 +5,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ single.title }} ({{ form_requests_count }})</title>
+    <title>{{ forma.title }} ({{ form_requests_count }})</title>
     <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
     <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
 </head>
 <body>
-    {% if single.is_public %}
+    {% if forma.is_public %}
     <span>This Form Public</span>
     {% else %}
     <span>This Form Private</span>
@@ -23,9 +23,9 @@
     {{ y.full_name }}
     <br>
     {% endfor %}
-
+    {% if request_form %}
     <div class="container w-50 mt-4">
-        <h4>Submit Request to <a target="_blank" href="{% url 'base:profile' single.author %}" class="text-dark">@{{ single.author }}</a></h4>
+        <h4>Submit Request to <a target="_blank" href="{% url 'base:profile' forma.author %}" class="text-dark">@{{ forma.author }}</a></h4>
         <form method="post" class="mt-4">
             {% csrf_token %}
             {% load widget_tweaks %}
@@ -37,7 +37,7 @@
                 <label for="is_public" style="margin-right: 10px;">Public: </label>
                 {% render_field request_form.is_public id="is_public" %}
             </span>
-            {% if single.anonim_requests == True and request.user.is_authenticated %}
+            {% if forma.anonim_requests == True and request.user.is_authenticated %}
             <span class="d-flex">
                 <label for="as_anonim" style="margin-right: 10px;">Anonim: </label>
                 {% render_field request_form.as_anonim id="as_anonim" %}
@@ -52,5 +52,6 @@
             <button class="btn btn-info w-100 mt-4" type="submit">Submit request</button>
         </form>
     </div>
+    {% endif %}
 </body>
 </html>
