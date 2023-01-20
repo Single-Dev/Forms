@@ -134,7 +134,7 @@ def SingleFormView(request, slug):
         else:
             requests_ = single.form_requests.filter(is_public=True)
     # ----------------------- shu formaga kelgan sorovlarni ko'rish ----------------------- #
-    # ----------------------- Sorov Yubirish uchun Forma tayyorlash ----------------------- #
+    # ----------------------- Sorov Yubirish uchun ----------------------- #
     form_ = get_object_or_404(Form, slug=slug)
     user_r = None
     # Agar Anonim Sorovlaar uchun ruxsat etilmagan bo'lsa
@@ -143,32 +143,25 @@ def SingleFormView(request, slug):
             user_r = get_object_or_404(CustomUser, username=request.user)
         else:
             return redirect(f"/login/?next={request.path}")
+    # Agar Anonim Sorovlaar uchun ruxsat etilmagan bo'lsa
+    # Agar Anonim Sorovlaar uchun ruxsat etilgan bo'lsa
     else:
         if not request.user.is_authenticated:
             user_r = get_object_or_404(CustomUser, username='anonim')
-    # Agar Anonim Sorovlaar uchun ruxsat etilmagan bo'lsa
+    # Agar Anonim Sorovlaar uchun ruxsat etilgan bo'lsa
     form_requests_count = form_.form_requests.count()
     new_request = None
     if request.method == 'POST':
         request_form = CreateFormRequestTest(data=request.POST)
         if request_form.is_valid():
             new_request = request_form.save(commit=False)
-            new_request.form = form_
-
-            # -------------- Agar Anonim Sorovlaar uchun ruxsat etilgan bo'lsa
-            if single.anonim_requests == True and request.user.is_authenticated:
-                if new_request.as_anonim == False:
-                    user_r = get_object_or_404(CustomUser, username=request.user)
-                else:
-                    user_r = get_object_or_404(CustomUser, username='anonim')
-            # -------------- Agar Anonim Sorovlaar uchun ruxsat etilgan bo'lsa
-            
+            new_request.form = form_            
             new_request.user = user_r
             new_request.save()
             return redirect("base:submit_success", slug)
     else:
         request_form = CreateFormRequestTest()
-    # ----------------------- Sorov Yubirish uchun Forma tayyorlash ----------------------- #
+    # ----------------------- Sorov Yubirish uchun ----------------------- #
     context = {
         "single":single,
         "form_requests_count":form_requests_count,
