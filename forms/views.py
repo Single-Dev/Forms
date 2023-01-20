@@ -107,9 +107,9 @@ def logoutView(request):
 def NewFormView(request):
     author = get_object_or_404(CustomUser, username=request.user)
     new_dash = None
-    NewForm = CreateCreationFormForm()
+    NewForm = FormaForm()
     if request.method == 'POST':
-        NewForm = CreateCreationFormForm(data=request.POST)
+        NewForm = FormaForm(data=request.POST)
         if NewForm.is_valid():
             new_dash = NewForm.save(commit=False)     
             new_dash.slug = new_dash.created_on.strftime("%Y%m%d%H%M%S%f")
@@ -173,6 +173,47 @@ def SingleFormView(request, slug):
     return render(request, 'pages/single-form.html', context)
 
 
+# ----------------------- Request view ----------------------- #
+@login_required(login_url='base:login')
+def SingleRequestView(request, slug, pk):
+    single_form = Form.objects.get(slug=slug)
+    single_request = FormRequest.objects.get(id=pk)
+    user_ = get_object_or_404(CustomUser, username=request.user)
+    if single_request.is_public == True:
+        pass
+    else:
+        if user_.username == single_form.author.username or user_.username == single_request.user.username:
+            pass
+        else:
+            return redirect('base:home')
+    if single_form.author.username == user_.username:
+        single_request.view = True
+        single_request.save()
+    context = {
+        'single_request':single_request,
+        'single_form':single_form
+    }
+    return render(request, 'pages/single_request.html', context)
+# ----------------------- request view ----------------------- #
+
+# ----------------------- Update Form view ----------------------- #
+def UpdateFormView(request, slug):
+    forma = Form.objects.get(slug=slug)
+    update_forma = FormaForm(instance=forma)
+    if request.method == 'POST':
+        update_chart_form = FormaForm(request.POST, instance=forma)
+        if update_chart_form.is_valid():
+            update_chart_form.save()
+            slug = update_chart_form.cleaned_data.get('slug')
+            return redirect("base:form", slug)
+    context={
+        "ufa":update_forma,
+        "forma":forma,
+    }
+    return render(request, "pages/update_chart.html", context)
+# ----------------------- Update Form view ----------------------- #
+
+
 
 def SubmitSuccessView(request, slug):
     single = Form.objects.get(slug=slug)
@@ -190,26 +231,3 @@ def NotificationsView(request):
     }
     return render(request, 'pages/notifications.html', context)
 # ----------------------- notifications view ----------------------- #
-
-# ----------------------- Request view ----------------------- #
-@login_required(login_url='base:login')
-def SingleRequestView(request, slug, pk):
-    single_form = Form.objects.get(slug=slug)
-    single_request = FormRequest.objects.get(id=pk)
-    user_ = get_object_or_404(CustomUser, username=request.user)
-    if single_request.is_public == True:
-            pass
-    else:
-        if user_.username == single_form.author.username or user_.username == single_request.user.username:
-            pass
-        else:
-            return redirect('base:home')
-    if single_form.author.username == user_.username:
-        single_request.view = True
-        single_request.save()
-    context = {
-        'single_request':single_request,
-        'single_form':single_form
-    }
-    return render(request, 'pages/single_request.html', context)
-# ----------------------- request view ----------------------- #

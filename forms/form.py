@@ -62,7 +62,7 @@ class UpdateProfileForm(forms.ModelForm):
 
         return avatar
 
-class CreateCreationFormForm(forms.ModelForm):
+class FormaForm(forms.ModelForm):
     class Meta:
         model = Form
         fields = ['title', 'is_public', 'anonim_requests', 'message']
