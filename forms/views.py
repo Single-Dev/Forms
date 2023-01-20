@@ -154,14 +154,14 @@ def SingleFormView(request, slug):
     form_requests_count = form_.form_requests.count()
     new_request = None
     request_form = None
-    if form_.author == request.user:
-        pass
+    if forma.author.username == request.user.username:
+        return redirect("base:dash_form", slug)
     else:
         if request.method == 'POST':
             request_form = CreateFormRequestTest(data=request.POST)
             if request_form.is_valid():
                 new_request = request_form.save(commit=False)
-                new_request.form = form_            
+                new_request.form = form_       
                 new_request.user = user_r
                 new_request.save()
                 return redirect("base:submit_success", slug)
@@ -179,7 +179,10 @@ def SingleFormView(request, slug):
 # ----------------------- Dashboard Form  ----------------------- #
 def DashboardFromView(request, slug):
     forma = Form.objects.get(slug=slug)
-    return render(request, "pages/dash_form.html")
+    context = {
+        "forma":forma
+    }
+    return render(request, "pages/dash_form.html", context)
 # ----------------------- Dashboard Form  ----------------------- #
 
 # ----------------------- Request view ----------------------- #

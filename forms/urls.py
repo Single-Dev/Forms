@@ -12,6 +12,7 @@ urlpatterns = [
     path('@<str:username>/', ProfileView, name="profile"),
     path('new/', NewFormView, name='new'),
     path("form/<str:slug>/", SingleFormView, name='form'),
+    path("dashboard/<str:slug>/", DashboardFromView, name='dash_form'),
     path('update/<str:slug>/', UpdateFormView, name="update_forma"),
     path('submit-success/<str:slug>/', SubmitSuccessView, name="submit_success"),
     path('request/<str:slug>/<int:pk>/', SingleRequestView, name='single_request'),
