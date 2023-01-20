@@ -148,6 +148,8 @@ def SingleFormView(request, slug):
     else:
         if not request.user.is_authenticated:
             user_r = get_object_or_404(CustomUser, username='anonim')
+        else:
+            user_r = get_object_or_404(CustomUser, username=request.user)
     # Agar Anonim Sorovlaar uchun ruxsat etilgan bo'lsa
     form_requests_count = form_.form_requests.count()
     new_request = None
