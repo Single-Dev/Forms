@@ -115,7 +115,7 @@ def NewFormView(request):
             new_dash.slug = new_dash.created_on.strftime("%Y%m%d%H%M%S%f")
             new_dash.author = author
             new_dash.save()
-            return redirect("base:single", new_dash.slug) 
+            return redirect("base:form", new_dash.slug) 
    
     context={
         "NewForm":NewForm,
