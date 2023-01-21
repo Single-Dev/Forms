@@ -5,6 +5,7 @@ from django.db import models
 class CustomUser(AbstractUser):
     is_organiser = models.BooleanField(default=False)
     is_agent = models.BooleanField(default=False)
+    view_form = models.ManyToManyField("DashboardForm", blank=True, related_name="view_form", symmetrical=False)
 
 class Profile(models.Model):
     class Meta:
@@ -33,6 +34,15 @@ class Form(models.Model):
     anonim_requests = models.BooleanField(default=False)
     def __str__(self):
         return f'id: {self.id}, Created on: {self.created_on.strftime("%T")}, author: {self.author}'
+
+class DashboardForm(models.Model):
+    form = models.OneToOneField(Form, on_delete=models.CASCADE, related_name="dashboard_form")
+    visits = models.IntegerField(default=0)
+    last_visit = models.DateTimeField(default=timezone.now)
+    blocked_users = models.ManyToManyField(CustomUser, related_name="blocked")
+
+    def __str__(self):
+        return f"{self.form}, views={self.visits}"
 
 class FormRequest(models.Model):
     form = models.ForeignKey(Form, on_delete=models.CASCADE, related_name="form_requests")

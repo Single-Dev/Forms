@@ -115,16 +115,24 @@ def NewFormView(request):
             new_dash.slug = new_dash.created_on.strftime("%Y%m%d%H%M%S%f")
             new_dash.author = author
             new_dash.save()
-            return redirect("base:form", new_dash.slug) 
+            return redirect("base:create_dashboard", new_dash.slug) 
    
     context={
         "NewForm":NewForm,
     }
     return render(request, "pages/new.html", context)
 
+def CreateDashBoardFormView(request, slug):
+    forma = Form.objects.get(slug=slug)
+    DashboardForm.objects.create(form=forma)
+    return redirect("base:dashboard", slug)
 # Yagona Forma ko'rish manzili
 def SingleFormView(request, slug):
     forma = Form.objects.get(slug=slug)
+    # if not forma in DashboardForm.objects.get(form=forma):
+    # dashboard_obj = forma.dashboard_form
+    # dashboard_obj.visits += 1
+    # dashboard_obj.save()
     # ----------------------- shu formaga kelgan sorovlarni ko'rish ----------------------- #
     tab = request.GET.get('form')
     requests_ = None
@@ -155,7 +163,7 @@ def SingleFormView(request, slug):
     new_request = None
     request_form = None
     if forma.author.username == request.user.username:
-        return redirect("base:dash_form", slug)
+        return redirect("base:dashboard", slug)
     else:
         if request.method == 'POST':
             request_form = CreateFormRequestTest(data=request.POST)
@@ -179,8 +187,12 @@ def SingleFormView(request, slug):
 # ----------------------- Dashboard Form  ----------------------- #
 def DashboardFromView(request, slug):
     forma = Form.objects.get(slug=slug)
+    # dashboard_obj = forma.dashboard_form
+    # dashboard_obj.form = forma
+
     context = {
-        "forma":forma
+        "forma":forma,
+        # "dashboard_obj": dashboard_obj
     }
     return render(request, "pages/dash_form.html", context)
 # ----------------------- Dashboard Form  ----------------------- #
