@@ -187,12 +187,13 @@ def SingleFormView(request, slug):
 # ----------------------- Dashboard Form  ----------------------- #
 def DashboardFromView(request, slug):
     forma = Form.objects.get(slug=slug)
-    # dashboard_obj = forma.dashboard_form
-    # dashboard_obj.form = forma
+    requests = forma.form_requests.all()
+    dashboard_obj = forma.dashboard_form
 
     context = {
         "forma":forma,
-        # "dashboard_obj": dashboard_obj
+        "dashboard_obj": dashboard_obj,
+        "requests":requests
     }
     return render(request, "pages/dash_form.html", context)
 # ----------------------- Dashboard Form  ----------------------- #

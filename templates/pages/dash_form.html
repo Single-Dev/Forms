@@ -8,7 +8,10 @@
 </head>
 <body>
 
-    {{dobj.visits}}
-    
+    {{dashboard_obj.visits}}
+    {% for b in requests %}
+    {{ b.full_name }}
+    {{ b.email }}
+    {% endfor %}
 </body>
 </html>
