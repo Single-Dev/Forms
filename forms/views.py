@@ -129,10 +129,14 @@ def CreateDashBoardFormView(request, slug):
 # Yagona Forma ko'rish manzili
 def SingleFormView(request, slug):
     forma = Form.objects.get(slug=slug)
-    # if not forma in DashboardForm.objects.get(form=forma):
-    # dashboard_obj = forma.dashboard_form
-    # dashboard_obj.visits += 1
-    # dashboard_obj.save()
+    dashboard_obj = forma.dashboard_form
+    blocked_users = dashboard_obj.blocked_users.all()
+    if not forma.author == request.user and not request.user in blocked_users:
+        dashboard_obj.visits += 1
+        dashboard_obj.save()
+    # Agar user bloklangan bo'lsa
+    if request.user in blocked_users:
+        return redirect("/")
     # ----------------------- shu formaga kelgan sorovlarni ko'rish ----------------------- #
     tab = request.GET.get('form')
     requests_ = None
