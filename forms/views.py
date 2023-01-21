@@ -162,7 +162,8 @@ def SingleFormView(request, slug):
     form_requests_count = form_.form_requests.count()
     new_request = None
     request_form = None
-    if forma.author.username == request.user.username:
+    # Agar Foydalanuvchi formani yaratgan bo'lsa
+    if forma.author == request.user:
         return redirect("base:dashboard", slug)
     else:
         if request.method == 'POST':
@@ -185,11 +186,13 @@ def SingleFormView(request, slug):
     return render(request, 'pages/form.html', context)
 
 # ----------------------- Dashboard Form  ----------------------- #
+@login_required(login_url="base:login")
 def DashboardFromView(request, slug):
     forma = Form.objects.get(slug=slug)
     requests = forma.form_requests.all()
     dashboard_obj = forma.dashboard_form
-
+    if not forma.author == request.user:
+        return redirect("base:form", slug)
     context = {
         "forma":forma,
         "dashboard_obj": dashboard_obj,
