@@ -177,6 +177,12 @@ body {
         bottom: 100%;
     }
 }
-input:-internal-autofill-selected{
-    background: transparent !important;
+
+h4{
+    color: #fff;
+    font-weight: bold;
+}
+
+h4 a{
+    color: #fff;
 }

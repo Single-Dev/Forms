@@ -20,7 +20,6 @@
                 {% load widget_tweaks %}
                 {% csrf_token %}
                 {% render_field cuf.username placeholder="Username" class="input" %}
-                {% render_field cuf.email placeholder="Email" class="input" %}
                 {% render_field cuf.password1 placeholder="Password" class="input" %}
                 {% render_field cuf.password2 placeholder="Confirm Password" class="input" %}
                 <button type="submit" class="btn">Sign Up</button>
