@@ -16,9 +16,9 @@
         <!-- Sign Up -->
         <div class="container__form container--signup">
             <form method="post" class="form" id="form1">
+                <h2 class="form__title">Sign Up</h2>
                 {% load widget_tweaks %}
                 {% csrf_token %}
-                <h2 class="form__title">Sign Up</h2>
                 {% render_field cuf.username placeholder="Username" class="input" %}
                 {% render_field cuf.email placeholder="Email" class="input" %}
                 {% render_field cuf.password1 placeholder="Password" class="input" %}

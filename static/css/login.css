@@ -177,3 +177,6 @@ body {
         bottom: 100%;
     }
 }
+input:-internal-autofill-selected{
+    background: transparent !important;
+}
