@@ -11,7 +11,7 @@ from .models import *
 from forms.form import *
 
 def home(request):
-    return render(request, 'pages/home.html')
+    return render(request, 'pages/main/home.html')
 
 # Create User Account
 def CreateAccountView(request):
@@ -96,7 +96,7 @@ def ProfileView(request, username):
         "user_form":user_form,
         "profile_form":profile_form
     }
-    return render(request, 'pages/profile.html', context)
+    return render(request, 'pages/main/profile.html', context)
 
 def logoutView(request):
     logout(request)
@@ -120,7 +120,7 @@ def NewFormView(request):
     context={
         "NewForm":NewForm,
     }
-    return render(request, "pages/new.html", context)
+    return render(request, "pages/others/new.html", context)
 
 # --------------------------------------------------------------------- #
 def CreateDashBoardFormView(request, slug):
@@ -191,7 +191,7 @@ def SingleFormView(request, slug):
         "request_form":request_form,
         "requests_":requests_,
     }
-    return render(request, 'pages/form.html', context)
+    return render(request, 'pages/others/form.html', context)
 # ----------------------- Yagona Forma ko'rish manzili ----------------------- #
 
 # ----------------------- Dashboard Form  ----------------------- #
@@ -216,7 +216,7 @@ def DashboardFromView(request, slug):
         "requests":requests,
         "ufa": update_forma
     }
-    return render(request, "pages/dash_form.html", context)
+    return render(request, "pages/others/dashboard.html", context)
 # ----------------------- Dashboard Form  End ----------------------- #
 
 # ----------------------- Request view ----------------------- #
@@ -239,7 +239,7 @@ def SingleRequestView(request, slug, pk):
         'single_request':single_request,
         'single_form':single_form
     }
-    return render(request, 'pages/single_request.html', context)
+    return render(request, 'pages/others/request.html', context)
 # ----------------------- request view End ----------------------- #
 
 def SubmitSuccessView(request, slug):
@@ -247,7 +247,7 @@ def SubmitSuccessView(request, slug):
     context ={
         "single":single
     }
-    return render(request, 'pages/success.html', context)
+    return render(request, 'pages/helpers/success.html', context)
 
 # ----------------------- Notifications view ----------------------- #
 @login_required(login_url='base:login')
@@ -256,5 +256,5 @@ def NotificationsView(request):
     context = {
         "new_requests":new_requests,
     }
-    return render(request, 'pages/notifications.html', context)
+    return render(request, 'pages/main/notifications.html', context)
 # ----------------------- notifications view End----------------------- #
