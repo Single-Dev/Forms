@@ -13,7 +13,7 @@ from forms.form import *
 def home(request):
     return render(request, 'pages/home.html')
 
-# Account Create
+# Create User Account
 def CreateAccountView(request):
     create_user_form = CreateAccountForm()
     login_form = AuthenticationForm()
@@ -44,7 +44,6 @@ def CreateAccountView(request):
         "login_form":login_form
     }
     return render(request, 'registration/signup.html', context)
-
 
 # Profile View
 def ProfileView(request, username):
@@ -123,11 +122,14 @@ def NewFormView(request):
     }
     return render(request, "pages/new.html", context)
 
+# --------------------------------------------------------------------- #
 def CreateDashBoardFormView(request, slug):
     forma = Form.objects.get(slug=slug)
     DashboardForm.objects.create(form=forma)
     return redirect("base:dashboard", slug)
-# Yagona Forma ko'rish manzili
+# --------------------------------------------------------------------- #
+
+# ----------------------- Yagona Forma ko'rish manzili ----------------------- #
 def SingleFormView(request, slug):
     forma = Form.objects.get(slug=slug)
     dashboard_obj = forma.dashboard_form
@@ -190,6 +192,7 @@ def SingleFormView(request, slug):
         "requests_":requests_,
     }
     return render(request, 'pages/form.html', context)
+# ----------------------- Yagona Forma ko'rish manzili ----------------------- #
 
 # ----------------------- Dashboard Form  ----------------------- #
 @login_required(login_url="base:login")
@@ -199,14 +202,14 @@ def DashboardFromView(request, slug):
     dashboard_obj = forma.dashboard_form
     if not forma.author == request.user:
         return redirect("base:form", slug)
-    # Update Form View
+    # ----------------------- Update Form view ----------------------- #
     update_forma = FormaForm(instance=forma)
     if request.method == 'POST':
         update_forma = FormaForm(request.POST, instance=forma)
         if update_forma.is_valid():
             update_forma.save()
             return redirect("base:dashboard", slug)
-    # Update Form View End
+    # ----------------------- Update Form view  End----------------------- #
     context = {
         "forma":forma,
         "dashboard_obj": dashboard_obj,
@@ -214,7 +217,7 @@ def DashboardFromView(request, slug):
         "ufa": update_forma
     }
     return render(request, "pages/dash_form.html", context)
-# ----------------------- Dashboard Form  ----------------------- #
+# ----------------------- Dashboard Form  End ----------------------- #
 
 # ----------------------- Request view ----------------------- #
 @login_required(login_url='base:login')
@@ -237,23 +240,7 @@ def SingleRequestView(request, slug, pk):
         'single_form':single_form
     }
     return render(request, 'pages/single_request.html', context)
-# ----------------------- request view ----------------------- #
-
-# ----------------------- Update Form view ----------------------- #
-def UpdateFormView(request, slug):
-    forma = Form.objects.get(slug=slug)
-    update_forma = FormaForm(instance=forma)
-    if request.method == 'POST':
-        update_chart_form = FormaForm(request.POST, instance=forma)
-        if update_chart_form.is_valid():
-            update_chart_form.save()
-            return redirect("base:profile", forma.author)
-    context={
-        "ufa":update_forma,
-        "forma":forma,
-    }
-    return render(request, "pages/update_forma.html", context)
-# ----------------------- Update Form view ----------------------- #
+# ----------------------- request view End ----------------------- #
 
 def SubmitSuccessView(request, slug):
     single = Form.objects.get(slug=slug)
@@ -270,4 +257,4 @@ def NotificationsView(request):
         "new_requests":new_requests,
     }
     return render(request, 'pages/notifications.html', context)
-# ----------------------- notifications view ----------------------- #
+# ----------------------- notifications view End----------------------- #
