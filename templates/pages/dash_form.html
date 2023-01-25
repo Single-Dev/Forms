@@ -11,7 +11,12 @@
 <body>
 
     <p>visits: {{dashboard_obj.visits}}</p>
-
+    <span>last visit: {{ dashboard_obj.last_visit }}</span>
+    <form method="post">
+        {% csrf_token %}
+        {{ ufa }}
+        <button type="submit">Update</button>
+    </form>
 </body>
 
 </html>

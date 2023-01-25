@@ -5,6 +5,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.http import HttpResponseRedirect
 from django.contrib.auth import logout
 from django.contrib import messages
+from django.utils import timezone
 from django.views import generic
 from .models import *
 from forms.form import *
@@ -133,6 +134,7 @@ def SingleFormView(request, slug):
     blocked_users = dashboard_obj.blocked_users.all()
     if not forma.author == request.user and not request.user in blocked_users:
         dashboard_obj.visits += 1
+        dashboard_obj.last_visit = timezone.now()
         dashboard_obj.save()
     # Agar user bloklangan bo'lsa
     if request.user in blocked_users:
@@ -197,10 +199,19 @@ def DashboardFromView(request, slug):
     dashboard_obj = forma.dashboard_form
     if not forma.author == request.user:
         return redirect("base:form", slug)
+    # Update Form View
+    update_forma = FormaForm(instance=forma)
+    if request.method == 'POST':
+        update_forma = FormaForm(request.POST, instance=forma)
+        if update_forma.is_valid():
+            update_forma.save()
+            return redirect("base:dashboard", slug)
+    # Update Form View End
     context = {
         "forma":forma,
         "dashboard_obj": dashboard_obj,
-        "requests":requests
+        "requests":requests,
+        "ufa": update_forma
     }
     return render(request, "pages/dash_form.html", context)
 # ----------------------- Dashboard Form  ----------------------- #
