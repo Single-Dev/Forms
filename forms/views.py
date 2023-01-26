@@ -14,7 +14,7 @@ def home(request):
     return render(request, 'pages/main/home.html')
 
 # Create User Account
-def CreateAccountView(request):
+def create_account_view(request):
     create_user_form = CreateAccountForm()
     login_form = AuthenticationForm()
     if request.method == 'POST':
@@ -46,7 +46,7 @@ def CreateAccountView(request):
     return render(request, 'registration/signup.html', context)
 
 # Profile View
-def ProfileView(request, username):
+def profile_view(request, username):
     user_p = User.objects.get(username=username)
     if user_p.username == "anonim":
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
@@ -98,13 +98,13 @@ def ProfileView(request, username):
     }
     return render(request, 'pages/main/profile.html', context)
 
-def logoutView(request):
+def logout_view(request):
     logout(request)
     return redirect("base:home")
 
 # Create Form View
 @login_required(login_url='base:login')
-def NewFormView(request):
+def new_form_view(request):
     author = get_object_or_404(CustomUser, username=request.user)
     new_dash = None
     NewForm = FormaForm()
@@ -123,14 +123,14 @@ def NewFormView(request):
     return render(request, "pages/others/new.html", context)
 
 # --------------------------------------------------------------------- #
-def CreateDashBoardFormView(request, slug):
+def create_dashboard_form_view(request, slug):
     forma = Form.objects.get(slug=slug)
     DashboardForm.objects.create(form=forma)
     return redirect("base:dashboard", slug)
 # --------------------------------------------------------------------- #
 
 # ----------------------- Yagona Forma ko'rish manzili ----------------------- #
-def SingleFormView(request, slug):
+def single_form_view(request, slug):
     forma = Form.objects.get(slug=slug)
     dashboard_obj = forma.dashboard_form
     blocked_users = dashboard_obj.blocked_users.all()
@@ -196,7 +196,7 @@ def SingleFormView(request, slug):
 
 # ----------------------- Dashboard Form  ----------------------- #
 @login_required(login_url="base:login")
-def DashboardFromView(request, slug):
+def dashboard_from_view(request, slug):
     forma = Form.objects.get(slug=slug)
     requests = forma.form_requests.all()
     dashboard_obj = forma.dashboard_form
@@ -221,7 +221,7 @@ def DashboardFromView(request, slug):
 
 # ----------------------- Request view ----------------------- #
 @login_required(login_url='base:login')
-def SingleRequestView(request, slug, pk):
+def single_request_view(request, slug, pk):
     single_form = Form.objects.get(slug=slug)
     single_request = FormRequest.objects.get(id=pk)
     user_ = get_object_or_404(CustomUser, username=request.user)
@@ -242,7 +242,7 @@ def SingleRequestView(request, slug, pk):
     return render(request, 'pages/others/request.html', context)
 # ----------------------- request view End ----------------------- #
 
-def SubmitSuccessView(request, slug):
+def submit_success_view(request, slug):
     single = Form.objects.get(slug=slug)
     context ={
         "single":single
@@ -251,10 +251,11 @@ def SubmitSuccessView(request, slug):
 
 # ----------------------- Notifications view ----------------------- #
 @login_required(login_url='base:login')
-def NotificationsView(request):
+def notifications_view(request):
     new_requests = FormRequest.objects.filter(view=False)
     context = {
         "new_requests":new_requests,
     }
     return render(request, 'pages/main/notifications.html', context)
 # ----------------------- notifications view End----------------------- #
+
