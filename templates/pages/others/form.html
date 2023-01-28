@@ -33,6 +33,7 @@
             {% render_field request_form.full_name type="text" id="full_name" class="form-control mt-2 mb-2" placeholder="Full name" %}
             <label for="email">Email</label>
             {% render_field request_form.email type="email" class="form-control mt-2 mb-2" id="email" placeholder="Enter Valid email addres" %}
+            {% render_field request_form.description class="form-control mt-2 mb-2" id="email" placeholder="Description" %}
             <span class="d-flex">
                 <label for="is_public" style="margin-right: 10px;">Public: </label>
                 {% render_field request_form.is_public id="is_public" %}

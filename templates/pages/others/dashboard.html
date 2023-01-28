@@ -116,16 +116,14 @@
                                         Type</th>
                                     <th
                                         class="font-normal px-3 pt-0 pb-3 border-b border-gray-200 dark:border-gray-800">
-                                        Where</th>
+                                        Full Name</th>
                                     <th
                                         class="font-normal px-3 pt-0 pb-3 border-b border-gray-200 dark:border-gray-800 hidden md:table-cell">
                                         Description</th>
                                     <th
                                         class="font-normal px-3 pt-0 pb-3 border-b border-gray-200 dark:border-gray-800">
-                                        Amount</th>
-                                    <th
-                                        class="font-normal px-3 pt-0 pb-3 border-b border-gray-200 dark:border-gray-800 sm:text-gray-400 text-white">
-                                        Date</th>
+                                        Email</th>
+                                  
                                 </tr>
                             </thead>
                             <tbody class="text-gray-600 dark:text-gray-100">
@@ -150,28 +148,10 @@
                                     </td>
                                     <td
                                         class="sm:p-3 py-2 px-1 border-b border-gray-200 dark:border-gray-800 md:table-cell hidden">
-                                        {{ fr. }}</td>
+                                        {{ fr.description }}</td>
                                     <td
-                                        class="sm:p-3 py-2 px-1 border-b border-gray-200 dark:border-gray-800 text-red-500">
-                                        - $120.00</td>
-                                    <td class="sm:p-3 py-2 px-1 border-b border-gray-200 dark:border-gray-800">
-                                        <div class="flex items-center">
-                                            <div class="sm:flex hidden flex-col">
-                                                24.12.2020
-                                                <div class="text-gray-400 text-xs">11:16 AM</div>
-                                            </div>
-                                            <button
-                                                class="w-8 h-8 inline-flex items-center justify-center text-gray-400 ml-auto">
-                                                <svg viewBox="0 0 24 24" class="w-5" stroke="currentColor"
-                                                    stroke-width="2" fill="none" stroke-linecap="round"
-                                                    stroke-linejoin="round">
-                                                    <circle cx="12" cy="12" r="1"></circle>
-                                                    <circle cx="19" cy="12" r="1"></circle>
-                                                    <circle cx="5" cy="12" r="1"></circle>
-                                                </svg>
-                                            </button>
-                                        </div>
-                                    </td>
+                                        class="sm:p-3 py-2 px-1 border-b border-gray-200 dark:border-gray-800 ">
+                                        {{ fr.email }}</td>
                                 </tr>
                                 {% endfor %}
                             </tbody>
