@@ -52,7 +52,7 @@ class FormRequest(models.Model):
     view = models.BooleanField(default=False)
     full_name = models.CharField(max_length=32)
     email = models.EmailField()
-
+    description = models.TextField(max_length=500)
     def __str__(self):
         return f'id: {self.id}'
 
