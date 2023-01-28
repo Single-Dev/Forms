@@ -74,11 +74,12 @@
                         </div>
                         <div class="flex items-center space-x-3 sm:mt-7 mt-4">
                             <a href="#"
-                                class="px-3 border-b-2 border-blue-500 text-blue-500 dark:text-white dark:border-white pb-1.5">Activities</a>
+                                class="px-3 border-b-2 border-blue-500 text-blue-500 dark:text-white dark:border-white pb-1.5">Requests</a>
                             <a href="#"
                                 class="px-3 border-b-2 border-transparent text-gray-600 dark:text-gray-400 pb-1.5">Transfer</a>
                             </div>
                     </div>
+                    {% if requests %}
                     <div class="sm:p-7 p-4">
                         <div class="flex w-full items-center mb-7">
                             <button
@@ -119,40 +120,49 @@
                                         Full Name</th>
                                     <th
                                         class="font-normal px-3 pt-0 pb-3 border-b border-gray-200 dark:border-gray-800 hidden md:table-cell">
-                                        Description</th>
+                                        Email</th>
                                     <th
                                         class="font-normal px-3 pt-0 pb-3 border-b border-gray-200 dark:border-gray-800">
-                                        Email</th>
+                                        View</th>
                                   
                                 </tr>
                             </thead>
                             <tbody class="text-gray-600 dark:text-gray-100">
                                 {% for fr in requests %}
-                                <tr>
-                                    <td class="sm:p-3 py-2 px-1 border-b border-gray-200 dark:border-gray-800">
-                                        <div class="flex items-center">
-                                            <svg viewBox="0 0 24 24" class="w-4 mr-5 text-yellow-500"
-                                                stroke="currentColor" stroke-width="3" fill="none"
-                                                stroke-linecap="round" stroke-linejoin="round">
-                                                <circle cx="12" cy="12" r="10"></circle>
-                                                <line x1="12" y1="8" x2="12" y2="12"></line>
-                                                <line x1="12" y1="16" x2="12.01" y2="16"></line>
-                                            </svg>
-                                            Request
-                                        </div>
-                                    </td>
-                                    <td class="sm:p-3 py-2 px-1 border-b border-gray-200 dark:border-gray-800">
-                                        <div class="flex items-center">
-                                         {{ fr.full_name }}
-                                        </div>
-                                    </td>
-                                    <td
-                                        class="sm:p-3 py-2 px-1 border-b border-gray-200 dark:border-gray-800 md:table-cell hidden">
-                                        {{ fr.description }}</td>
-                                    <td
-                                        class="sm:p-3 py-2 px-1 border-b border-gray-200 dark:border-gray-800 ">
-                                        {{ fr.email }}</td>
-                                </tr>
+                                
+                                    <tr>
+                                        <td class="sm:p-3 py-2 px-1 border-b border-gray-200 dark:border-gray-800">
+                                            <div class="flex items-center">
+                                                <svg viewBox="0 0 24 24" class="w-4 mr-5 text-yellow-500"
+                                                    stroke="currentColor" stroke-width="3" fill="none"
+                                                    stroke-linecap="round" stroke-linejoin="round">
+                                                    <circle cx="12" cy="12" r="10"></circle>
+                                                    <line x1="12" y1="8" x2="12" y2="12"></line>
+                                                    <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                                                </svg>
+                                                Request
+                                            </div>
+                                        </td>
+                                        <td class="sm:p-3 py-2 px-1 border-b border-gray-200 dark:border-gray-800">
+                                            <div class="flex items-center">
+                                            {{ fr.full_name }}
+                                            </div>
+                                        </td>
+                                       
+                                        <td
+                                            class="sm:p-3 py-2 px-1 border-b border-gray-200 dark:border-gray-800 ">
+                                            {{ fr.email }}</td>
+                                        <td class="sm:p-3 py-2 px-1 border-b border-gray-200 dark:border-gray-800 ">
+                                            <a href="{% url 'base:single_request' fr.form.slug fr.id %}">
+                                                {% if fr.view %}
+                                                Viewed
+                                                {% else %}
+                                                View
+                                                {% endif %}
+                                            </a>
+                                        </td>
+                                    </tr>
+
                                 {% endfor %}
                             </tbody>
                         </table>
@@ -178,6 +188,7 @@
                             </button>
                         </div>
                     </div>
+                    {% endif %}
                 </div>
             </div>
         </div>
