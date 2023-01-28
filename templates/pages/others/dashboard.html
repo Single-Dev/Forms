@@ -6,17 +6,207 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{forma.title}} - Dashboard</title>
+    <link rel="stylesheet" href="https://assets.codepen.io/344846/style.css">
 </head>
 
 <body>
+    <div class="bg-gray-100 dark:bg-gray-900 dark:text-white text-gray-600 h-screen flex overflow-hidden text-sm">
+      
+        <div class="flex-grow overflow-hidden h-full flex flex-col">
+         
+            <div class="flex-grow flex overflow-x-hidden">
+                <div
+                    class="xl:w-72 w-48 flex-shrink-0 border-r border-gray-200 dark:border-gray-800 h-full overflow-y-auto lg:block hidden p-5">
+                    <div class="space-y-4 mt-3">
+                        <button class="bg-white p-3 w-full flex flex-col rounded-md dark:bg-gray-800 shadow">
+                            <div
+                                class="flex xl:flex-row flex-col items-center font-medium text-gray-900 dark:text-white pb-2 mb-2 xl:border-b border-gray-200 border-opacity-75 dark:border-gray-700 w-full">
+                                <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=046c29138c1335ef8edee7daf521ba50"
+                                    class="w-7 h-7 mr-2 rounded-full" alt="profile" />
+                                Kathyrn Murphy
+                            </div>
+                            <div class="flex items-center w-full">
+                                <div
+                                    class="text-xs py-1 px-2 leading-none dark:bg-gray-900 bg-blue-100 text-blue-500 rounded-md">
+                                    Design</div>
+                                <div class="ml-auto text-xs text-gray-500">$1,902.00</div>
+                            </div>
+                        </button>
+                        <button
+                            class="bg-white p-3 w-full flex flex-col rounded-md dark:bg-gray-800 shadow-lg relative ring-2 ring-blue-500 focus:outline-none">
+                            <div
+                                class="flex xl:flex-row flex-col items-center font-medium text-gray-900 dark:text-white pb-2 mb-2 xl:border-b border-gray-200 border-opacity-75 dark:border-gray-700 w-full">
+                                <img src="https://assets.codepen.io/344846/internal/avatars/users/default.png?fit=crop&format=auto&height=512&version=1582611188&width=512"
+                                    class="w-7 h-7 mr-2 rounded-full" alt="profile" />
+                                Mert Cukuren
+                            </div>
+                            <div class="flex items-center w-full">
+                                <div
+                                    class="text-xs py-1 px-2 leading-none dark:bg-gray-900 bg-green-100 text-green-600 rounded-md">
+                                    Sales</div>
+                                <div class="ml-auto text-xs text-gray-500">$2,794.00</div>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+                <div class="flex-grow bg-white dark:bg-gray-900 overflow-y-auto">
+                    <div
+                        class="sm:px-7 sm:pt-7 px-4 pt-4 flex flex-col w-full border-b border-gray-200 bg-white dark:bg-gray-900 dark:text-white dark:border-gray-800 sticky top-0">
+                        <div class="flex w-full items-center">
+                            <div class="flex items-center text-3xl text-gray-900 dark:text-white">
+                                {{forma.title}}
+                            </div>
+                            <div class="ml-auto sm:flex hidden items-center justify-end">
+                                <div class="text-right">
+                                    <div class="text-xs text-gray-400 dark:text-gray-400">All Requests:</div>
+                                    <div class="text-gray-900 text-lg dark:text-white">{{forma.form_requests.count}}</div>
+                                </div>
+                                <button
+                                    class="w-8 h-8 ml-4 text-gray-400 shadow dark:text-gray-400 rounded-full flex items-center justify-center border border-gray-200 dark:border-gray-700">
+                                    <svg viewBox="0 0 24 24" class="w-4" stroke="currentColor" stroke-width="2"
+                                        fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <circle cx="12" cy="12" r="1"></circle>
+                                        <circle cx="19" cy="12" r="1"></circle>
+                                        <circle cx="5" cy="12" r="1"></circle>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-3 sm:mt-7 mt-4">
+                            <a href="#"
+                                class="px-3 border-b-2 border-blue-500 text-blue-500 dark:text-white dark:border-white pb-1.5">Activities</a>
+                            <a href="#"
+                                class="px-3 border-b-2 border-transparent text-gray-600 dark:text-gray-400 pb-1.5">Transfer</a>
+                            </div>
+                    </div>
+                    <div class="sm:p-7 p-4">
+                        <div class="flex w-full items-center mb-7">
+                            <button
+                                class="inline-flex items-center h-8 pl-2.5 pr-2 rounded-md shadow text-gray-700 dark:text-gray-400 dark:border-gray-800 border border-gray-200 leading-none py-0">
+                                Filter by
+                                <svg viewBox="0 0 24 24" class="w-4 ml-1.5 text-gray-400 dark:text-gray-600"
+                                    stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <polyline points="6 9 12 15 18 9"></polyline>
+                                </svg>
+                            </button>
+                            <div class="ml-auto text-gray-500 text-xs sm:inline-flex hidden items-center">
+                                <span class="mr-3">Page 1 of 1</span>
+                                <button
+                                    class="inline-flex mr-2 items-center h-8 w-8 justify-center text-gray-400 rounded-md shadow border border-gray-200 dark:border-gray-800 leading-none py-0">
+                                    <svg class="w-4" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"
+                                        fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="15 18 9 12 15 6"></polyline>
+                                    </svg>
+                                </button>
+                                <button
+                                    class="inline-flex items-center h-8 w-8 justify-center text-gray-400 rounded-md shadow border border-gray-200 dark:border-gray-800 leading-none py-0">
+                                    <svg class="w-4" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"
+                                        fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="9 18 15 12 9 6"></polyline>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <table class="w-full text-left">
+                            <thead>
+                                <tr class="text-gray-400">
+                                    <th
+                                        class="font-normal px-3 pt-0 pb-3 border-b border-gray-200 dark:border-gray-800">
+                                        Type</th>
+                                    <th
+                                        class="font-normal px-3 pt-0 pb-3 border-b border-gray-200 dark:border-gray-800">
+                                        Where</th>
+                                    <th
+                                        class="font-normal px-3 pt-0 pb-3 border-b border-gray-200 dark:border-gray-800 hidden md:table-cell">
+                                        Description</th>
+                                    <th
+                                        class="font-normal px-3 pt-0 pb-3 border-b border-gray-200 dark:border-gray-800">
+                                        Amount</th>
+                                    <th
+                                        class="font-normal px-3 pt-0 pb-3 border-b border-gray-200 dark:border-gray-800 sm:text-gray-400 text-white">
+                                        Date</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-gray-600 dark:text-gray-100">
+                                <tr>
+                                    <td class="sm:p-3 py-2 px-1 border-b border-gray-200 dark:border-gray-800">
+                                        <div class="flex items-center">
+                                            <svg viewBox="0 0 24 24" class="w-4 mr-5 text-yellow-500"
+                                                stroke="currentColor" stroke-width="3" fill="none"
+                                                stroke-linecap="round" stroke-linejoin="round">
+                                                <circle cx="12" cy="12" r="10"></circle>
+                                                <line x1="12" y1="8" x2="12" y2="12"></line>
+                                                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                                            </svg>
+                                            Card
+                                        </div>
+                                    </td>
+                                    <td class="sm:p-3 py-2 px-1 border-b border-gray-200 dark:border-gray-800">
+                                        <div class="flex items-center">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512.001 512.001"
+                                                class="w-7 h-7 p-1.5 mr-2.5 rounded-lg border border-gray-200 dark:border-gray-800">
+                                                <path fill="#03a9f4"
+                                                    d="M425.457 117.739c-3.121-1.838-6.961-1.966-10.197-.341-3.231 1.629-5.416 4.786-5.803 8.384-.384 3.499-.981 6.997-1.728 10.667-20.885 94.784-62.827 140.885-128.256 140.885h-96c-5.062.009-9.42 3.574-10.432 8.533l-32 149.995-5.717 38.187c-3.287 17.365 8.125 34.107 25.489 37.394 1.915.362 3.858.549 5.807.558h64.213c14.718.045 27.55-10 31.04-24.299l25.941-103.701h55.659c65.685 0 111.083-52.373 127.829-147.477 11.054-45.286-7.234-92.668-45.845-118.785z" />
+                                                <path fill="#283593"
+                                                    d="M405.339 38.017C384.261 14.108 354.012.286 322.139.001h-176.64C119.064-.141 96.558 19.2 92.721 45.355L37.873 411.243c-2.627 17.477 9.41 33.774 26.887 36.402 1.586.239 3.189.357 4.793.356h81.92c5.062-.009 9.42-3.574 10.432-8.533l30.187-140.8h87.467c75.904 0 126.059-53.056 149.099-157.867.926-4.178 1.638-8.4 2.133-12.651 5.348-32.335-3.981-65.372-25.452-90.133z" />
+                                            </svg>
+                                            PayPal
+                                        </div>
+                                    </td>
+                                    <td
+                                        class="sm:p-3 py-2 px-1 border-b border-gray-200 dark:border-gray-800 md:table-cell hidden">
+                                        Subscription renewal</td>
+                                    <td
+                                        class="sm:p-3 py-2 px-1 border-b border-gray-200 dark:border-gray-800 text-red-500">
+                                        - $120.00</td>
+                                    <td class="sm:p-3 py-2 px-1 border-b border-gray-200 dark:border-gray-800">
+                                        <div class="flex items-center">
+                                            <div class="sm:flex hidden flex-col">
+                                                24.12.2020
+                                                <div class="text-gray-400 text-xs">11:16 AM</div>
+                                            </div>
+                                            <button
+                                                class="w-8 h-8 inline-flex items-center justify-center text-gray-400 ml-auto">
+                                                <svg viewBox="0 0 24 24" class="w-5" stroke="currentColor"
+                                                    stroke-width="2" fill="none" stroke-linecap="round"
+                                                    stroke-linejoin="round">
+                                                    <circle cx="12" cy="12" r="1"></circle>
+                                                    <circle cx="19" cy="12" r="1"></circle>
+                                                    <circle cx="5" cy="12" r="1"></circle>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="flex w-full mt-5 space-x-2 justify-end">
+                            <button
+                                class="inline-flex items-center h-8 w-8 justify-center text-gray-400 rounded-md shadow border border-gray-200 dark:border-gray-800 leading-none">
+                                <svg class="w-4" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="15 18 9 12 15 6"></polyline>
+                                </svg>
+                            </button>
+                            <button
+                                class="inline-flex items-center h-8 w-8 justify-center text-gray-500 rounded-md shadow border border-gray-200 dark:border-gray-800 leading-none bg-gray-100 dark:bg-gray-800 dark:text-white">1</button>
+                            <button
+                                class="inline-flex items-center h-8 w-8 justify-center text-gray-500 rounded-md shadow border border-gray-200 dark:border-gray-800 leading-none">2</button>
 
-    <p>visits: {{dashboard_obj.visits}}</p>
-    <span>last visit: {{ dashboard_obj.last_visit }}</span>
-    <form method="post">
-        {% csrf_token %}
-        {{ ufa }}
-        <button type="submit">Update</button>
-    </form>
+                            <button
+                                class="inline-flex items-center h-8 w-8 justify-center text-gray-400 rounded-md shadow border border-gray-200 dark:border-gray-800 leading-none">
+                                <svg class="w-4" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="9 18 15 12 9 6"></polyline>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
