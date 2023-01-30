@@ -199,8 +199,13 @@ def dashboard_from_view(request, slug):
     user_requests = request.GET.get('user_requests')
     forma = Form.objects.get(slug=slug)
     requests = forma.form_requests.all()
+    # ----- category request by username 
     if user_requests != None:
-        requests = forma.form_requests.filter(user__username=user_requests)
+        # if user_requests == "anonim":
+        #     request =forma.form_requests.filter(as_anonim=True)
+        # else:
+            requests = forma.form_requests.filter(user__username=user_requests)
+    # ----- category request by username
     dashboard_obj = forma.dashboard_form
     if not forma.author == request.user:
         return redirect("base:form", slug)
@@ -212,11 +217,18 @@ def dashboard_from_view(request, slug):
             update_forma.save()
             return redirect("base:dashboard", slug)
     # ----------------------- Update Form view  End----------------------- #
+    # ----------------------- Get Senders ----------------------- #
+    senders = []
+    for sender in requests:
+        if sender != sender:
+            senders.append(sender)
+    # ----------------------- Get Senders End ----------------------- #
     context = {
         "forma":forma,
         "dashboard_obj": dashboard_obj,
         "requests":requests,
-        "ufa": update_forma
+        "senders":senders,
+        "ufa": update_forma,
     }
     return render(request, "pages/others/dashboard.html", context)
 # ----------------------- Dashboard Form  End ----------------------- #
