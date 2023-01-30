@@ -196,8 +196,11 @@ def single_form_view(request, slug):
 # ----------------------- Dashboard Form  ----------------------- #
 @login_required(login_url="base:login")
 def dashboard_from_view(request, slug):
+    user_requests = request.GET.get('user_requests')
     forma = Form.objects.get(slug=slug)
     requests = forma.form_requests.all()
+    if user_requests != None:
+        requests = forma.form_requests.filter(user__username=user_requests)
     dashboard_obj = forma.dashboard_form
     if not forma.author == request.user:
         return redirect("base:form", slug)
