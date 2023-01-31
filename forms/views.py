@@ -10,9 +10,11 @@ from .models import *
 from forms.form import *
 
 def home(request):
-    new_requests = FormRequest.objects.filter(view=False)
-    unread_notifys =  new_requests.filter(form__author=request.user)
-    n_count = unread_notifys.count()
+    n_count = None
+    if request.user.is_authenticated:
+        new_requests = FormRequest.objects.filter(view=False)
+        unread_notifys =  new_requests.filter(form__author=request.user)
+        n_count = unread_notifys.count()
     context={
         "n_count":n_count
     }

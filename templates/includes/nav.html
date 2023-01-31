@@ -12,7 +12,16 @@
                 <li><a class="nav-link scrollto" href="#about">About</a></li>
                 <li><a class="nav-link scrollto" href="#services">Services</a></li>
                 <li><a class="nav-link   scrollto" href="#portfolio">Portfolio</a></li>
-                <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
+                <li class="dropdown">
+                    <a href="#">
+                        <span>
+                            Drop Down
+                            {% if n_count > 0 %}
+                            *
+                            {% endif %}
+                        </span>
+                        <i class="bi bi-chevron-down"></i>
+                    </a>
                     <ul>
                         {% if request.user.is_authenticated %}
                         <li><a href="{% url 'base:profile' request.user %}">Profile (@{{request.user}})</a></li>
