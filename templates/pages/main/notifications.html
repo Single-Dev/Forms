@@ -9,15 +9,16 @@
 </head>
 
 <body>
-    {% if test %}
-    {% for x in test %}
+    <span>Unread notify: {{n_count}}</span>
+    {% if unread_notifys %}
+    {% for ur in unread_notifys %}
     <div id="requests">
-        <h1><a href="{% url 'base:single_request' x.form.slug x.id %}">{{ x.full_name }}</a> / <a
-                href="{% url 'base:form' x.form.slug %}">{{ x.form.title }}</a></h1>
+        <h1><a href="{% url 'base:single_request' ur.form.slug ur.id %}">{{ ur.full_name }}</a> / <a
+                href="{% url 'base:form' ur.form.slug %}">{{ ur.form.title }}</a></h1>
         <br>
         {{ x.email }}
-        {% if not x.as_anonim %}
-        <a href="{% url 'base:profile' x.user.username %}">{{ x.user.username }}</a>
+        {% if not ur.as_anonim %}
+        <a href="{% url 'base:profile' ur.user.username %}">{{ ur.user.username }}</a>
         {% else %}
         <a href="#">Anonim</a>
         {% endif %}

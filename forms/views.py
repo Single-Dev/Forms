@@ -10,7 +10,13 @@ from .models import *
 from forms.form import *
 
 def home(request):
-    return render(request, 'pages/main/home.html')
+    new_requests = FormRequest.objects.filter(view=False)
+    unread_notifys =  new_requests.filter(form__author=request.user)
+    n_count = unread_notifys.count()
+    context={
+        "n_count":n_count
+    }
+    return render(request, 'pages/main/home.html', context)
 
 # Create User Account
 def create_account_view(request):
@@ -267,10 +273,11 @@ def submit_success_view(request, slug):
 @login_required(login_url='base:login')
 def notifications_view(request):
     new_requests = FormRequest.objects.filter(view=False)
-    test =  new_requests.filter(form__author=request.user)
+    unread_notifys =  new_requests.filter(form__author=request.user)
+    n_count = unread_notifys.count()
     context = {
-        "new_requests":new_requests,
-        "test":test
+        "unread_notifys":unread_notifys,
+        "n_count":n_count
     }
     return render(request, 'pages/main/notifications.html', context)
 # ----------------------- notifications view End----------------------- #
