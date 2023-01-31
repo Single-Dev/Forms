@@ -12,8 +12,7 @@ from forms.form import *
 def home(request):
     n_count = None
     if request.user.is_authenticated:
-        new_requests = FormRequest.objects.filter(view=False)
-        unread_notifys =  new_requests.filter(form__author=request.user)
+        unread_notifys = FormRequest.objects.filter(view=False, form__author=request.user)
         n_count = unread_notifys.count()
     context={
         "n_count":n_count
@@ -274,8 +273,7 @@ def submit_success_view(request, slug):
 # ----------------------- Notifications view ----------------------- #
 @login_required(login_url='base:login')
 def notifications_view(request):
-    new_requests = FormRequest.objects.filter(view=False)
-    unread_notifys =  new_requests.filter(form__author=request.user)
+    unread_notifys = FormRequest.objects.filter(view=False, form__author=request.user)
     n_count = unread_notifys.count()
     context = {
         "unread_notifys":unread_notifys,
