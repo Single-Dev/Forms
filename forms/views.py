@@ -220,7 +220,7 @@ def dashboard_from_view(request, slug):
     # ----------------------- Get Senders ----------------------- #
     senders = []
     for sender in requests:
-        if sender != sender:
+        if sender in requests:
             senders.append(sender)
     # ----------------------- Get Senders End ----------------------- #
     context = {
@@ -267,8 +267,10 @@ def submit_success_view(request, slug):
 @login_required(login_url='base:login')
 def notifications_view(request):
     new_requests = FormRequest.objects.filter(view=False)
+    test =  new_requests.filter(form__author=request.user)
     context = {
         "new_requests":new_requests,
+        "test":test
     }
     return render(request, 'pages/main/notifications.html', context)
 # ----------------------- notifications view End----------------------- #

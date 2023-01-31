@@ -9,8 +9,8 @@
 </head>
 
 <body>
-    {% for x in new_requests %}
-    {% if x.form.author.username == request.user.username %}
+    {% if test %}
+    {% for x in test %}
     <div id="requests">
         <h1><a href="{% url 'base:single_request' x.form.slug x.id %}">{{ x.full_name }}</a> / <a
                 href="{% url 'base:form' x.form.slug %}">{{ x.form.title }}</a></h1>
@@ -25,8 +25,8 @@
         <br>
         <hr>
     </div>
-    {% endif %}
     {% endfor %}
+    {% endif %}
     <div id="response"></div>
     <script src="{% static 'js/notify.js' %}"></script>
 </body>
