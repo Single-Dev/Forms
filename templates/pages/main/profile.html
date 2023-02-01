@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="{% static 'css/profile.css' %}">
     <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
     <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+    <link rel="icon" href="{{ user_p.profile.image.url }}">
     <title>{{title}}</title>
 </head>
 
@@ -144,7 +145,7 @@
             </div>
 
             <div class="profile-card-message js-message">
-                <form method="post" class="profile-card-form">
+                <form method="post" class="profile-card-form" enctype="multipart/form-data">
                     <div class="profile-card-form__container">
                         {% csrf_token %}
                         {% load widget_tweaks %}
@@ -163,8 +164,7 @@
 
                     <div class="profile-card-form__bottom">
                         <button type="button" class="profile-card__button button--gray js-message-close">Cancel</button>
-                        <button type="submit" class="profile-card__button button--blue js-message-close">Update
-                            zProfile</button>
+                        <button type="submit" class="profile-card__button button--blue js-message-close">Update Profile</button>
                     </div>
                 </form>
 

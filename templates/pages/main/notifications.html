@@ -1,33 +1,35 @@
 <!DOCTYPE html>
 {% load static %}
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/notify.css' %}">
     <title>notifications</title>
 </head>
 
 <body>
     <span>Unread notify: {{n_count}}</span>
-    {% if unread_notifys %}
-    {% for ur in unread_notifys %}
-    <div id="requests">
-        <h1><a href="{% url 'base:single_request' ur.form.slug ur.id %}">{{ ur.full_name }}</a> / <a
-                href="{% url 'base:form' ur.form.slug %}">{{ ur.form.title }}</a></h1>
-        <br>
-        {{ x.email }}
-        {% if not ur.as_anonim %}
-        <a href="{% url 'base:profile' ur.user.username %}">{{ ur.user.username }}</a>
-        {% else %}
-        <a href="#">Anonim</a>
+    <div class="scroll-cards">
+        {% if unread_notifys %}
+        {% for unr in unread_notifys %}
+        <div id="requests">
+            <div class="mail-info">
+                {{unr.full_name}}
+            </div>
+            <div>
+            </div>
+            <div class="bottom-info">
+                <div class="date">Submited on {{ unr.submited_on }}</div>
+                <a href="{% url 'base:single_request' unr.form.slug unr.id %}">View</a>
+            </div>
+
+        </div>
+        {% endfor %}
         {% endif %}
-        <br>
-        <br>
-        <hr>
     </div>
-    {% endfor %}
-    {% endif %}
     <div id="response"></div>
     <script src="{% static 'js/notify.js' %}"></script>
 </body>
