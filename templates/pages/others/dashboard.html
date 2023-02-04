@@ -18,6 +18,14 @@
                 <div
                     class="xl:w-72 w-48 flex-shrink-0 border-r border-gray-200 dark:border-gray-800 h-full overflow-y-auto lg:block hidden p-5">
                     <div class="space-y-4 mt-3">
+                        <a href="?user_requests=anonim" class="bg-white p-3 w-full flex flex-col rounded-md dark:bg-gray-800 shadow">
+                            <div
+                                class="flex xl:flex-row flex-col items-center font-medium text-gray-900 dark:text-white pb-2 mb-2 xl:border-b border-gray-200 border-opacity-75 dark:border-gray-700 w-full">
+                                <img src="{% static 'imgs/logo.png' %}"
+                                    class="w-7 h-7 mr-2 rounded-full" alt="profile" />
+                                    Anonim
+                            </div>
+                        </a>
                         {% for arm in senders %}
                         {% if not arm.as_anonim %}
                         <a href="?user_requests={{ arm.user }}" class="bg-white p-3 w-full flex flex-col rounded-md dark:bg-gray-800 shadow">
@@ -59,10 +67,8 @@
                             </div>
                         </div>
                         <div class="flex items-center space-x-3 sm:mt-7 mt-4">
-                            <a href="#"
-                                class="px-3 border-b-2 border-blue-500 text-blue-500 dark:text-white dark:border-white pb-1.5">Requests</a>
-                            <a href="#"
-                                class="px-3 border-b-2 border-transparent text-gray-600 dark:text-gray-400 pb-1.5">Transfer</a>
+                            <a href="#"class="px-3 border-b-2 border-blue-500 text-blue-500 dark:text-white dark:border-white pb-1.5">Requests</a>
+                            <a href="#" class="px-3 border-b-2 border-transparent text-gray-600 dark:text-gray-400 pb-1.5">Transfer</a>
                             </div>
                     </div>
                     {% if requests %}
@@ -100,7 +106,7 @@
                                 <tr class="text-gray-400">
                                     <th
                                         class="font-normal px-3 pt-0 pb-3 border-b border-gray-200 dark:border-gray-800">
-                                        Anonim</th>
+                                        Sender</th>
                                     <th
                                         class="font-normal px-3 pt-0 pb-3 border-b border-gray-200 dark:border-gray-800">
                                         Full Name</th>
@@ -126,7 +132,11 @@
                                                     <line x1="12" y1="8" x2="12" y2="12"></line>
                                                     <line x1="12" y1="16" x2="12.01" y2="16"></line>
                                                 </svg>
-                                                {{fr.as_anonim}}
+                                                {% if fr.as_anonim %}
+                                                <a href="#">Anonim</a>
+                                                {% else %}
+                                                <a href="{% url 'base:profile' fr.user %}">@{{ fr.user }}</a>
+                                                {% endif %}
                                             </div>
                                         </td>
                                         <td class="sm:p-3 py-2 px-1 border-b border-gray-200 dark:border-gray-800">

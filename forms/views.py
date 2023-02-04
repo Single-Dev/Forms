@@ -208,10 +208,10 @@ def dashboard_from_view(request, slug):
     requests = forma.form_requests.all()
     # ----- category request by username 
     if user_requests != None:
-        # if user_requests == "anonim":
-        #     request =forma.form_requests.filter(as_anonim=True)
-        # else:
-            requests = forma.form_requests.filter(user__username=user_requests)
+        if user_requests == "anonim":
+            requests =forma.form_requests.filter(as_anonim=True)
+        else:
+            requests = forma.form_requests.filter(user__username=user_requests).filter(as_anonim=False)
     # ----- category request by username
     dashboard_obj = forma.dashboard_form
     if not forma.author == request.user:
