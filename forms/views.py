@@ -225,10 +225,12 @@ def dashboard_from_view(request, slug):
             return redirect("base:dashboard", slug)
     # ----------------------- Update Form view  End----------------------- #
     # ----------------------- Get Senders ----------------------- #
-    senders = []
-    for sender in requests:
-        if sender in requests:
-            senders.append(sender)
+    sender_1 = forma.form_requests.all()
+    senders =None
+    for su in sender_1:
+        senders = forma.form_requests.filter(user__username=su.user.username)
+    # for sender in requests:
+    #     senders.append(sender)
     # ----------------------- Get Senders End ----------------------- #
     context = {
         "forma":forma,
