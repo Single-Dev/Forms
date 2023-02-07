@@ -3,6 +3,7 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.http import HttpResponseRedirect
+from django.core.paginator import Paginator
 from django.contrib.auth import logout
 from django.contrib import messages
 from django.utils import timezone
@@ -75,6 +76,7 @@ def profile_view(request, username):
         elif tab == 'requests':
             user_requests = user_p.user_request.filter(is_public=True)
             title = f"@{user_p.username}'s - requests"
+            # user_requests_count = user_requests.count()
     # ----------------------- Profile Tab End ----------------------- #
     # ----------------------- Update Profile ----------------------- #
     user_form = None
@@ -98,6 +100,7 @@ def profile_view(request, username):
         "user_p": user_p,    
         "user_forms":user_forms,
         "user_requests":user_requests,
+        # "user_requests_count":user_requests_count,
         "title": title,
         "user_form":user_form,
         "profile_form":profile_form
@@ -232,12 +235,21 @@ def dashboard_from_view(request, slug):
     # for sender in requests:
     #     senders.append(sender)
     # ----------------------- Get Senders End ----------------------- #
+    # ----------------------- Pagination  ----------------------- #
+    page_number = request.GET.get('page')
+    page_list = forma.form_requests.all()
+    paginator  = Paginator(page_list, 2)
+    requests = paginator.get_page(page_number)
+    if page_number == None:
+        requests = forma.form_requests.all()
+    # ----------------------- Pagination End ----------------------- #
     context = {
         "forma":forma,
         "dashboard_obj": dashboard_obj,
         "requests":requests,
         "senders":senders,
         "ufa": update_forma,
+        # "page_obj":page_obj
     }
     return render(request, "pages/others/dashboard.html", context)
 # ----------------------- Dashboard Form  End ----------------------- #
