@@ -236,12 +236,12 @@ def dashboard_from_view(request, slug):
     #     senders.append(sender)
     # ----------------------- Get Senders End ----------------------- #
     # ----------------------- Pagination  ----------------------- #
-    page_number = request.GET.get('page')
-    page_list = forma.form_requests.all()
-    paginator  = Paginator(page_list, 2)
-    requests = paginator.get_page(page_number)
-    if page_number == None:
-        requests = forma.form_requests.all()
+    # page_number = request.GET.get('page')
+    # page_list = forma.form_requests.all()
+    # paginator  = Paginator(page_list, 2)
+    # requests = paginator.get_page(page_number)
+    # if page_number == None:
+    #     requests = forma.form_requests.all()
     # ----------------------- Pagination End ----------------------- #
     context = {
         "forma":forma,
