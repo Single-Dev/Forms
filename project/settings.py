@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'forms',
     'api',
+    'rosetta',
 
     'rest_framework',
     "widget_tweaks",
