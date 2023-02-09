@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-09 20:54+0500\n"
-"PO-Revision-Date: 2023-02-09 21:10+0000\n"
+"POT-Creation-Date: 2023-02-09 21:16+0500\n"
+"PO-Revision-Date: 2023-02-09 21:16+0000\n"
 "Last-Translator: BEKZOD Tursunboyev <mygmaildotrcom@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -19,14 +19,29 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Translated-Using: django-rosetta 0.9.8\n"
 
-#: .\project\settings.py:111
+#: .\project\settings.py:112
 msgid "Uzbek"
 msgstr "O'zbek"
 
-#: .\project\settings.py:112
+#: .\project\settings.py:113
 msgid "English"
 msgstr "Ingliz"
 
-#: .\templates\pages\main\home.html:25
-msgid "salom"
-msgstr "Hello"
+#: .\templates\includes\nav.html:12
+msgid "Uy"
+msgstr "Home"
+
+#: .\templates\includes\nav.html:13
+msgid "haqida"
+msgstr "about"
+
+#: .\templates\includes\nav.html:14
+msgid "ximatlar"
+msgstr "Services"
+
+#: .\templates\includes\nav.html:15
+msgid "partfel"
+msgstr "portfolio"
+
+#~ msgid "salom"
+#~ msgstr "Hello"

@@ -1,4 +1,5 @@
 <!-- ======= Header ======= -->
+{% load i18n %}
 <header id="header" class="fixed-top ">
     <div class="container d-flex align-items-center">
 
@@ -8,10 +9,10 @@
 
         <nav id="navbar" class="navbar">
             <ul>
-                <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-                <li><a class="nav-link scrollto" href="#about">About</a></li>
-                <li><a class="nav-link scrollto" href="#services">Services</a></li>
-                <li><a class="nav-link   scrollto" href="#portfolio">Portfolio</a></li>
+                <li><a class="nav-link scrollto active" href="#hero">{% translate "Uy" %}</a></li>
+                <li><a class="nav-link scrollto" href="#about">{% trans 'haqida' %}</a></li>
+                <li><a class="nav-link scrollto" href="#services">{% trans 'ximatlar' %}</a></li>
+                <li><a class="nav-link   scrollto" href="#portfolio">{% trans 'partfel' %}</a></li>
                 <li class="dropdown">
                     <a href="#">
                         <span>
