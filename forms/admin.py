@@ -1,3 +1,4 @@
+from .translater import TranslationOptions
 from django.contrib import admin
 from .models import *
 
