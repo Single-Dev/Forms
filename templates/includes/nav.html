@@ -25,7 +25,7 @@
                     </a>
                     <ul>
                         {% if request.user.is_authenticated %}
-                        <li><a href="{% url 'base:profile' request.user %}">Profile (@{{request.user}})</a></li>
+                        <li><a href="{% url 'profile' request.user %}">Profile (@{{request.user}})</a></li>
                         {% endif %}
                         <li><a href="{% url 'base:new' %}">New Form</a></li>
                         <li><a href="{% url 'base:notifications' %}">Notifications ({{ n_count }})</a></li>

@@ -5,11 +5,13 @@ from django.conf.urls.static import static
 from django.views.static import serve
 from django.conf.urls import handler404, handler500
 from django.conf.urls.i18n import i18n_patterns
+from forms import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('api.urls')),
     path('api-auth/', include('rest_framework.urls')),
+    path('@<str:username>/', views.profile_view, name="profile"),
     re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + i18n_patterns(
     path('', include('forms.urls')),

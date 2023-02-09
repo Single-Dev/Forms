@@ -9,7 +9,6 @@ urlpatterns = [
     path('signup/', create_account_view, name="signup"),
     path("login/", LoginView.as_view(), name="login"),
     path('logout/', logout_view, name='logout'),
-    path('@<str:username>/', profile_view, name="profile"),
     path('new/', new_form_view, name='new'),
     path('create/<str:slug>/', create_dashboard_form_view, name="create_dashboard"),
     path("form/<str:slug>/", single_form_view, name='form'),

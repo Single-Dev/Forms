@@ -34,7 +34,7 @@ def create_account_view(request):
             if user is not None:
                 login(request, user)
                 messages.info(request, f"Siz {username} orqali ro'yhatdan o'tdingiz.")
-                return redirect("base:profile", username)
+                return redirect("profile", username)
             else:
                 messages.error(request,"Foydalanuvchi nomi yoki parol xato")
                 login_form = AuthenticationForm()
@@ -94,7 +94,7 @@ def profile_view(request, username):
                     user_name = user_form.cleaned_data.get('username')
                     user_form.save()
                     profile_form.save()
-                    return redirect("base:profile", user_name)
+                    return redirect("profile", user_name)
     # ----------------------- Update Profile ----------------------- #
     context = { 
         "user_p": user_p,    
