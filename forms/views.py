@@ -10,6 +10,7 @@ from django.utils import timezone
 from .models import *
 from forms.form import *
 
+# ---- Home ---- #
 def home(request):
     n_count = None
     if request.user.is_authenticated:
@@ -19,6 +20,12 @@ def home(request):
         "n_count":n_count
     }
     return render(request, 'pages/main/home.html', context)
+# ---- Home End ---- #
+# ---- /uz/ resirect ---- #
+def uz_redirect(request):
+    return redirect('base:home')
+# ---- /uz/ resirect end ---- #
+
 
 # Create User Account
 def create_account_view(request):

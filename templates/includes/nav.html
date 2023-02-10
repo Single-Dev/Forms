@@ -37,6 +37,20 @@
                         </li>
                     </ul>
                 </li>
+                <li class="dropdown">
+                    <a href="#">
+                        <span>Til</span>
+                        <i class="bi bi-chevron-down"></i>
+                    </a>
+                    <ul>
+                        {% get_current_language as LANGUAGE_CODE %}
+                        {% get_available_languages as LANGUAGES %}
+                        {% get_language_info_list for LANGUAGES as languages %}
+                        {% for language in languages %}
+                        <li><a href="/{{ language.code }}/">{{ language.name_local }} ({{ language.code }})</a></li>
+                        {% endfor %}
+                    </ul>
+                </li>
                 <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
                 {% if not request.user.is_authenticated %}
                 <li><a class="getstarted scrollto" href="{% url 'base:signup' %}">Get Started</a></li>

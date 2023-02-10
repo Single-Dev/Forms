@@ -6,6 +6,7 @@ app_name = 'base'
 
 urlpatterns = [
     path('',home, name="home"),
+    path("uz/", uz_redirect),
     path('signup/', create_account_view, name="signup"),
     path("login/", LoginView.as_view(), name="login"),
     path('logout/', logout_view, name='logout'),
