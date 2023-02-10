@@ -12,6 +12,7 @@ urlpatterns = [
     path('api/', include('api.urls')),
     path('api-auth/', include('rest_framework.urls')),
     path('@<str:username>/', views.profile_view, name="profile"),
+    path('logout/', views.logout_view, name='logout'),
     re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + i18n_patterns(
     path('', include('forms.urls')),

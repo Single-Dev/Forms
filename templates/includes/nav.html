@@ -12,7 +12,7 @@
                 <li><a class="nav-link scrollto active" href="#hero">{% translate "Uy" %}</a></li>
                 <li><a class="nav-link scrollto" href="#about">{% trans 'haqida' %}</a></li>
                 <li><a class="nav-link scrollto" href="#services">{% trans 'ximatlar' %}</a></li>
-                <li><a class="nav-link   scrollto" href="#portfolio">{% trans 'partfel' %}</a></li>
+                <li><a class="nav-link scrollto" href="#portfolio">{% trans 'partfel' %}</a></li>
                 <li class="dropdown">
                     <a href="#">
                         <span>
@@ -39,7 +39,7 @@
                 </li>
                 <li class="dropdown">
                     <a href="#">
-                        <span>Til</span>
+                        <span>{% trans "til" %}</span>
                         <i class="bi bi-chevron-down"></i>
                     </a>
                     <ul>
@@ -53,10 +53,10 @@
                 </li>
                 <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
                 {% if not request.user.is_authenticated %}
-                <li><a class="getstarted scrollto" href="{% url 'base:signup' %}">Get Started</a></li>
-                <li><a class="scrollto" href="{% url 'base:login' %}">Login</a></li>
+                <li><a class="getstarted scrollto" href="{% url 'base:signup' %}">{% trans "boshlash" %}</a></li>
+                <li><a class="scrollto" href="{% url 'base:login' %}">{% trans "kirish" %}</a></li>
                 {% else %}
-                <li><a class="getstarted scrollto" href="{% url 'base:logout' %}">Logout</a></li>
+                <li><a class="getstarted scrollto" href="{% url 'logout' %}">{% trans "chiqish" %}</a></li>
                 {% endif %}
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>
