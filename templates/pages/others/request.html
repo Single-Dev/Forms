@@ -19,7 +19,7 @@
     {% endif %}
     <h3>sender: {{ single_request.full_name }}</h3>
     {% if not single_request.as_anonim %}
-    <a href="{% url 'base:profile' single_request.user  %}">{{ single_request.user }}</a>
+    <a href="{% url 'profile' single_request.user  %}">{{ single_request.user }}</a>
     {% else %}
     <a href="#">Anonim</a>
     {% endif %}

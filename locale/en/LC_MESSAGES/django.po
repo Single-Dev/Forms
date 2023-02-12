@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-10 23:06+0500\n"
-"PO-Revision-Date: 2023-02-10 23:07+0000\n"
+"POT-Creation-Date: 2023-02-12 10:12+0500\n"
+"PO-Revision-Date: 2023-02-12 10:13+0000\n"
 "Last-Translator: BEKZOD Tursunboyev <mygmaildotrcom@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -58,6 +58,10 @@ msgstr "login"
 #: .\templates\includes\nav.html:59
 msgid "chiqish"
 msgstr "logout"
+
+#: .\templates\pages\main\notifications.html:34
+msgid "Asosiy jild top toza!"
+msgstr "Main jild is clear"
 
 #~ msgid "salom"
 #~ msgstr "Hello"

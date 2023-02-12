@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
+{% load i18n %}
 <html lang="en">
 
 <head>
@@ -30,7 +31,7 @@
         {% endfor %}
         {% endif %}
     </div>
-    <div id="response"></div>
+    <div id="response"><h1>{% trans 'Asosiy jild top toza!' %}</h1></div>
     <script src="{% static 'js/notify.js' %}"></script>
 </body>
 
