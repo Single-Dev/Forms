@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-12 10:12+0500\n"
-"PO-Revision-Date: 2023-02-12 10:13+0000\n"
+"POT-Creation-Date: 2023-02-12 10:18+0500\n"
+"PO-Revision-Date: 2023-02-12 10:18+0000\n"
 "Last-Translator: BEKZOD Tursunboyev <mygmaildotrcom@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -26,6 +26,10 @@ msgstr "Uzbek"
 #: .\project\settings.py:113
 msgid "English"
 msgstr "Ingliz"
+
+#: .\project\settings.py:114
+msgid "Russian"
+msgstr "Russian"
 
 #: .\templates\includes\nav.html:12
 msgid "Uy"
