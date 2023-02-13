@@ -25,7 +25,7 @@
     {% endfor %}
     {% if request_form %}
     <div class="container w-50 mt-4">
-        <h4>Submit Request to <a target="_blank" href="{% url 'base:profile' forma.author %}" class="text-dark">@{{ forma.author }}</a></h4>
+        <h4>Submit Request to <a target="_blank" href="{% url 'profile' forma.author %}" class="text-dark">@{{ forma.author }}</a></h4>
         <form method="post" class="mt-4">
             {% csrf_token %}
             {% load widget_tweaks %}
