@@ -27,7 +27,7 @@
                         {% if request.user.is_authenticated %}
                         <li><a href="{% url 'profile' request.user %}">Profile (@{{request.user}})</a></li>
                         {% endif %}
-                        <li><a href="{% url 'base:new' %}">New Form</a></li>
+                        <li><a href="{% url 'base:new' %}">{% trans 'Yangi Forma' %}</a></li>
                         <li><a href="{% url 'base:notifications' %}">Notifications ({{ n_count }})</a></li>
                         <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i
                                     class="bi bi-chevron-right"></i></a>

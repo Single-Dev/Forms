@@ -135,7 +135,7 @@
                                                 {% if fr.as_anonim %}
                                                 <a href="#">Anonim</a>
                                                 {% else %}
-                                                <a href="{% url 'base:profile' fr.user %}">@{{ fr.user }}</a>
+                                                <a href="{% url 'profile' fr.user %}">@{{ fr.user }}</a>
                                                 {% endif %}
                                             </div>
                                         </td>
