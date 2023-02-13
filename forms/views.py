@@ -62,8 +62,6 @@ def create_account_view(request):
 # Profile View
 def profile_view(request, username):
     user_p = User.objects.get(username=username)
-    if user_p.username == "anonim":
-        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     # ----------------------- Profile Tab ----------------------- #
     user_forms = None
     user_requests = None

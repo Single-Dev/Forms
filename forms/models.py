@@ -25,12 +25,12 @@ class Profile(models.Model):
         return f"id: {self.id}; user id: {self.custom_user.id}"
 
 class Form(models.Model):
-    title = models.CharField(max_length=50)
+    title = models.CharField(max_length=50, null=True, blank=True)
     slug = models.SlugField(unique=True)
     author = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='form')
     is_public = models.BooleanField(default=True)
     created_on = models.DateTimeField(("created on"), default=timezone.now)
-    message = models.TextField(max_length=300)
+    message = models.TextField(max_length=300, null=True, blank=True)
     anonim_requests = models.BooleanField(default=False)
     def __str__(self):
         return f'id: {self.id}, Created on: {self.created_on.strftime("%T")}, author: {self.author}'
