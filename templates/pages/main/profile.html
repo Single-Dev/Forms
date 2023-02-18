@@ -136,7 +136,7 @@
                 {% if user_forms %}
                 <div class="tab_page">
                     <div class="card">
-                        <h5 class="card-header">User's forms</h5>
+                        <h5 class="card-header">{{title}}</h5>
                         {% for uf in user_forms %}
                         <div class="card-body">
                             <h5 class="card-title">{{uf.title}}<span>`{% if uf.is_public %}Public{% else %}Private{% endif %}`</span></h5>
@@ -151,7 +151,7 @@
                 {% if user_requests %}
                 <div class="tab_page">
                     <div class="card">
-                        <h5 class="card-header">User's forms</h5>
+                        <h5 class="card-header">{{title}}</h5>
                         {% for ur in user_requests %}
                         <div class="card-body">
                             <h5 class="card-title">`{% if ur.is_public %}Public{% else %}Private{% endif %}`</h5>
