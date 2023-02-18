@@ -112,6 +112,22 @@ def profile_view(request, username):
     }
     return render(request, 'pages/main/profile.html', context)
 
+def follow_toggle(request, author):
+    if request.user.is_authenticated:
+        authorObj = User.objects.get(username=author)
+        request_user = User.objects.get(username=request.user.username)
+        following = authorObj.following.all()
+
+        if author != request_user.username:
+            if request_user in following:
+                authorObj.following.remove(request_user.id)
+            else:
+                authorObj.following.add(request_user.id)
+
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    else:
+        return redirect('base:login')
+
 def logout_view(request):
     logout(request)
     return redirect("base:home")

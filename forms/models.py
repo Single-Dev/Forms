@@ -6,6 +6,7 @@ class CustomUser(AbstractUser):
     is_organiser = models.BooleanField(default=False)
     is_agent = models.BooleanField(default=False)
     view_form = models.ManyToManyField("DashboardForm", blank=True, related_name="view_form", symmetrical=False)
+    following = models.ManyToManyField("self", blank=True, related_name="followers", symmetrical=False)
 
 class Profile(models.Model):
     class Meta:

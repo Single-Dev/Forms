@@ -41,7 +41,14 @@
                     {% if request.user.username == user_p.username %}
                     <button class="profile-card__button button--blue js-message-btn">Edit Profile</button>
                     {% else %}
-                    <button class="profile-card__button button--orange">Follow</button>
+                    <form action="{% url 'base:follow' user_p.username %}" method="post">
+                        {% csrf_token %}
+                        {% if user_p in request.user.followers.all%}
+                        <button class="profile-card__button button--orange">Unfollow</button>
+                        {% else %}
+                        <button class="profile-card__button button--blue">Follow</button>
+                        {% endif %}
+                    </form>
                     {% endif %}
                 </div>
 
