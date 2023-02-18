@@ -64,7 +64,7 @@ def profile_view(request, username):
     user_p = User.objects.get(username=username)
     # ----------------------- Profile Tab ----------------------- #
     user_followers = None
-    user_follwing = None
+    user_following = None
     user_forms = None
     user_requests = None
     title = f'@{user_p.username}'
@@ -75,7 +75,7 @@ def profile_view(request, username):
             user_followers = user_p.following.all()
             title = "Your followers"
         elif tab == "following":
-            user_follwing = user_p.folowers.all()
+            user_following = user_p.followers.all()
             title = "Your following"
         elif tab == 'forms':
             user_forms = user_p.form.all()
@@ -88,7 +88,7 @@ def profile_view(request, username):
             user_followers = user_p.following.all()
             title = f"@{user_p.username}`s - followers"
         elif tab == "following":
-            user_follwing = user_p.followers.all()
+            user_following = user_p.followers.all()
             title = f"@{user_p.username}`s - following"
         elif tab == 'forms':
             user_forms = user_p.form.filter(is_public=True)
@@ -119,7 +119,7 @@ def profile_view(request, username):
     context = { 
         "user_p": user_p,
         "user_followers":user_followers,
-        "user_follwing":user_follwing,
+        "user_following":user_following,
         "user_forms":user_forms,
         "user_requests":user_requests,
         # "user_requests_count":user_requests_count,

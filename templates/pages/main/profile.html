@@ -83,8 +83,8 @@
                             </svg>
                         </span>
                     </a>
-                    {% endif %}
-                    {% if user_p.profile.instagram %}
+                {% endif %}
+                {% if user_p.profile.instagram %}
                     <a href="{{user_p.profile.instagram}}" class="profile-card-social__item instagram" target="_blank">
                         <span class="icon-font">
                             <svg class="icon">
@@ -92,8 +92,8 @@
                             </svg>
                         </span>
                     </a>
-                    {% endif %}
-                    {% if user_p.profile.github %}
+                {% endif %}
+                {% if user_p.profile.github %}
                     <a href="{{user_p.profile.github}}" class="profile-card-social__item github" target="_blank">
                         <span class="icon-font">
                             <svg class="icon">
@@ -101,8 +101,8 @@
                             </svg>
                         </span>
                     </a>
-                    {% endif %}
-                    {% if user_p.profile.link %}
+                {% endif %}
+                {% if user_p.profile.link %}
                     <a href="{{user_p.profile.link}}" class="profile-card-social__item link" target="_blank">
                         <span class="icon-font">
                             <svg class="icon">
@@ -110,7 +110,27 @@
                             </svg>
                         </span>
                     </a>
-                    {% endif %}
+                {% endif %}
+                </div>
+                {% endif %}
+                {% if user_followers %}
+                <div class="tab_page">
+                    <div >
+                        <h5 class="card-header">{{ title }}</h5>
+                        {% for user_follower in user_followers %}
+                        <a href="#">{{ user_follower }}</a>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+                {% if user_following %}
+                <div class="tab_page">
+                    <div>
+                        <h5 class="crad-header">{{ title }}</h5>
+                        {% for uf in user_following %}
+                        <a href="#">{{ uf.username }}</a>
+                        {% endfor %}
+                    </div>
                 </div>
                 {% endif %}
                 {% if user_forms %}
@@ -129,7 +149,6 @@
                 </div>
                 {% endif %}
                 {% if user_requests %}
-
                 <div class="tab_page">
                     <div class="card">
                         <h5 class="card-header">User's forms</h5>
