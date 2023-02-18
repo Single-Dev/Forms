@@ -63,24 +63,39 @@ def create_account_view(request):
 def profile_view(request, username):
     user_p = User.objects.get(username=username)
     # ----------------------- Profile Tab ----------------------- #
+    user_followers = None
+    user_follwing = None
     user_forms = None
     user_requests = None
     title = f'@{user_p.username}'
     tab = request.GET.get('tab')
     if user_p.username == request.user.username:
-        if tab == 'forms':
+        # followingda foydalanuvchi uchun followerslar keladi. followersda esa teskarisi
+        if tab == "followers":
+            user_followers = user_p.following.all()
+            title = "Your followers"
+        elif tab == "following":
+            user_follwing = user_p.folowers.all()
+            title = "Your following"
+        elif tab == 'forms':
             user_forms = user_p.form.all()
             title = f"Your forms"
         elif tab =='requests':
             user_requests = user_p.user_request.all()
             title = f"Your requests"
     else:
-        if tab == 'forms':
+        if tab == "followers":
+            user_followers = user_p.following.all()
+            title = f"@{user_p.username}`s - followers"
+        elif tab == "following":
+            user_follwing = user_p.followers.all()
+            title = f"@{user_p.username}`s - following"
+        elif tab == 'forms':
             user_forms = user_p.form.filter(is_public=True)
-            title = f"@{user_p.username}'s - forms"
+            title = f"@{user_p.username}`s - forms"
         elif tab == 'requests':
             user_requests = user_p.user_request.filter(is_public=True)
-            title = f"@{user_p.username}'s - requests"
+            title = f"@{user_p.username}`s - requests"
             # user_requests_count = user_requests.count()
     # ----------------------- Profile Tab End ----------------------- #
     # ----------------------- Update Profile ----------------------- #
@@ -102,7 +117,9 @@ def profile_view(request, username):
                     return redirect("profile", user_name)
     # ----------------------- Update Profile ----------------------- #
     context = { 
-        "user_p": user_p,    
+        "user_p": user_p,
+        "user_followers":user_followers,
+        "user_follwing":user_follwing,
         "user_forms":user_forms,
         "user_requests":user_requests,
         # "user_requests_count":user_requests_count,
