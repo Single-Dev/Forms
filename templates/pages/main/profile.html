@@ -115,21 +115,61 @@
                 {% endif %}
                 {% if user_followers %}
                 <div class="tab_page">
-                    <div >
+                    <div id="card-tab">
                         <h5 class="card-header">{{ title }}</h5>
+                        <div style="margin-top: 10px;">
                         {% for user_follower in user_followers %}
-                        <a href="#">{{ user_follower }}</a>
+                            <div id="user-card">
+                                <div id="d-flex">
+                                    <img id="user_foller_image" src="{{ user_follower.profile.image.url }}" alt="profile image" width="40">
+                                    <div style="margin-left: 10px;">
+                                        <p>{{ user_follower.first_name }}</p>
+                                        <a id="user_profile_link" href="{% url 'profile' user_follower.username %}">@{{ user_follower.username }}</a>
+                                    </div>
+                                </div>
+                                <form action="{% url 'base:follow' user_follower.username %}" method="post">
+                                    {% csrf_token %}
+                                    <button id="f_toggle_link">
+                                        {% if user_follower in request.user.followers.all%}
+                                        Unfollow
+                                        {% else %}
+                                        Follow
+                                        {% endif %}
+                                    </button>
+                                </form>
+                            </div>
                         {% endfor %}
+                        </div>
                     </div>
                 </div>
                 {% endif %}
                 {% if user_following %}
                 <div class="tab_page">
-                    <div>
+                    <div id="card-tab">
                         <h5 class="crad-header">{{ title }}</h5>
-                        {% for uf in user_following %}
-                        <a href="#">{{ uf.username }}</a>
+                        <div style="margin-top: 10px;">
+                            {% for uf in user_following %}
+                            <div id="user-card">
+                                <div id="d-flex">
+                                    <img id="user_foller_image" src="{{ uf.profile.image.url }}" alt="profile image" width="40">
+                                    <div style="margin-left: 10px;">
+                                    <p>{{ uf.first_name }}</p>
+                                    <a id="user_profile_link" href="{% url 'profile' uf.username %}">@{{ uf.username }}</a>
+                                </div>
+                            </div>
+                            <form action="{% url 'base:follow' uf.username %}" method="post">
+                                {% csrf_token %}
+                                <button id="f_toggle_link">
+                                    {% if uf in request.user.followers.all%}
+                                    Unfollow
+                                    {% else %}
+                                    Follow
+                                    {% endif %}
+                                </button>
+                            </form>
+                        </div>
                         {% endfor %}
+                        </div>
                     </div>
                 </div>
                 {% endif %}

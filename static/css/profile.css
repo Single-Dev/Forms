@@ -34,6 +34,45 @@ a:hover {
     fill: currentColor;
 }
 
+#card-tab{
+    margin-left: 67px;
+}
+
+#user-card{
+    display: flex;
+    justify-content: space-between;
+    width: 523px;
+}
+
+#user-card #d-flex{
+    display: flex;
+    align-items: center;
+}
+
+#user-card #user_foller_image{
+    border-radius: 100px;
+}
+
+#user-card div p{
+    margin: 0px;
+}
+
+#user-card #user_profile_link{
+    color: #142029;
+    text-decoration: none;
+}
+
+#user-card #f_toggle_link{
+    color: #142029;
+    text-decoration: none;
+    padding: 7px 20px;
+    border-radius: 10px;
+    background-color: #0e71c8;
+    margin: 5px 0px;
+    color: #fff;
+    border: none;
+}
+
 .wrapper {
     width: 100%;
     width: 100%;
@@ -55,6 +94,13 @@ a:hover {
     }
     .tab_page{
         margin-left: 20px;
+    }
+    #card-tab{
+        margin-left: 20px;
+    }
+
+    #user-card #f_toggle_link{
+        display: none;
     }
 }
 
