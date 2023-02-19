@@ -26,9 +26,9 @@
     {% endfor %}
     {% get_current_language as LANGUAGE_CODE %}
     {% if LANGUAGE_CODE == "uz" %}
-    <a href="en/{% url 'base:form' forma.slug %}">Ingliz titliga tarjima qilish</a>
+    <a href="/en{% url 'base:form' forma.slug %}">Ingliz titliga tarjima qilish</a>
     {% else %}
-    <a href="{% url 'base:form' forma.slug %}">O'zbek titliga tarjima qilish</a>
+    <a href="/form/{{forma.slug}}">O'zbek titliga tarjima qilish</a>
     {% endif %}
     {% if request_form %}
     <div class="container w-50 mt-4">
