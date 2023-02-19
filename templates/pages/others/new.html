@@ -20,7 +20,8 @@
         <form method="post" class="mt-4">
             {% csrf_token %}
             {% load widget_tweaks %}
-            {% render_field NewForm.title type="text" class="form-control mt-2 mb-2" placeholder="Form Title" %}
+            {% render_field NewForm.title type="text" class="form-control mt-2 mb-2" placeholder="Form title for Uzbek" %}
+            {% render_field NewForm.title_en type="text" class="form-control mt-2 mb-2" placeholder="Form title For English" %}
             <span class="d-flex" style="align-items: center;">
                 <label for="is_public" style="margin-right: 10px;">Public:</label>
                 {% render_field NewForm.is_public type="checkbox" id="is_public" class="mt-2 mb-2" %}
@@ -30,6 +31,7 @@
                 {% render_field NewForm.anonim_requests class="mt-2 mb-2" id="anonim_requests" %}
             </span>
             {% render_field NewForm.message type="text" class="form-control mt-2 mb-2" placeholder="Succsess Submit Message" %}
+            {% render_field NewForm.message_en type="text" class="form-control mt-2 mb-2" placeholder="Succsess Submit Message for english" %}
             <input type="submit" class="btn btn-info w-100">
         </form>
     </div>
