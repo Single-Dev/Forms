@@ -198,7 +198,7 @@
                             <h4>
                                 submited as
                                 {% if ur.as_anonim %}Anonim{% else %}
-                                <a href="{% url 'base:profile' user_p.username %}" class="text-dark text-decoration-none">@{{user_p.username}}</a>
+                                <a href="{% url 'profile' user_p.username %}" class="text-dark text-decoration-none">@{{user_p.username}}</a>
                                 {% endif %}
                             </h4>
                             <a href="{% url 'base:single_request' ur.form.slug ur.id %}" class="text-dark text-decoration-none">Form: {{ ur.form.title }}</a>

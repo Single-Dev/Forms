@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
+{% load i18n %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -23,6 +24,12 @@
     {{ y.full_name }}
     <br>
     {% endfor %}
+    {% get_current_language as LANGUAGE_CODE %}
+    {% if LANGUAGE_CODE == "uz" %}
+    <a href="en/{% url 'base:form' forma.slug %}">Ingliz titliga tarjima qilish</a>
+    {% else %}
+    <a href="{% url 'base:form' forma.slug %}">O'zbek titliga tarjima qilish</a>
+    {% endif %}
     {% if request_form %}
     <div class="container w-50 mt-4">
         <h4>Submit Request to <a target="_blank" href="{% url 'profile' forma.author %}" class="text-dark">@{{ forma.author }}</a></h4>
@@ -45,7 +52,7 @@
             </span>
             {% else %}
             {% if request.user.is_authenticated %}
-            <span>Bu Sorov <a href="{% url 'base:profile' request.user %}" class="text-dark">@{{request.user}}</a>dan yuboriladi</span>
+            <span>Bu Sorov <a href="{% url 'profile' request.user %}" class="text-dark">@{{request.user}}</a>dan yuboriladi</span>
             {% else %}
             <span>Bu Sorov Anonim Tarzda Yuboriladi</span>
             {% endif %}
