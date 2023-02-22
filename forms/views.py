@@ -188,7 +188,15 @@ def single_form_view(request, slug):
     if request.user in blocked_users:
         return redirect("/")
     
-    # if not forma.infinite_requests:
+    # Foydalanuvchilar bir marta sororv yuborish uchun
+    user_submited_r_all = forma.form_requests.all()
+    if not forma.infinite_requests:
+        for user_submited_r in user_submited_r_all:
+            dashboard_obj.uwsr.add(user_submited_r.user.id)
+
+    if request.user in dashboard_obj.uwsr.all():
+        return redirect("base:submit_success", slug)
+    # Foydalanuvchilar bir marta sororv yuborish uchun
 
 
     # ----------------------- shu formaga kelgan sorovlarni ko'rish ----------------------- #

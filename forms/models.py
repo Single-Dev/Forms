@@ -42,7 +42,7 @@ class DashboardForm(models.Model):
     visits = models.IntegerField(default=0)
     last_visit = models.DateTimeField(default=timezone.now)
     blocked_users = models.ManyToManyField(CustomUser, related_name="blocked")
-    uwsr = models.ManyToManyField(CustomUser, related_name="submited")
+    uwsr = models.ManyToManyField(CustomUser)
     def __str__(self):
         return f"{self.form}, views={self.visits}"
 
