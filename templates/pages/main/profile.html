@@ -43,7 +43,7 @@
                     {% else %}
                     <form action="{% url 'base:follow' user_p.username %}" method="post">
                         {% csrf_token %}
-                        {% if user_p in request.user.followers.all%}
+                        {% if user_p in request.user.following.all%}
                         <button class="profile-card__button button--orange">Unfollow</button>
                         {% else %}
                         <button class="profile-card__button button--blue">Follow</button>
@@ -127,16 +127,18 @@
                                         <a id="user_profile_link" href="{% url 'profile' user_follower.username %}">@{{ user_follower.username }}</a>
                                     </div>
                                 </div>
+                                {% if not user_follower == request.user %}
                                 <form action="{% url 'base:follow' user_follower.username %}" method="post">
                                     {% csrf_token %}
                                     <button id="f_toggle_link">
-                                        {% if user_follower in request.user.followers.all%}
+                                        {% if user_follower in request.user.following.all%}
                                         Unfollow
                                         {% else %}
                                         Follow
                                         {% endif %}
                                     </button>
                                 </form>
+                                {% endif %}
                             </div>
                         {% endfor %}
                         </div>
@@ -157,16 +159,18 @@
                                     <a id="user_profile_link" href="{% url 'profile' uf.username %}">@{{ uf.username }}</a>
                                 </div>
                             </div>
+                            {% if not uf == request.user %}
                             <form action="{% url 'base:follow' uf.username %}" method="post">
                                 {% csrf_token %}
                                 <button id="f_toggle_link">
-                                    {% if uf in request.user.followers.all%}
+                                    {% if uf in request.user.following.all%}
                                     Unfollow
                                     {% else %}
                                     Follow
                                     {% endif %}
                                 </button>
                             </form>
+                            {% endif %}
                         </div>
                         {% endfor %}
                         </div>

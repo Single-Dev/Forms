@@ -84,10 +84,10 @@ def profile_view(request, username):
             title = f"Your requests"
     else:
         if tab == "followers":
-            user_followers = user_p.following.all()
+            user_followers = user_p.followers.all()
             title = f"@{user_p.username}`s - followers"
         elif tab == "following":
-            user_following = user_p.followers.all()
+            user_following = user_p.following.all()
             title = f"@{user_p.username}`s - following"
         elif tab == 'forms':
             user_forms = user_p.form.filter(is_public=True)
@@ -132,13 +132,13 @@ def follow_toggle(request, author):
     if request.user.is_authenticated:
         authorObj = User.objects.get(username=author)
         request_user = User.objects.get(username=request.user.username)
-        following = authorObj.following.all()
+        followers = authorObj.followers.all()
 
         if author != request_user.username:
-            if request_user in following:
-                authorObj.following.remove(request_user.id)
+            if request_user in followers:
+                authorObj.followers.remove(request_user.id)
             else:
-                authorObj.following.add(request_user.id)
+                authorObj.followers.add(request_user.id)
 
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     else:
