@@ -94,7 +94,7 @@ def profile_view(request, username):
             user_forms = user_p.form.filter(is_public=True)
             title = f"@{user_p.username}`s - forms"
         elif tab == 'requests':
-            user_requests = user_p.user_request.filter(is_public=True)
+            user_requests = user_p.user_request.filter(is_public=True, as_anonim=False)
             title = f"@{user_p.username}`s - requests"
             # user_requests_count = user_requests.count()
     # ----------------------- Profile Tab End ----------------------- #
@@ -249,7 +249,7 @@ def dashboard_from_view(request, slug):
     requests = forma.form_requests.all()
     # ----- category request by username 
     if user_requests != None:
-        if user_requests == "anonim":
+        if user_requests == "/anonim/":
             requests =forma.form_requests.filter(as_anonim=True)
         else:
             requests = forma.form_requests.filter(user__username=user_requests).filter(as_anonim=False)

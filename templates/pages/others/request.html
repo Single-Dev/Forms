@@ -10,14 +10,18 @@
     <h4>Public: {{ single_request.is_public }}</h4>
 
     {% if single_request.user == request.user %}
-    {% if request.user.username == single_request.user.username and single_request.view %}
-    <h2>{{single_request.form.author}} ko'rgan</h2>
+
+    {% if single_request.view %}
+    <h2>✔️✔️</h2>
+    {% else %}
+    <h2>✔️</h2>
     {% endif %}
-    {% if single_request.view == False %}
-    <h2>{{single_request.form.author}}ga Yetib borgan</h2>
+    {% else %}
+    <p>{{ single_request.submited_on }}</p>
     {% endif %}
-    {% endif %}
-    <h3>sender: {{ single_request.full_name }}</h3>
+    <h2>Full Name: {{ single_request.full_name }}</h2>
+    <p>{{ single_request.description }}</p>
+    
     {% if not single_request.as_anonim %}
     <a href="{% url 'profile' single_request.user  %}">{{ single_request.user }}</a>
     {% else %}
