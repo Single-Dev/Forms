@@ -70,12 +70,11 @@ def profile_view(request, username):
     title = f'@{user_p.username}'
     tab = request.GET.get('tab')
     if user_p.username == request.user.username:
-        # followingda foydalanuvchi uchun followerslar keladi. followersda esa teskarisi
         if tab == "followers":
-            user_followers = user_p.following.all()
+            user_followers = user_p.followers.all()
             title = "Your followers"
         elif tab == "following":
-            user_following = user_p.followers.all()
+            user_following = user_p.following.all()
             title = "Your following"
         elif tab == 'forms':
             user_forms = user_p.form.all()
@@ -188,6 +187,10 @@ def single_form_view(request, slug):
     # Agar user bloklangan bo'lsa
     if request.user in blocked_users:
         return redirect("/")
+    
+    # if not forma.infinite_requests:
+
+
     # ----------------------- shu formaga kelgan sorovlarni ko'rish ----------------------- #
     tab = request.GET.get('form')
     requests_ = None

@@ -6,7 +6,7 @@ class CustomUser(AbstractUser):
     is_organiser = models.BooleanField(default=False)
     is_agent = models.BooleanField(default=False)
     view_form = models.ManyToManyField("DashboardForm", blank=True, related_name="view_form", symmetrical=False)
-    following = models.ManyToManyField("self", blank=True, related_name="followers", symmetrical=False)
+    followers = models.ManyToManyField("self", blank=True, related_name="following", symmetrical=False)
 
 class Profile(models.Model):
     class Meta:
@@ -33,6 +33,7 @@ class Form(models.Model):
     created_on = models.DateTimeField(("created on"), default=timezone.now)
     message = models.TextField(max_length=300, null=True, blank=True)
     anonim_requests = models.BooleanField(default=False)
+    infinite_requests = models.BooleanField(default=False)
     def __str__(self):
         return f'id: {self.id}, Created on: {self.created_on.strftime("%T")}, author: {self.author}'
 
@@ -41,7 +42,7 @@ class DashboardForm(models.Model):
     visits = models.IntegerField(default=0)
     last_visit = models.DateTimeField(default=timezone.now)
     blocked_users = models.ManyToManyField(CustomUser, related_name="blocked")
-
+    uwsr = models.ManyToManyField(CustomUser, related_name="submited")
     def __str__(self):
         return f"{self.form}, views={self.visits}"
 
