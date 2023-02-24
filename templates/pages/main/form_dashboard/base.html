@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{forma.title}} {% block title %}- Dashboard{% endblock title%}</title>
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+</head>
+
+<body>
+    <div class="bg-gray-100 dark:bg-gray-900 dark:text-white text-gray-600 h-screen flex overflow-hidden text-sm">
+      
+        <div class="flex-grow overflow-hidden h-full flex flex-col">
+         
+            <div class="flex-grow flex overflow-x-hidden">
+                <div
+                    class="xl:w-72 w-48 flex-shrink-0 border-r border-gray-200 dark:border-gray-800 h-full overflow-y-auto lg:block hidden p-5">
+                    <div class="space-y-4 mt-3">
+                        <a href="?user_requests=/anonim/" class="bg-white p-3 w-full flex flex-col rounded-md dark:bg-gray-800 shadow">
+                            <div
+                                class="flex xl:flex-row flex-col items-center font-medium text-gray-900 dark:text-white pb-2 mb-2 xl:border-b border-gray-200 border-opacity-75 dark:border-gray-700 w-full">
+                                <img src="{% static 'imgs/logo.png' %}"
+                                    class="w-7 h-7 mr-2 rounded-full" alt="profile" />
+                                    Anonim
+                            </div>
+                        </a>
+                        {% for arm in senders %}
+                        {% if not arm.as_anonim %}
+                        <a href="?user_requests={{ arm.user }}" class="bg-white p-3 w-full flex flex-col rounded-md dark:bg-gray-800 shadow">
+                            <div
+                                class="flex xl:flex-row flex-col items-center font-medium text-gray-900 dark:text-white pb-2 mb-2 xl:border-b border-gray-200 border-opacity-75 dark:border-gray-700 w-full">
+                                <img src="{{ arm.user.profile.image.url }}"
+                                    class="w-7 h-7 mr-2 rounded-full" alt="profile" />
+                                {{ arm.user.first_name }} | @{{ arm.user }}
+                            </div>
+                            <div class="flex items-center w-full">
+                                <div class="ml-auto text-xs text-gray-500">UTC: {{ arm.submited_on }}</div>
+                            </div>
+                        </a>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="flex-grow bg-white dark:bg-gray-900 overflow-y-auto">
+                    <div
+                        class="sm:px-7 sm:pt-7 px-4 pt-4 flex flex-col w-full border-b border-gray-200 bg-white dark:bg-gray-900 dark:text-white dark:border-gray-800 sticky top-0">
+                        <div class="flex w-full items-center">
+                            <a href="{% url 'base:form' forma.slug %}" class="flex items-center text-3xl text-gray-900 dark:text-white">
+                                {{forma.title}}
+                            </a>
+                            <div class="ml-auto sm:flex hidden items-center justify-end">
+                                <div class="text-right">
+                                    <div class="text-xs text-gray-400 dark:text-gray-400">All Requests:</div>
+                                    <div class="text-gray-900 text-lg dark:text-white">{{requests.count}}</div>
+                                </div>
+                                <button
+                                    class="w-8 h-8 ml-4 text-gray-400 shadow dark:text-gray-400 rounded-full flex items-center justify-center border border-gray-200 dark:border-gray-700">
+                                    <svg viewBox="0 0 24 24" class="w-4" stroke="currentColor" stroke-width="2"
+                                        fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <circle cx="12" cy="12" r="1"></circle>
+                                        <circle cx="19" cy="12" r="1"></circle>
+                                        <circle cx="5" cy="12" r="1"></circle>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-3 sm:mt-7 mt-4">
+                            <a href="#"class="px-3 border-b-2 border-blue-500 text-blue-500 dark:text-white dark:border-white pb-1.5">Requests</a>
+                            <a href="#" class="px-3 border-b-2 border-transparent text-gray-600 dark:text-gray-400 pb-1.5">Transfer</a>
+                            </div>
+                    </div>
+                    {% block content %}
+                    {% include 'pages/main/form_dashboard/inc/requests.html' %}
+                    {% endblock content %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pagination">
+        <span class="step-links">
+            {% if requests.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ requests.previous_page_number }}">previous</a>
+            {% endif %}
+    
+    
+            {% if requests.has_next %}
+                <a href="?page={{ requests.next_page_number }}">next</a>
+                <a href="?page={{ requests.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+</body>
+
+</html>

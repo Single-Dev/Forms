@@ -300,7 +300,7 @@ def dashboard_from_view(request, slug):
         "ufa": update_forma,
         # "page_obj":page_obj
     }
-    return render(request, "pages/others/dashboard.html", context)
+    return render(request, "pages/main/form_dashboard/base.html", context)
 # ----------------------- Dashboard Form  End ----------------------- #
 
 # ----------------------- Request view ----------------------- #
