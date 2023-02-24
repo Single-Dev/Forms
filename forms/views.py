@@ -280,9 +280,9 @@ def dashboard_from_view(request, slug):
     # ----------------------- Update Form view  End----------------------- #
     # ----------------------- Get Senders ----------------------- #
     sender_1 = forma.form_requests.all()
-    senders =None
-    for su in sender_1:
-        senders = forma.form_requests.filter(user__username=su.user.username)
+    senders =forma.form_requests.all()
+    # for su in sender_1:
+    #     senders = forma.form_requests.filter(user__username=su.user.username)
     # for sender in requests:
     #     senders.append(sender)
     # ----------------------- Get Senders End ----------------------- #
