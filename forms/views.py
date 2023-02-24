@@ -253,6 +253,8 @@ def single_form_view(request, slug):
 # ----------------------- Yagona Forma ko'rish manzili ----------------------- #
 
 # ----------------------- Dashboard Form  ----------------------- #
+# ----------------------- Dashboard
+
 @login_required(login_url="base:login")
 def dashboard_from_view(request, slug):
     user_requests = request.GET.get('user_requests')
@@ -301,6 +303,17 @@ def dashboard_from_view(request, slug):
         # "page_obj":page_obj
     }
     return render(request, "pages/main/form_dashboard/base.html", context)
+# ----------------------- Dashboard
+# ----------------------- Edit Form
+@login_required(login_url='base:login')
+def update_from(request, slug):
+    forma = Form.objects.get(slug=slug)
+    template_name = "pages/main/form_dashboard/pages/edit-form.html"
+    context = {
+        "forma":forma
+    }
+    return render(request, template_name, context)
+# ----------------------- Form Edit
 # ----------------------- Dashboard Form  End ----------------------- #
 
 # ----------------------- Request view ----------------------- #
