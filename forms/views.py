@@ -180,7 +180,8 @@ def single_form_view(request, slug):
     forma = Form.objects.get(slug=slug)
     dashboard_obj = forma.dashboard_form
     blocked_users = dashboard_obj.blocked_users.all()
-    if not forma.author == request.user and not request.user in blocked_users:
+    uwsra = dashboard_obj.uwsr.all()
+    if not forma.author == request.user and not request.user in blocked_users and not request.user in uwsra:
         dashboard_obj.visits += 1
         dashboard_obj.last_visit = timezone.now()
         dashboard_obj.save()
@@ -189,9 +190,9 @@ def single_form_view(request, slug):
         return redirect("/")
     
     # Foydalanuvchilar bir marta sororv yuborish uchun
-    user_submited_r_all = forma.form_requests.all()
+    user_submited_request_all = forma.form_requests.all()
     if not forma.infinite_requests:
-        for user_submited_r in user_submited_r_all:
+        for user_submited_r in user_submited_request_all:
             dashboard_obj.uwsr.add(user_submited_r.user.id)
 
     if request.user in dashboard_obj.uwsr.all():
