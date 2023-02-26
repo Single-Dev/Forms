@@ -18,7 +18,7 @@
                 <div
                     class="xl:w-72 w-48 flex-shrink-0 border-r border-gray-200 dark:border-gray-800 h-full overflow-y-auto lg:block hidden p-5">
                     <div class="space-y-4 mt-3">
-                        <a href="?user_requests=/anonim/" class="bg-white p-3 w-full flex flex-col rounded-md dark:bg-gray-800 shadow">
+                        <a href="{% url 'base:dashboard' forma.slug %}?user_requests=/anonim/" class="bg-white p-3 w-full flex flex-col rounded-md dark:bg-gray-800 shadow">
                             <div
                                 class="flex xl:flex-row flex-col items-center font-medium text-gray-900 dark:text-white pb-2 mb-2 xl:border-b border-gray-200 border-opacity-75 dark:border-gray-700 w-full">
                                 <img src="{% static 'imgs/logo.png' %}"
@@ -26,9 +26,9 @@
                                     Anonim
                             </div>
                         </a>
-                        {% for arm in senders %}
+                        {% for arm in forma.form_requests.all %}
                         {% if not arm.as_anonim %}
-                        <a href="?user_requests={{ arm.user }}" class="bg-white p-3 w-full flex flex-col rounded-md dark:bg-gray-800 shadow">
+                        <a href="{% url 'base:dashboard' forma.slug %}?user_requests={{ arm.user }}" class="bg-white p-3 w-full flex flex-col rounded-md dark:bg-gray-800 shadow">
                             <div
                                 class="flex xl:flex-row flex-col items-center font-medium text-gray-900 dark:text-white pb-2 mb-2 xl:border-b border-gray-200 border-opacity-75 dark:border-gray-700 w-full">
                                 <img src="{{ arm.user.profile.image.url }}"
