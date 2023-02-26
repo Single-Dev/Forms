@@ -2,5 +2,11 @@
 {% block title %}- Edit{% endblock title %}
 
 {% block content %}
-<h1>Salom</h1>
+<form method="post">
+    {% csrf_token %}
+    {% load widget_tweaks %}
+    {% render_field edit_forma.title %}
+    {% render_field edit_forma.title_en %}
+    <button type="submit">Submit</button>
+</form>
 {% endblock content %}

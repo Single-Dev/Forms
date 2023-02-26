@@ -282,19 +282,6 @@ def dashboard_from_view(request, slug):
     # ----------------------- Get Senders ----------------------- #
     sender_1 = forma.form_requests.all()
     senders =forma.form_requests.all()
-    # for su in sender_1:
-    #     senders = forma.form_requests.filter(user__username=su.user.username)
-    # for sender in requests:
-    #     senders.append(sender)
-    # ----------------------- Get Senders End ----------------------- #
-    # ----------------------- Pagination  ----------------------- #
-    # page_number = request.GET.get('page')
-    # page_list = forma.form_requests.all()
-    # paginator  = Paginator(page_list, 2)
-    # requests = paginator.get_page(page_number)
-    # if page_number == None:
-    #     requests = forma.form_requests.all()
-    # ----------------------- Pagination End ----------------------- #
     context = {
         "forma":forma,
         "dashboard_obj": dashboard_obj,
@@ -310,8 +297,15 @@ def dashboard_from_view(request, slug):
 def update_from(request, slug):
     forma = Form.objects.get(slug=slug)
     template_name = "pages/main/form_dashboard/pages/edit-form.html"
+    edit_forma = FormaForm(instance=forma)
+    if request.method == 'POST':
+        edit_forma = FormaForm(request.POST, instance=forma)
+        if edit_forma.is_valid():
+            edit_forma.save()
+            return redirect("base:update_form", slug) 
     context = {
-        "forma":forma
+        "forma":forma,
+        "edit_forma":edit_forma
     }
     return render(request, template_name, context)
 # ----------------------- Form Edit
