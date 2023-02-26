@@ -65,7 +65,7 @@ class UpdateProfileForm(forms.ModelForm):
 class FormaForm(forms.ModelForm):
     class Meta:
         model = Form
-        fields = ['title', 'title_en', 'is_public', 'anonim_requests', 'message', 'message_en']
+        fields = ['title_uz', 'title_en', 'is_public', 'anonim_requests', 'message_uz', 'message_en']
 
 class CreateFormRequestTest(forms.ModelForm):
     class Meta:

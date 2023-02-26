@@ -2,11 +2,54 @@
 {% block title %}- Edit{% endblock title %}
 
 {% block content %}
-<form method="post">
-    {% csrf_token %}
-    {% load widget_tweaks %}
-    {% render_field edit_forma.title %}
-    {% render_field edit_forma.title_en %}
-    <button type="submit">Submit</button>
-</form>
+<style>
+    .form-section{
+        width: 500px;
+        margin: 20px auto;
+    }
+    #input, #text-area{
+        caret-color: #fff;
+        color: #fff;
+        background: transparent;
+        padding: 5px;
+        border-radius: 10px;
+        outline: 2px solid #fff;
+        margin: 5px 0px;
+        width: 500px;
+    }
+    #display-b{
+        display: block;
+    }
+    #btn{
+        border: 2px solid #fff;
+        width: 500px;
+        padding: 10px 0px;
+        border-radius: 5px;
+        transition: 500ms all;
+    }
+    #btn:hover{
+        background-color: #fff;
+        color: #000;
+
+    }
+</style>
+<div class="form-section">
+    <form method="post">
+        {% csrf_token %}
+        {% load widget_tweaks %}
+        {% render_field edit_forma.title_uz id="input" placeholder="Sarlovha uzbek" %}
+        {% render_field edit_forma.title_en id="input" placeholder="Title for en" %}
+        <div id="display-b">
+            <label for="anonim_requests">Anonim Requests</label>
+            {% render_field edit_forma.anonim_requests id="anonim_requests" %}
+        </div>
+        <div id="display-b">
+            <label for="is_public">Public</label>
+        {% render_field edit_forma.is_public id="is_public" %}
+        </div>
+        {% render_field edit_forma.message_uz id="text-area" placeholder="Xabar for Uzbek" %}
+        {% render_field edit_forma.message_en id="text-area" placeholder="Xabar for En" %}
+        <button type="submit" id="btn">Update</button>
+    </form>
+</div>
 {% endblock content %}
