@@ -314,9 +314,9 @@ def update_from(request, slug):
 def form_permissions(request, slug):
     forma = Form.objects.get(slug=slug)
     template_name = "pages/main/form_dashboard/pages/form-permissions.html"
-    forma_permissions = FormPermissions(instance=forma)
+    forma_permissions = FormPermissions(instance=forma.dashboard_form)
     if request.method == 'POST':
-        forma_permissions = FormPermissions(request.POST, instance=forma)
+        forma_permissions = FormPermissions(request.POST, instance=forma.dashboard_form)
         if forma_permissions.is_valid():
             forma_permissions.save()
             return redirect("base:form_permissions", slug) 

@@ -1,4 +1,4 @@
-.form-section{
+.form-section, #section{
     width: 500px;
     margin: 20px auto;
 }
@@ -36,4 +36,9 @@
     outline: 2px solid #fff;
     margin: 5px 0px;
     width: 500px;
+    height: 250px;
+}
+
+#section #display-b h3{
+    text-transform: uppercase;
 }

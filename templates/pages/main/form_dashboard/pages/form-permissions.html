@@ -5,17 +5,19 @@
 <link rel="stylesheet" href="{% static 'css/form.css' %}">
 {% endblock head %}
 {% block content %}
-    <form method="post">
-        {% csrf_token %}
-        {% load widget_tweaks %}
-        <div id="display-b">
-            <h3>blocklanganlar </h3>
-            {% render_field  forma_permissions.blocked_users id="list"%}
-        </div>
-        <div id="display-b">
-            <h3>sorov yuborganlar</h3>
-            {% render_field  forma_permissions.uwsr id="list" %}
-        </div>
-        <button id="btn" type="submit">Update</button>
-    </form>
+    <div id="section">
+        <form method="post">
+            {% csrf_token %}
+            {% load widget_tweaks %}
+            <div id="display-b">
+                <h3>bloklanganlar</h3>
+                {% render_field  forma_permissions.blocked_users id="list"%}
+            </div>
+            <div id="display-b">
+                <h3>sorov yuborganlar</h3>
+                {% render_field  forma_permissions.uwsr id="list" %}
+            </div>
+            <button id="btn" type="submit">Update</button>
+        </form>
+    </div>
 {% endblock content %}
