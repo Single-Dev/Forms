@@ -65,9 +65,14 @@ class UpdateProfileForm(forms.ModelForm):
 class FormaForm(forms.ModelForm):
     class Meta:
         model = Form
-        fields = ['title_uz', 'title_en', 'is_public', 'anonim_requests', 'message_uz', 'message_en']
+        fields = ['title_uz', 'title_en', 'is_public', 'anonim_requests', 'infinite_requests', 'message_uz', 'message_en']
 
 class CreateFormRequestTest(forms.ModelForm):
     class Meta:
         model = FormRequest
         fields = ['is_public', 'full_name', 'email', 'as_anonim', "description"]
+
+class FormPermissions(forms.ModelForm):
+    class Meta:
+        model = DashboardForm
+        fields = ['blocked_users', 'uwsr']

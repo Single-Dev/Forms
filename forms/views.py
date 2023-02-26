@@ -308,7 +308,24 @@ def update_from(request, slug):
         "edit_forma":edit_forma
     }
     return render(request, template_name, context)
-# ----------------------- Form Edit
+# ----------------------- Form Edit end
+# ----------------------- Form permissions
+@login_required(login_url='base:login')
+def form_permissions(request, slug):
+    forma = Form.objects.get(slug=slug)
+    template_name = "pages/main/form_dashboard/pages/form-permissions.html"
+    forma_permissions = FormPermissions(instance=forma)
+    if request.method == 'POST':
+        forma_permissions = FormPermissions(request.POST, instance=forma)
+        if forma_permissions.is_valid():
+            forma_permissions.save()
+            return redirect("base:form_permissions", slug) 
+    context = {
+        "forma":forma,
+        "forma_permissions":forma_permissions
+    }
+    return render(request, template_name, context)
+# ----------------------- Form permissions End
 # ----------------------- Dashboard Form  End ----------------------- #
 
 # ----------------------- Request view ----------------------- #

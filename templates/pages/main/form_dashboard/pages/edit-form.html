@@ -47,6 +47,10 @@
             <label for="is_public">Public</label>
         {% render_field edit_forma.is_public id="is_public" %}
         </div>
+        <div id="display-b">
+            <label for="infinite_requests">Infinite requests</label>
+            {% render_field edit_forma.infinite_requests id='infinite_requests' %}
+        </div>
         {% render_field edit_forma.message_uz id="text-area" placeholder="Xabar for Uzbek" %}
         {% render_field edit_forma.message_en id="text-area" placeholder="Xabar for En" %}
         <button type="submit" id="btn">Update</button>

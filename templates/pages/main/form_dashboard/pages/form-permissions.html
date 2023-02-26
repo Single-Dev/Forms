@@ -1,0 +1,10 @@
+{% extends 'pages/main/form_dashboard/base.html' %}
+{% block title %}- permissions{% endblock title %}
+
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+        {{forma_permissions}}
+        <button type="submit"></button>
+    </form>
+{% endblock content %}
