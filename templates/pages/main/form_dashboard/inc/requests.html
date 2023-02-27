@@ -63,7 +63,7 @@
                 <td class="sm:p-3 py-2 px-1 border-b border-gray-200 dark:border-gray-800">
                     <div class="flex items-center">
                         {% if not fr.as_anonim %}
-                        <a href="#">
+                        <a href="{% url 'base:block_toggle' forma.slug fr.user%}">
                             {% if fr.user in forma.dashboard_form.blocked_users.all%}
                             unblock user
                             {% else %}

@@ -326,6 +326,19 @@ def form_permissions(request, slug):
     }
     return render(request, template_name, context)
 # ----------------------- Form permissions End
+# ----------------------- User Block toggle
+@login_required(login_url='base:login')
+def block_toggle(request, slug, user):
+    forma = Form.objects.get(slug=slug)
+    user = CustomUser.objects.get(username=user)
+    blocked_users_list = forma.dashboard_form.blocked_users.all()
+
+    if user in blocked_users_list:
+        forma.dashboard_form.blocked_users.remove(user)
+    elif not user in blocked_users_list:
+        forma.dashboard_form.blocked_users.add(user)
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+# ----------------------- User Block toggle End
 # ----------------------- Dashboard Form  End ----------------------- #
 
 # ----------------------- Request view ----------------------- #
