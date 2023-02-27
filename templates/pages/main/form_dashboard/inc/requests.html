@@ -33,10 +33,10 @@
                 <th class="font-normal px-3 pt-0 pb-3 border-b border-gray-200 dark:border-gray-800">
                     Sender</th>
                 <th class="font-normal px-3 pt-0 pb-3 border-b border-gray-200 dark:border-gray-800">
-                    Full Name</th>
+                    Status</th>
                 <th
                     class="font-normal px-3 pt-0 pb-3 border-b border-gray-200 dark:border-gray-800 hidden md:table-cell">
-                    Email</th>
+                    Yana yuborishi</th>
                 <th class="font-normal px-3 pt-0 pb-3 border-b border-gray-200 dark:border-gray-800">
                     View</th>
 
@@ -63,12 +63,25 @@
                 </td>
                 <td class="sm:p-3 py-2 px-1 border-b border-gray-200 dark:border-gray-800">
                     <div class="flex items-center">
-                        {{ fr.full_name }}
+                        <a href="#">
+                            {% if fr.user in forma.dashboard_form.blocked_users.all%}
+                            unblock user
+                            {% else %}
+                            Block user
+                            {% endif %}
+                        </a>
                     </div>
                 </td>
 
                 <td class="sm:p-3 py-2 px-1 border-b border-gray-200 dark:border-gray-800 ">
-                    {{ fr.email }}</td>
+                    <a href="#">
+                        {% if fr.user in forma.dashboard_form.uwsr.all %}
+                        Ruxsatsiz
+                        {% else %}
+                        Ruxsatli
+                        {% endif %}
+                    </a>
+                </td>
                 <td class="sm:p-3 py-2 px-1 border-b border-gray-200 dark:border-gray-800 ">
                     <a href="{% url 'base:single_request' fr.form.slug fr.id %}">
                         {% if fr.view %}

@@ -191,7 +191,7 @@ def single_form_view(request, slug):
     
     # Foydalanuvchilar bir marta sororv yuborish uchun
     user_submited_request_all = forma.form_requests.all()
-    if not forma.infinite_requests:
+    if not forma.infinite_requests and request.user != forma.author:
         for user_submited_r in user_submited_request_all:
             dashboard_obj.uwsr.add(user_submited_r.user.id)
 
