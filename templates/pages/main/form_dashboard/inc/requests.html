@@ -32,8 +32,7 @@
             <tr class="text-gray-400">
                 <th class="font-normal px-3 pt-0 pb-3 border-b border-gray-200 dark:border-gray-800">
                     Sender</th>
-                <th class="font-normal px-3 pt-0 pb-3 border-b border-gray-200 dark:border-gray-800">
-                    Status</th>
+                <th class="font-normal px-3 pt-0 pb-3 border-b border-gray-200 dark:border-gray-800">Bloklash</th>
                 <th
                     class="font-normal px-3 pt-0 pb-3 border-b border-gray-200 dark:border-gray-800 hidden md:table-cell">
                     Yana yuborishi</th>
@@ -63,6 +62,7 @@
                 </td>
                 <td class="sm:p-3 py-2 px-1 border-b border-gray-200 dark:border-gray-800">
                     <div class="flex items-center">
+                        {% if not fr.as_anonim %}
                         <a href="#">
                             {% if fr.user in forma.dashboard_form.blocked_users.all%}
                             unblock user
@@ -70,10 +70,14 @@
                             Block user
                             {% endif %}
                         </a>
+                        {% else %}
+                        <a href="#">not</a>
+                        {% endif %}
                     </div>
                 </td>
 
                 <td class="sm:p-3 py-2 px-1 border-b border-gray-200 dark:border-gray-800 ">
+                    {% if not fr.as_anonim %}
                     <a href="#">
                         {% if fr.user in forma.dashboard_form.uwsr.all %}
                         Ruxsatsiz
@@ -81,6 +85,9 @@
                         Ruxsatli
                         {% endif %}
                     </a>
+                    {% else %}
+                    <a href="#">Can't</a>
+                    {% endif %}
                 </td>
                 <td class="sm:p-3 py-2 px-1 border-b border-gray-200 dark:border-gray-800 ">
                     <a href="{% url 'base:single_request' fr.form.slug fr.id %}">
