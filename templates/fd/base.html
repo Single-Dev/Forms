@@ -20,7 +20,7 @@
                 <div
                     class="xl:w-72 w-48 flex-shrink-0 border-r border-gray-200 dark:border-gray-800 h-full overflow-y-auto lg:block hidden p-5">
                     <div class="space-y-4 mt-3">
-                        <a href="{% url 'base:dashboard' forma.slug %}?user_requests=/anonim/" class="bg-white p-3 w-full flex flex-col rounded-md dark:bg-gray-800 shadow">
+                        <a href="{% url 'fd:dashboard' forma.slug %}?user_requests=/anonim/" class="bg-white p-3 w-full flex flex-col rounded-md dark:bg-gray-800 shadow">
                             <div
                                 class="flex xl:flex-row flex-col items-center font-medium text-gray-900 dark:text-white pb-2 mb-2 xl:border-b border-gray-200 border-opacity-75 dark:border-gray-700 w-full">
                                 <img src="{% static 'imgs/logo.png' %}"
@@ -30,7 +30,7 @@
                         </a>
                         {% for arm in forma.form_requests.all %}
                         {% if not arm.as_anonim %}
-                        <a href="{% url 'base:dashboard' forma.slug %}?user_requests={{ arm.user }}" class="bg-white p-3 w-full flex flex-col rounded-md dark:bg-gray-800 shadow">
+                        <a href="{% url 'fd:dashboard' forma.slug %}?user_requests={{ arm.user }}" class="bg-white p-3 w-full flex flex-col rounded-md dark:bg-gray-800 shadow">
                             <div
                                 class="flex xl:flex-row flex-col items-center font-medium text-gray-900 dark:text-white pb-2 mb-2 xl:border-b border-gray-200 border-opacity-75 dark:border-gray-700 w-full">
                                 <img src="{{ arm.user.profile.image.url }}"
@@ -70,12 +70,12 @@
                         </div>
                         <div class="flex items-center space-x-3 sm:mt-7 mt-4">
                             <a href="#"class="px-3 border-b-2 border-blue-500 text-blue-500 dark:text-white dark:border-white pb-1.5">Requests</a>
-                            <a href="{% url 'base:update_form' forma.slug %}" class="px-3 border-b-2 border-transparent text-gray-600 dark:text-gray-400 pb-1.5">Edit Form</a>
-                            <a href="{% url 'base:form_permissions' forma.slug %}" class="px-3 border-b-2 border-transparent text-gray-600 dark:text-gray-400 pb-1.5">Form permissions</a>
+                            <a href="{% url 'fd:update_form' forma.slug %}" class="px-3 border-b-2 border-transparent text-gray-600 dark:text-gray-400 pb-1.5">Edit Form</a>
+                            <a href="{% url 'fd:form_permissions' forma.slug %}" class="px-3 border-b-2 border-transparent text-gray-600 dark:text-gray-400 pb-1.5">Form permissions</a>
                             </div>
                     </div>
                     {% block content %}
-                    {% include 'pages/main/form_dashboard/inc/requests.html' %}
+                    {% include 'fd/inc/requests.html' %}
                     {% endblock content %}
                 </div>
             </div>
