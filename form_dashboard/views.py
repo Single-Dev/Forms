@@ -1,5 +1,6 @@
-from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect
+from django.http import HttpResponseRedirect
 from forms.models import *
 from forms.form import *
 
@@ -52,7 +53,7 @@ def update_from(request, slug):
         edit_forma = FormaForm(request.POST, instance=forma)
         if edit_forma.is_valid():
             edit_forma.save()
-            return redirect("base:update_form", slug) 
+            return redirect("fd:update_form", slug) 
     context = {
         "forma":forma,
         "edit_forma":edit_forma
@@ -69,7 +70,7 @@ def form_permissions(request, slug):
         forma_permissions = FormPermissions(request.POST, instance=forma.dashboard_form)
         if forma_permissions.is_valid():
             forma_permissions.save()
-            return redirect("base:form_permissions", slug) 
+            return redirect("fd:form_permissions", slug) 
     context = {
         "forma":forma,
         "forma_permissions":forma_permissions
