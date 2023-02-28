@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'forms',
     'api',
+    'form_dashboard',
     'rosetta',
 
     'rest_framework',
