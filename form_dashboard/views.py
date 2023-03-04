@@ -6,7 +6,6 @@ from forms.form import *
 
 # ----------------------- Dashboard Form  ----------------------- #
 # ----------------------- Dashboard
-
 @login_required(login_url="base:login")
 def dashboard_from_view(request, slug):
     user_requests = request.GET.get('user_requests')
@@ -90,4 +89,14 @@ def block_toggle(request, slug, user):
         forma.dashboard_form.blocked_users.add(user)
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 # ----------------------- User Block toggle End
+# ----------------------- Form visits view
+@login_required(login_url='base:login')
+def form_visits_view(request, slug):
+    forma = Form.objects.get(slug=slug)
+    template_name = "fd/pages/visits-chart.html"
+    context = {
+        "forma":forma
+    }
+    return render(request, template_name, context)
+# ----------------------- Form visits view end
 # ----------------------- Dashboard Form  End ----------------------- #
