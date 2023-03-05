@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'forms',
     'api',
     'form_dashboard',
+    'site_dashboard',
     'rosetta',
 
     'rest_framework',

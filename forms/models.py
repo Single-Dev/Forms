@@ -36,7 +36,10 @@ class Form(models.Model):
     infinite_requests = models.BooleanField(default=False)
     def __str__(self):
         return f'id: {self.id}, Created on: {self.created_on.strftime("%T")}, author: {self.author}'
-
+# class FormVisits(models.Model):
+#     form = models.OneToOneField(Form, on_delete=models.CASCADE, related_name="visits")
+#     visits = models.IntegerField(default=0)
+#     date =  models.DateTimeField(default=timezone.now)
 class DashboardForm(models.Model):
     form = models.OneToOneField(Form, on_delete=models.CASCADE, related_name="dashboard_form")
     visits = models.IntegerField(default=0)
