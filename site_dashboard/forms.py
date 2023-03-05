@@ -4,4 +4,4 @@ from .models import *
 class SendToEmailForm(forms.ModelForm):
     class Meta:
         model = SubmitMsgToEmail
-        fields= "__all__"
+        fields= ['subject', "message", "email"]

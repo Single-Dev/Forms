@@ -145,3 +145,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 AUTH_USER_MODEL = 'forms.CustomUser'
+
+# EMAIL_HOST = "smtp.gmail.com"
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = 1225
+EMAIL_HOST_USER = "bekzodbek06062006@gmail.com"
+EMAIL_HOST_PASSWORD = "Password2006"
+EMAIL_USE_TSL = True

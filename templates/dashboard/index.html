@@ -7,6 +7,10 @@
     <title>Dashboard</title>
 </head>
 <body>
-    
+    <form method="post">
+        {% csrf_token %}
+        {{ send_form }}
+        <button type="submit">Send To Users Email</button>
+    </form>
 </body>
 </html>
