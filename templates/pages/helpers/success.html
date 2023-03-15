@@ -48,10 +48,8 @@
     </style>
 
     <div class="text-center">
-        <h1 class="text-light">Your request <span class="text-danger">successfully</span> submit to <a class="author "
-                href="{% url 'profile' single.author %}">@{{single.author}}</a>*</h1>
         <h2 class="text-light">{{single.message}}</h2>
-        <a class="go-home" href="{% url 'base:home' %}">Go Home</a>
+        <a class="go-home" href="{% url 'profile' single.author %}">@{{single.author}}</a>
     </div>
 </body>
 

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
+{% load i18n %}
 <html lang="en">
 
 <head>
@@ -32,7 +33,7 @@
             </span>
             {% render_field NewForm.message_uz type="text" class="form-control mt-2 mb-2" placeholder="Succsess Submit Message" %}
             {% render_field NewForm.message_en type="text" class="form-control mt-2 mb-2" placeholder="Succsess Submit Message for english" %}
-            <input type="submit" class="btn btn-info w-100">
+            <input type="submit" class="btn btn-info w-100" value="{% trans 'Yaratish' %}">
         </form>
     </div>
 </body>
