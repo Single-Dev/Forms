@@ -49,7 +49,7 @@
 
     <div class="text-center">
         <h2 class="text-light">{{single.message}}</h2>
-        <a class="go-home" href="{% url 'profile' single.author %}">@{{single.author}}</a>
+        <a class="go-home" href="{% url 'profile' request.user %}?tab=requests">View All Requests</a>
     </div>
 </body>
 
