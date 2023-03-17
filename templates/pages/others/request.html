@@ -216,82 +216,26 @@
         }
     </style>
     <ul class="chat-thread">
+        {%  if single_request.user == request.user %}
+        <li>{{ single_request.description }}</li>
+        <li>{{ single_request.form.message }}</li>
+        {% else %}
+        <li></li>
+        <li>{{ single_request.description }}</li>
+        <li>{{ single_request.form.message }}</li>
+        {% endif %}
         <li>Are we meeting today?</li>
-        <li>Are we meeting sad?</li>
-        <li>Are we meeting asd?</li>
-        <li>yes, what time suits you?</li>
-        <li>I was thinking after lunch, I have a meeting in the morning</li>
+        <li>Are we meeting today?</li>
+        <li>Are we meeting today?</li>
+
+
     </ul>
 
-    <form class="chat-window">
+    <!-- <form class="chat-window">
         <input class="chat-window-message" type="text" autocomplete="off" autofocus />
-    </form>
+    </form> -->
 
-    <script>
 
-        var sendChannel,
-            receiveChannel,
-            chatWindow = document.querySelector('.chat-window'),
-            chatWindowMessage = document.querySelector('.chat-window-message'),
-            chatThread = document.querySelector('.chat-thread');
-
-        // Create WebRTC connection
-        createConnection();
-
-        // On form submit, send message
-        chatWindow.onsubmit = function (e) {
-            e.preventDefault();
-
-            sendData();
-
-            return false;
-        };
-
-        function createConnection() {
-            var servers = null;
-
-            if (window.mozRTCPeerConnection) {
-                window.localPeerConnection = new mozRTCPeerConnection(servers, {
-                    optional: [{
-                        RtpDataChannels: true
-                    }]
-                });
-            } else {
-                window.localPeerConnection = new webkitRTCPeerConnection(servers, {
-                    optional: [{
-                        RtpDataChannels: true
-                    }]
-                });
-            }
-
-            try {
-                // Reliable Data Channels not yet supported in Chrome
-                sendChannel = localPeerConnection.createDataChannel('sendDataChannel', {
-                    reliable: false
-                });
-            } catch (e) {
-            }
-
-            localPeerConnection.onicecandidate = gotLocalCandidate;
-            sendChannel.onopen = handleSendChannelStateChange;
-            sendChannel.onclose = handleSendChannelStateChange;
-
-            if (window.mozRTCPeerConnection) {
-                window.remotePeerConnection = new mozRTCPeerConnection(servers, {
-                    optional: [{
-                        RtpDataChannels: true
-                    }]
-                });
-            } else {
-                window.remotePeerConnection = new webkitRTCPeerConnection(servers, {
-                    optional: [{
-                        RtpDataChannels: true
-                    }]
-                });
-            }
-
-        }
-    </script>
 </body>
 
 </html>
