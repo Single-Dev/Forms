@@ -1,326 +1,297 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-    <title>Ionic Elastichat</title>
-    <link href="//code.ionicframework.com/1.0.0-beta.14/css/ionic.min.css" rel="stylesheet">
-    <script src="//code.ionicframework.com/1.0.0-beta.14/js/ionic.bundle.min.js"></script>
-    <!-- moment -->
-    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js"></script>
-    <!-- angular moment -->
-    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-moment/0.8.2/angular-moment.min.js"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 </head>
-<style>
-    body {
-        cursor: url('https://ionicframework.com/img/finger.png'), auto;
-    }
 
-    /* allows the bar-footer to be elastic /*
-/* optionally set a max-height */
-    /* maxlength on the textarea will prevent /*
-/* it from getting too large also */
-    .bar-footer {
-        overflow: visible !important;
-    }
+<body>
+    <style>
+        @import 'https://fonts.googleapis.com/css?family=Noto+Sans';
 
-    .bar-footer textarea {
-        resize: none;
-        height: 25px;
-    }
+        body {
+            padding: 0;
+            margin: 0;
+            background: -moz-linear-gradient(-45deg, #183850 0, #183850 25%, #192c46 50%, #22254c 75%, #22254c 100%);
+            background: -webkit-linear-gradient(-45deg, #183850 0, #183850 25%, #192c46 50%, #22254c 75%, #22254c 100%);
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
 
-    /* fixes an ios bug bear */
-    button.ion-android-send {
-        padding-top: 2px;
-    }
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
 
-    /* add this to keep your footer buttons down 
-at the bottom as the textarea resizes */
-    .footer-btn-wrap {
-        position: relative;
-        height: 100%;
-        width: 50px;
-        top: 7px;
-    }
+        ::-webkit-scrollbar-track {
+            border-radius: 10px;
+            background-color: rgba(25, 147, 147, 0.1);
+        }
 
-    .footer-btn {
-        position: absolute !important;
-        bottom: 0;
-    }
+        ::-webkit-scrollbar-thumb {
+            border-radius: 10px;
+            background-color: rgba(25, 147, 147, 0.2);
+        }
 
-    img.profile-pic {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        position: absolute;
-        bottom: 10px;
-    }
+        .chat-thread {
+            margin: 24px auto 0 auto;
+            padding: 0 20px 0 0;
+            list-style: none;
+            overflow-y: scroll;
+            overflow-x: hidden;
+        }
 
-    img.profile-pic.left {
-        left: 10px;
-    }
+        .chat-thread li {
+            position: relative;
+            clear: both;
+            display: inline-block;
+            padding: 16px 40px 16px 20px;
+            margin: 0 0 20px 0;
+            font: 16px/20px 'Noto Sans', sans-serif;
+            border-radius: 10px;
+            background-color: rgba(25, 147, 147, 0.2);
+        }
 
-    img.profile-pic.right {
-        right: 10px;
-    }
+        /* Chat - Avatar */
+        .chat-thread li:before {
+            position: absolute;
+            top: 0;
+            width: 50px;
+            height: 50px;
+            border-radius: 50px;
+            content: '';
+        }
 
-    .ion-email {
-        float: right;
-        font-size: 32px;
-        vertical-align: middle;
-    }
+        /* Chat - Speech Bubble Arrow */
+        .chat-thread li:after {
+            position: absolute;
+            top: 15px;
+            content: '';
+            width: 0;
+            height: 0;
+            border-top: 15px solid rgba(25, 147, 147, 0.2);
+        }
 
-    .message {
-        font-size: 14px;
-    }
+        .chat-thread li:nth-child(odd) {
+            animation: show-chat-odd 0.15s 1 ease-in;
+            -moz-animation: show-chat-odd 0.15s 1 ease-in;
+            -webkit-animation: show-chat-odd 0.15s 1 ease-in;
+            float: right;
+            margin-right: 80px;
+            color: #0ad5c1;
+        }
 
-    .message-detail {
-        white-space: nowrap;
-        font-size: 14px;
-    }
+        /* .chat-thread li:nth-child(odd):before {
+            right: -80px;
+            background-image: url({{request.user.profile.image.url}})
+        } */
 
-    .bar.item-input-inset .item-input-wrapper input {
-        width: 100% !important;
-    }
+        .chat-thread li:nth-child(odd):after {
+            border-right: 15px solid transparent;
+            right: -15px;
+        }
 
-    .message-wrapper {
-        position: relative;
-    }
+        .chat-thread li:nth-child(even) {
+            animation: show-chat-even 0.15s 1 ease-in;
+            -moz-animation: show-chat-even 0.15s 1 ease-in;
+            -webkit-animation: show-chat-even 0.15s 1 ease-in;
+            float: left;
+            margin-left: 80px;
+            color: #0ec879;
+        }
 
-    .message-wrapper:last-child {
-        margin-bottom: 10px;
-    }
+        /* .chat-thread li:nth-child(even):before {
+            left: -80px;
+            background-image: url(data:image/jpeg;
+ base64,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);
+        } */
 
-    .chat-bubble {
-        border-radius: 5px;
-        display: inline-block;
-        padding: 10px 18px;
-        position: relative;
-        margin: 10px;
-        max-width: 80%;
-    }
+        .chat-thread li:nth-child(even):after {
+            border-left: 15px solid transparent;
+            left: -15px;
+        }
 
-    .chat-bubble:before {
-        content: "\00a0";
-        display: block;
-        height: 16px;
-        width: 9px;
-        position: absolute;
-        bottom: -7.5px;
-    }
+        .chat-window {
+            position: fixed;
+            bottom: 18px;
+        }
 
-    .chat-bubble.left {
-        background-color: #e6e5eb;
-        float: left;
-        margin-left: 55px;
-    }
+        .chat-window-message {
+            width: 100%;
+            height: 48px;
+            font: 32px/48px 'Noto Sans', sans-serif;
+            background: none;
+            color: #0ad5c1;
+            border: 0;
+            border-bottom: 1px solid rgba(25, 147, 147, 0.2);
+            outline: none;
+        }
 
-    .chat-bubble.left:before {
-        background-color: #e6e5eb;
-        left: 10px;
-        -webkit-transform: rotate(70deg) skew(5deg);
-    }
+        /* Small screens */
+        @media all and (max-width: 767px) {
+            .chat-thread {
+                width: 90%;
+                height: 700px;
+            }
 
-    .chat-bubble.right {
-        background-color: #158ffe;
-        color: #fff;
-        float: right;
-        margin-right: 55px;
-    }
+            .chat-window {
+                left: 5%;
+                width: 90%;
+            }
+        }
 
-    .chat-bubble.right:before {
-        background-color: #158ffe;
-        right: 10px;
-        -webkit-transform: rotate(118deg) skew(-5deg);
-    }
+        /* Medium and large screens */
+        @media all and (min-width: 768px) {
+            .chat-thread {
+                width: 50%;
+                height: 705px;
+            }
 
-    .chat-bubble.right a.autolinker {
-        color: #fff;
-        font-weight: bold;
-    }
+            .chat-window {
+                left: 25%;
+                width: 50%;
+            }
+        }
 
-    .user-messages-top-icon {
-        font-size: 28px;
-        display: inline-block;
-        vertical-align: middle;
-        position: relative;
-        top: -3px;
-        right: 5px;
-    }
+        @keyframes show-chat-even {
+            0% {
+                margin-left: -480px;
+            }
 
-    .msg-header-username {
-        display: inline-block;
-        vertical-align: middle;
-        position: relative;
-        top: -3px;
-    }
+            100% {
+                margin-left: 0;
+            }
+        }
 
-    input,
-    textarea,
-    .item-input,
-    .item-input-wrapper {
-        background-color: #f4f4f4 !important;
-    }
+        @-moz-keyframes show-chat-even {
+            0% {
+                margin-left: -480px;
+            }
 
-    .bold {
-        font-weight: bold;
-    }
+            100% {
+                margin-left: 0;
+            }
+        }
 
-    .cf {
-        clear: both !important;
-    }
+        @-webkit-keyframes show-chat-even {
+            0% {
+                margin-left: -480px;
+            }
 
-    a.autolinker {
-        color: #3b88c3;
-        text-decoration: none;
-    }
+            100% {
+                margin-left: 0;
+            }
+        }
 
-    /* loading */
-    .loader-center {
-        height: 100%;
-        display: -webkit-box;
-        display: -moz-box;
-        display: -ms-flexbox;
-        display: -webkit-flex;
-        display: flex;
-        -webkit-box-direction: normal;
-        -moz-box-direction: normal;
-        -webkit-box-orient: horizontal;
-        -moz-box-orient: horizontal;
-        -webkit-flex-direction: row;
-        -ms-flex-direction: row;
-        flex-direction: row;
-        -webkit-flex-wrap: nowrap;
-        -ms-flex-wrap: nowrap;
-        flex-wrap: nowrap;
-        -webkit-box-pack: center;
-        -moz-box-pack: center;
-        -webkit-justify-content: center;
-        -ms-flex-pack: center;
-        justify-content: center;
-        -webkit-align-content: stretch;
-        -ms-flex-line-pack: stretch;
-        align-content: stretch;
-        -webkit-box-align: center;
-        -moz-box-align: center;
-        -webkit-align-items: center;
-        -ms-flex-align: center;
-        align-items: center;
-    }
+        @keyframes show-chat-odd {
+            0% {
+                margin-right: -480px;
+            }
 
-    .loader .ion-loading-c {
-        font-size: 64px;
-    }
-</style>
+            100% {
+                margin-right: 0;
+            }
+        }
 
-<body ng-app="elastichat">
-    <ion-nav-bar class="bar-positive" no-tap-scroll="false">
-        <ion-nav-back-button class="button-icon ion-arrow-left-c">
-        </ion-nav-back-button>
-    </ion-nav-bar>
-    <!-- 
-      The views will be rendered in the <ion-nav-view> directive below
-      Templates are in the /templates folder (but you could also
-      have templates inline in this html file if you'd like).
-      -->
-    <ion-nav-view></ion-nav-view>
-    <script id="templates/UserMessages.html" type="text/ng-template">
-      <ion-view id="userMessagesView"
-          cache-view="false" 
-          view-title="<i class='icon ion-chatbubble user-messages-top-icon'></i> <div class='msg-header-username'>{{toUser.username}}</div>">
-        
-        <div class="loader-center" ng-if="!doneLoading">
-            <div class="loader">
-              <i class="icon ion-loading-c"></i>
-            </div>
-        </div>
-      
-          <ion-content has-bouncing="true" class="has-header has-footer" 
-              delegate-handle="userMessageScroll">
-            
-              <div ng-repeat="message in messages" class="message-wrapper"
-                  on-hold="onMessageHold($event, $index, message)">
-      
-                  <div ng-if="user._id !== message.userId">
-                      
-                    <img ng-click="viewProfile(message)" class="profile-pic left" 
-                          ng-src="{{toUser.pic}}" onerror="onProfilePicError(this)" />
-      
-                      <div class="chat-bubble left">
-      
-                          <div class="message" ng-bind-html="message.text | nl2br" autolinker>
-                          </div>
-      
-                          <div class="message-detail">
-                              <span ng-click="viewProfile(message)" 
-                                  class="bold">{{toUser.username}}</span>,
-                              <span am-time-ago="message.date"></span>
-                          </div>
-      
-                      </div>
-                  </div>
-      
-                  <div ng-if="user._id === message.userId">
-                    
-                       <img ng-click="viewProfile(message)" class="profile-pic right" 
-                          ng-src="{{user.pic}}" onerror="onProfilePicError(this)" />
-                    
-                      <div class="chat-bubble right">
-      
-                          <div class="message" ng-bind-html="message.text | nl2br" autolinker>
-                          </div>
-      
-                          <div class="message-detail">
-                              <span ng-click="viewProfile(message)" 
-                                  class="bold">{{user.username}}</span>, 
-                              <span am-time-ago="message.date"></span>
-                          </div>
-      
-                      </div>
-                    
-                  </div>
-      
-                  <div class="cf"></div>
-      
-              </div>
-          </ion-content>
-      
-          <form name="sendMessageForm" ng-submit="sendMessage(sendMessageForm)" novalidate>
-              <ion-footer-bar class="bar-stable item-input-inset message-footer" keyboard-attach>
-                  <label class="item-input-wrapper">
-                      <textarea ng-model="input.message" value="" placeholder="Send {{toUser.username}} a message..." required minlength="1" maxlength="1500" msd-elastic></textarea>
-                  </label>
-                  <div class="footer-btn-wrap">
-                    <button class="button button-icon icon ion-android-send footer-btn" type="submit"
-                        ng-disabled="!input.message || input.message === ''">
-                    </button>
-                  </div>
-              </ion-footer-bar>
-          </form>
-          
-      </ion-view>
+        @-moz-keyframes show-chat-odd {
+            0% {
+                margin-right: -480px;
+            }
+
+            100% {
+                margin-right: 0;
+            }
+        }
+
+        @-webkit-keyframes show-chat-odd {
+            0% {
+                margin-right: -480px;
+            }
+
+            100% {
+                margin-right: 0;
+            }
+        }
+    </style>
+    <ul class="chat-thread">
+        <li>Are we meeting today?</li>
+        <li>Are we meeting sad?</li>
+        <li>Are we meeting asd?</li>
+        <li>yes, what time suits you?</li>
+        <li>I was thinking after lunch, I have a meeting in the morning</li>
+    </ul>
+
+    <form class="chat-window">
+        <input class="chat-window-message" type="text" autocomplete="off" autofocus />
+    </form>
+
+    <script>
+
+        var sendChannel,
+            receiveChannel,
+            chatWindow = document.querySelector('.chat-window'),
+            chatWindowMessage = document.querySelector('.chat-window-message'),
+            chatThread = document.querySelector('.chat-thread');
+
+        // Create WebRTC connection
+        createConnection();
+
+        // On form submit, send message
+        chatWindow.onsubmit = function (e) {
+            e.preventDefault();
+
+            sendData();
+
+            return false;
+        };
+
+        function createConnection() {
+            var servers = null;
+
+            if (window.mozRTCPeerConnection) {
+                window.localPeerConnection = new mozRTCPeerConnection(servers, {
+                    optional: [{
+                        RtpDataChannels: true
+                    }]
+                });
+            } else {
+                window.localPeerConnection = new webkitRTCPeerConnection(servers, {
+                    optional: [{
+                        RtpDataChannels: true
+                    }]
+                });
+            }
+
+            try {
+                // Reliable Data Channels not yet supported in Chrome
+                sendChannel = localPeerConnection.createDataChannel('sendDataChannel', {
+                    reliable: false
+                });
+            } catch (e) {
+            }
+
+            localPeerConnection.onicecandidate = gotLocalCandidate;
+            sendChannel.onopen = handleSendChannelStateChange;
+            sendChannel.onclose = handleSendChannelStateChange;
+
+            if (window.mozRTCPeerConnection) {
+                window.remotePeerConnection = new mozRTCPeerConnection(servers, {
+                    optional: [{
+                        RtpDataChannels: true
+                    }]
+                });
+            } else {
+                window.remotePeerConnection = new webkitRTCPeerConnection(servers, {
+                    optional: [{
+                        RtpDataChannels: true
+                    }]
+                });
+            }
+
+        }
     </script>
 </body>
 
 </html>
-
-<h4>Public: {{ single_request.is_public }}</h4>
-
-{% if single_request.user == request.user %}
-
-{% if single_request.view %}
-<h2>✔️✔️</h2>
-{% else %}
-<h2>✔️</h2>
-{% endif %}
-{% else %}
-<p>{{ single_request.submited_on }}</p>
-{% endif %}
-<h2>Full Name: {{ single_request.full_name }}</h2>
-<p>{{ single_request.description }}</p>
-
-{% if not single_request.as_anonim %}
-<a href="{% url 'profile' single_request.user  %}">{{ single_request.user }}</a>
-{% else %}
-<a href="#">Anonim</a>
-{% endif %}
