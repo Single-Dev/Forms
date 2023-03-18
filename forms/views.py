@@ -235,7 +235,7 @@ def single_form_view(request, slug):
                 new_request = request_form.save(commit=False)
                 new_request.form = form_       
                 new_request.user = user_r
-                if user_r == "anonim":
+                if user_r.username == "anonim":
                     new_request.as_anonim = True
                 new_request.save()
                 return redirect("base:submit_success", slug)
