@@ -52,7 +52,6 @@ class DashboardForm(models.Model):
 class FormRequest(models.Model):
     form = models.ForeignKey(Form, on_delete=models.CASCADE, related_name="form_requests")
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, null=True, blank=True, related_name='user_request')
-    is_public = models.BooleanField(default=False)
     as_anonim = models.BooleanField(default=False)
     view = models.BooleanField(default=False)
     full_name = models.CharField(max_length=32)

@@ -70,7 +70,7 @@ class FormaForm(forms.ModelForm):
 class CreateFormRequestTest(forms.ModelForm):
     class Meta:
         model = FormRequest
-        fields = ['is_public', 'full_name', 'email', 'as_anonim', "description"]
+        fields = ['full_name', 'email', 'as_anonim', "description"]
 
 class FormPermissions(forms.ModelForm):
     class Meta:
