@@ -92,10 +92,6 @@ def profile_view(request, username):
         elif tab == 'forms':
             user_forms = user_p.form.filter(is_public=True)
             title = f"@{user_p.username}`s - forms"
-        elif tab == 'requests':
-            user_requests = user_p.user_request.filter(is_public=True, as_anonim=False)
-            title = f"@{user_p.username}`s - requests"
-            # user_requests_count = user_requests.count()
     # ----------------------- Profile Tab End ----------------------- #
     # ----------------------- Update Profile ----------------------- #
     user_form = None
@@ -239,6 +235,8 @@ def single_form_view(request, slug):
                 new_request = request_form.save(commit=False)
                 new_request.form = form_       
                 new_request.user = user_r
+                if user_r == "anonim":
+                    new_request.as_anonim = True
                 new_request.save()
                 return redirect("base:submit_success", slug)
         else:

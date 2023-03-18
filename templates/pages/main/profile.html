@@ -67,11 +67,12 @@
                         <div class="profile-card-inf__title">{{user_p.form.count}}</div>
                         <div class="profile-card-inf__txt">Forms</div>
                     </a>
-
+                    {% if request.user == user_p %}
                     <a href="?tab=requests" class="profile-card-inf__item text-dark text-decoration-none">
                         <div class="profile-card-inf__title">{{user_p.user_request.count}}</div>
                         <div class="profile-card-inf__txt">Requests</div>
                     </a>
+                    {% endif %}
                 </div>
                 {% if not request.GET.tab %}
                 <div class="profile-card-social">
