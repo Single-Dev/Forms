@@ -75,7 +75,7 @@ def profile_view(request, username):
             title = "Your followers"
         elif tab == "following":
             user_following = user_p.following.all()
-            title = "Your following"
+            title = "You are a follower"
         elif tab == 'forms':
             user_forms = user_p.form.all()
             title = f"Your forms"
