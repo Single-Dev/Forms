@@ -257,13 +257,10 @@ def single_request_view(request, slug, pk):
     single_form = Form.objects.get(slug=slug)
     single_request = FormRequest.objects.get(id=pk)
     user_ = get_object_or_404(CustomUser, username=request.user)
-    if single_request.is_public == True:
+    if user_.username == single_form.author.username or user_.username == single_request.user.username:
         pass
     else:
-        if user_.username == single_form.author.username or user_.username == single_request.user.username:
-            pass
-        else:
-            return redirect('base:home')
+        return redirect('base:home')
     if single_form.author.username == user_.username:
         single_request.view = True
         single_request.save()

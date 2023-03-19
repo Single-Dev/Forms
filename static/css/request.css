@@ -88,9 +88,9 @@ body {
 }
 
 .chat-thread li.receive {
-    animation: show-chat-even 0.15s 1 ease-in;
-    -moz-animation: show-chat-even 0.15s 1 ease-in;
-    -webkit-animation: show-chat-even 0.15s 1 ease-in;
+    animation: show-chat-even 0.50s 1 ease-in;
+    -moz-animation: show-chat-even 0.50s 1 ease-in;
+    -webkit-animation: show-chat-even 0.50s 1 ease-in;
     float: left;
     margin-left: 80px;
     color: #0ec879;
