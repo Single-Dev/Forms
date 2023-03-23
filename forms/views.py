@@ -9,6 +9,7 @@ from django.contrib import messages
 from django.utils import timezone
 from .models import *
 from forms.form import *
+from django.views.generic import TemplateView
 
 # ---- Home ---- #
 def home(request):
@@ -278,9 +279,9 @@ def submit_success_view(request, slug):
     }
     return render(request, 'pages/helpers/success.html', context)
 
-class UnsuccessView(generic.TemplateView):
+class UnsuccessView(TemplateView):
     template_name = 'pages/helpers/unsuccess.html'
-unsuccess_view = UnsuccessView
+unsuccess_view = UnsuccessView.as_view()
 # ----------------------- Notifications view ----------------------- #
 @login_required(login_url='base:login')
 def notifications_view(request):
