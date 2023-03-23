@@ -6,14 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/request.css' %}">
-    <title>{{single_request.form.title}}</title>
+    <title>{{single_request.form.title}} - chat</title>
 </head>
 
 <body>
 
-    <ul class="chat-thread">
+    <div class="chat-thread">
         {%  if single_request.user == request.user %}
-        <li class="sent">
+        <span class="sent">
             {{single_request.description}}
             <p class="is_viewed">
                 {% if single_request.view %}
@@ -22,16 +22,16 @@
                 ✔️
                 {% endif %}
             </p>
-        </li>
-        <li class="receive">{{single_request.form.message}}</li>
+        </span>
+        <span class="receive">{{single_request.form.message}}</span>
         {% else %}
-        <li class="receive">
+        <span class="receive">
             {{single_request.description}}
             <p class="submited_on">{{ single_request.submited_on }}</p>
-        </li>
-        <li class="sent">{{single_request.form.message}}</li>
+        </span>
+        <span class="sent">{{single_request.form.message}}</span>
         {% endif %}
-    </ul>
+    </div>
 
     <!-- <form class="chat-window">
         <input class="chat-window-message" type="text" autocomplete="off" autofocus />

@@ -184,7 +184,7 @@ def single_form_view(request, slug):
         dashboard_obj.save()
     # Agar user bloklangan bo'lsa
     if request.user in blocked_users:
-        return redirect("/")
+        return redirect("base:unsuccess_view")
     
     # Foydalanuvchilar bir marta sororv yuborish uchun
     user_submited_request_all = forma.form_requests.all()
