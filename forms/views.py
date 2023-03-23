@@ -278,6 +278,9 @@ def submit_success_view(request, slug):
     }
     return render(request, 'pages/helpers/success.html', context)
 
+class UnsuccessView(generic.TemplateView):
+    template_name = 'pages/helpers/unsuccess.html'
+unsuccess_view = UnsuccessView
 # ----------------------- Notifications view ----------------------- #
 @login_required(login_url='base:login')
 def notifications_view(request):
