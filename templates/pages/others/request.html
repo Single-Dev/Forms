@@ -14,7 +14,9 @@
     <div class="chat-thread">
         {%  if single_request.user == request.user %}
         <span class="sent">
-            {{single_request.description}}
+            <h4>{{ single_request.full_name }}:</h4>
+            <p>{{single_request.description}}</p>
+            <a href="mailto:{{ single_request.email }}">{{ single_request.email }}</a>
             <p class="is_viewed">
                 {% if single_request.view %}
                 ✔️✔️
@@ -26,8 +28,11 @@
         <span class="receive">{{single_request.form.message}}</span>
         {% else %}
         <span class="receive">
-            {{single_request.description}}
+            <h4>{{ single_request.full_name }}:</h4>
+            <p>{{single_request.description}}</p>
+            <a href="mailto:{{ single_request.email }}">{{ single_request.email }}</a>
             <p class="submited_on">{{ single_request.submited_on }}</p>
+            <p></p>
         </span>
         <span class="sent">{{single_request.form.message}}</span>
         {% endif %}
