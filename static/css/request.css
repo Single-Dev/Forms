@@ -12,6 +12,23 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
 }
+
+.container{
+    position: relative;
+}
+
+.container .form__title{
+    position: relative;
+    top: 35px;
+    left: 376px;
+    color: #fff;
+    font-size: 2rem;
+    font-family: sans-serif;
+}
+.container .form__title a{
+    text-decoration: none;
+    color: #fff;
+}
 .is_viewed, .submited_on{
     font-size: 10px;
 }
@@ -30,7 +47,7 @@ body {
 }
 
 .chat-thread {
-    margin: 24px auto 0 auto;
+    margin: 60px auto 0 auto;
     padding: 0 20px 0 0;
     list-style: none;
     overflow-y: scroll;
@@ -130,6 +147,10 @@ base64,/9j/4AAQSkZJRgABAQEAYABgAAD/4QBoRXhpZgAATU0AKgAAAAgABAEaAAUAAAABAAAAPgEbA
 
 /* Small screens */
 @media all and (max-width: 767px) {
+    .container .form__title{
+        left: 10px;
+    }
+
     .chat-thread {
         width: 90%;
         height: 700px;
@@ -143,6 +164,10 @@ base64,/9j/4AAQSkZJRgABAQEAYABgAAD/4QBoRXhpZgAATU0AKgAAAAgABAEaAAUAAAABAAAAPgEbA
 
 /* Medium and large screens */
 @media all and (min-width: 768px) {
+    .container .form__title{
+        left: 376px;
+    }
+
     .chat-thread {
         width: 50%;
         height: 705px;
