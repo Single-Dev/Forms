@@ -12,7 +12,7 @@
 <body>
 
     <div class="container">
-        <span class="form__title">Form: <a class="" href="#">{{ single_request.form.title }}</a></span>
+        <span class="form__title">Form: <a href="{% url 'base:form' single_request.form.slug %}">{{ single_request.form.title }}</a></span>
         <div class="chat-thread">
             {%  if single_request.user == request.user %}
             <span class="sent">
