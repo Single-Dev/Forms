@@ -16,6 +16,18 @@ body {
 .container{
     position: relative;
 }
+.trans-btn{
+    /* position: absolute;
+    top: 10px;
+    left: 250px; */
+    width: 250px;
+    float: left;
+}
+
+.trans-btn a{
+    color: #fff;
+    font-family: sans-serif;
+}
 
 .container .form__title{
     position: relative;

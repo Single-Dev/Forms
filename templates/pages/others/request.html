@@ -15,6 +15,14 @@
     <div class="container">
         <span class="form__title">Form: <a href="{% url 'base:form' single_request.form.slug %}">{{ single_request.form.title }}</a></span>
         <div class="chat-thread">
+            <span class="trans-btn">
+                {% get_current_language as LANGUAGE_CODE %}
+                {% if LANGUAGE_CODE == "uz" %}
+                <a href="/en{% url 'base:single_request' single_request.form.slug  single_request.id %}">Ingliz titliga tarjima qilish</a>
+                {% else %}
+                <a href="/request/{{single_request.form.slug}}/{{single_request.id}}">O'zbek titliga tarjima qilish</a>
+                {% endif %}
+            </span>
             {%  if single_request.user == request.user %}
             <span class="sent">
                 <h4>{{ single_request.full_name }}:</h4>
