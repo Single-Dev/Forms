@@ -11,13 +11,13 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('dashboard/', include('site_dashboard.urls'), name="dashboard"),
     path('api/', include('api.urls')),
-    path('settings/', include('settings.urls')),
     path('api-auth/', include('rest_framework.urls')),
     path('@<str:username>/', views.profile_view, name="profile"),
     path('logout/', views.logout_view, name='logout'),
     re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + i18n_patterns(
     path('', include('forms.urls')),
+    path('settings/', include('settings.urls')),
     path('fd/', include('form_dashboard.urls')),
     path('i18n/', include("django.conf.urls.i18n")),
     prefix_default_language = False

@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 @login_required(login_url='base:login')
 def password_change(request):
