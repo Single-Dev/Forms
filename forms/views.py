@@ -19,7 +19,7 @@ def home(request):
     context={
         "n_count":n_count
     }
-    return render(request, 'pages/main/home.html', context)
+    return render(request, 'base/pages/main/home.html', context)
 # ---- Home End ---- #
 # ---- /uz/ resirect ---- #
 def uz_redirect(request):
@@ -162,7 +162,7 @@ def new_form_view(request):
     context={
         "NewForm":NewForm,
     }
-    return render(request, "base/pages/others/new.html", context)
+    return render(request, "base/pages/main/new.html", context)
 
 # --------------------------------------------------------------------- #
 def create_dashboard_form_view(request, slug):
