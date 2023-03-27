@@ -184,9 +184,13 @@
                         <h5 class="card-header">{{title}}</h5>
                         {% for uf in user_forms %}
                         <div class="card-body">
-                            <h5 class="card-title">{{uf.title}}<span>`{% if uf.is_public %}Public{% else %}Private{% endif %}`</span></h5>
+                            <h4 class="card-title d-flex">
+                                <a href="{% url 'base:form' uf.slug %}" class="text-decoration-none text-dark">{{uf.title}}<a>
+                                <span>
+                                    ({% if uf.is_public %}Public{% else %}Private{% endif %})
+                                </span>
+                            </h4>
                             <p class="card-text">{{ uf.message }}</p>
-                            <a href="{% url 'base:form' uf.slug %}" class="text-dark text-decoration-none">{{ uf.slug }}</a>
                         </div>
                         <hr>
                         {% endfor %}
@@ -199,7 +203,7 @@
                         <h5 class="card-header">{{title}}</h5>
                         {% for ur in user_requests %}
                         <div class="card-body">
-                            <h5 class="card-title">`{% if ur.is_public %}Public{% else %}Private{% endif %}`</h5>
+                            <h5 class="card-title"></h5>
                             <h4>
                                 submited as
                                 {% if ur.as_anonim %}Anonim{% else %}
