@@ -4,7 +4,6 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.http import HttpResponseRedirect
 from django.core.paginator import Paginator
-from django.contrib.auth import logout
 from django.contrib import messages
 from django.utils import timezone
 from .models import *
@@ -123,7 +122,7 @@ def profile_view(request, username):
         "user_form":user_form,
         "profile_form":profile_form
     }
-    return render(request, 'pages/main/profile.html', context)
+    return render(request, 'base/pages/main/profile.html', context)
 
 def follow_toggle(request, author):
     if request.user.is_authenticated:
@@ -163,7 +162,7 @@ def new_form_view(request):
     context={
         "NewForm":NewForm,
     }
-    return render(request, "pages/others/new.html", context)
+    return render(request, "base/pages/others/new.html", context)
 
 # --------------------------------------------------------------------- #
 def create_dashboard_form_view(request, slug):
@@ -249,7 +248,7 @@ def single_form_view(request, slug):
         "request_form":request_form,
         "requests_":requests_,
     }
-    return render(request, 'pages/others/form.html', context)
+    return render(request, 'base/pages/main/form.html', context)
 # ----------------------- Yagona Forma ko'rish manzili ----------------------- #
 
 # ----------------------- Request view ----------------------- #
@@ -269,7 +268,7 @@ def single_request_view(request, slug, pk):
         'single_request':single_request,
         'single_form':single_form
     }
-    return render(request, 'pages/others/request.html', context)
+    return render(request, 'base/pages/main/request.html', context)
 # ----------------------- request view End ----------------------- #
 
 def submit_success_view(request, slug):
@@ -277,10 +276,10 @@ def submit_success_view(request, slug):
     context ={
         "single":single
     }
-    return render(request, 'pages/helpers/success.html', context)
+    return render(request, 'base/pages/helpers/success.html', context)
 
 class UnsuccessView(TemplateView):
-    template_name = 'pages/helpers/unsuccess.html'
+    template_name = 'base/pages/helpers/unsuccess.html'
 unsuccess_view = UnsuccessView.as_view()
 # ----------------------- Notifications view ----------------------- #
 @login_required(login_url='base:login')
@@ -291,6 +290,6 @@ def notifications_view(request):
         "unread_notifys":unread_notifys,
         "n_count":n_count
     }
-    return render(request, 'pages/main/notifications.html', context)
+    return render(request, 'base/pages/main/notifications.html', context)
 # ----------------------- notifications view End----------------------- #
 

@@ -11,6 +11,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('dashboard/', include('site_dashboard.urls'), name="dashboard"),
     path('api/', include('api.urls')),
+    path('settings/', include('settings.urls')),
     path('api-auth/', include('rest_framework.urls')),
     path('@<str:username>/', views.profile_view, name="profile"),
     path('logout/', views.logout_view, name='logout'),
