@@ -6,6 +6,7 @@ from django.views.static import serve
 from django.conf.urls import handler404, handler500
 from django.conf.urls.i18n import i18n_patterns
 from forms import views
+import forms
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -15,7 +16,8 @@ urlpatterns = [
     path('@<str:username>/', views.profile_view, name="profile"),
     path('logout/', views.logout_view, name='logout'),
     re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
-]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + i18n_patterns(
+    re_path(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),
+] + i18n_patterns(
     path('', include('forms.urls')),
     path('settings/', include('settings.urls')),
     path('fd/', include('form_dashboard.urls')),
@@ -30,5 +32,5 @@ if 'rosetta' in settings.INSTALLED_APPS:
         re_path(r'^rosetta/', include('rosetta.urls'))
     ]
 
-handler404 = "chart.views.handler404"
-handler500 = "chart.views.handler500"
+handler404 = "forms.views.handler404"
+handler500 = "forms.views.handler500"
