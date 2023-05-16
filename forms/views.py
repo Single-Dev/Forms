@@ -202,8 +202,6 @@ def single_form_view(request, slug):
     if tab == "requests":
         if request.user.username == forma.author.username:
             requests_ = forma.form_requests.all()
-        else:
-            requests_ = forma.form_requests.filter(is_public=True)
     # ----------------------- shu formaga kelgan sorovlarni ko'rish ----------------------- #
     # ----------------------- Sorov Yubirish uchun ----------------------- #
     form_ = get_object_or_404(Form, slug=slug)
