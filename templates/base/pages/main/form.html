@@ -41,10 +41,6 @@
             <label for="email">Email</label>
             {% render_field request_form.email type="email" class="form-control mt-2 mb-2" id="email" placeholder="Enter Valid email addres" %}
             {% render_field request_form.description class="form-control mt-2 mb-2" id="email" placeholder="Description" %}
-            <span class="d-flex">
-                <label for="is_public" style="margin-right: 10px;">Public: </label>
-                {% render_field request_form.is_public id="is_public" %}
-            </span>
             {% if forma.anonim_requests == True and request.user.is_authenticated %}
             <span class="d-flex">
                 <label for="as_anonim" style="margin-right: 10px;">Anonim: </label>
