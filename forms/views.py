@@ -293,3 +293,10 @@ def notifications_view(request):
     return render(request, 'base/pages/main/notifications.html', context)
 # ----------------------- notifications view End----------------------- #
 
+
+
+def handler404(request, exception):
+    return render(request, "base/pages/helpers/404.html")
+
+def handler500(request, *args, **argv):
+    return render(request, 'base/hpages/elpers/404.html')

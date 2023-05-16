@@ -29,3 +29,6 @@ if 'rosetta' in settings.INSTALLED_APPS:
     urlpatterns += [
         re_path(r'^rosetta/', include('rosetta.urls'))
     ]
+
+handler404 = "chart.views.handler404"
+handler500 = "chart.views.handler500"
