@@ -48,11 +48,13 @@ def update_form(request, slug):
     forma = Form.objects.get(slug=slug)
     template_name = "fd/pages/edit-form.html"
     edit_forma = FormaForm(instance=forma)
+    if not request.user == forma.author:
+        return redirect('base:form', slug)
     if request.method == 'POST':
         edit_forma = FormaForm(request.POST, instance=forma)
         if edit_forma.is_valid():
             edit_forma.save()
-            return redirect("fd:update_form", slug) 
+            return redirect("fd:dashboard", slug) 
     context = {
         "forma":forma,
         "edit_forma":edit_forma
@@ -65,6 +67,8 @@ def form_permissions(request, slug):
     forma = Form.objects.get(slug=slug)
     template_name = "fd/pages/form-permissions.html"
     forma_permissions = FormPermissions(instance=forma.dashboard_form)
+    if not request.user == forma.author:
+        return redirect('base:form', slug)
     if request.method == 'POST':
         forma_permissions = FormPermissions(request.POST, instance=forma.dashboard_form)
         if forma_permissions.is_valid():
