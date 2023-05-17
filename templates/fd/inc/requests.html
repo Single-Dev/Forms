@@ -1,3 +1,4 @@
+{% load i18n %}
 {% if requests %}
 <div class="sm:p-7 p-4">
     <div class="flex w-full items-center mb-7">
@@ -86,7 +87,7 @@
                         {% endif %}
                     </a>
                     {% else %}
-                    <a href="#">Can't</a>
+                    <a href="{% url 'fd:update_form' forma.slug %}">{% trans 'Anonim sorovlarni cheklash' %}</a>
                     {% endif %}
                 </td>
                 <td class="sm:p-3 py-2 px-1 border-b border-gray-200 dark:border-gray-800 ">

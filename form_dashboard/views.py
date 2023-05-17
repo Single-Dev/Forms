@@ -44,7 +44,7 @@ def dashboard_from_view(request, slug):
 # ----------------------- Dashboard
 # ----------------------- Edit Form
 @login_required(login_url='base:login')
-def update_from(request, slug):
+def update_form(request, slug):
     forma = Form.objects.get(slug=slug)
     template_name = "fd/pages/edit-form.html"
     edit_forma = FormaForm(instance=forma)
