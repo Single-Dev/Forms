@@ -199,9 +199,6 @@ def single_form_view(request, slug):
     # ----------------------- shu formaga kelgan sorovlarni ko'rish ----------------------- #
     tab = request.GET.get('form')
     requests_ = None
-    if tab == "requests":
-        if request.user.username == forma.author.username:
-            requests_ = forma.form_requests.all()
     # ----------------------- shu formaga kelgan sorovlarni ko'rish ----------------------- #
     # ----------------------- Sorov Yubirish uchun ----------------------- #
     form_ = get_object_or_404(Form, slug=slug)
@@ -244,7 +241,6 @@ def single_form_view(request, slug):
         "forma":forma,
         "form_requests_count":form_requests_count,
         "request_form":request_form,
-        "requests_":requests_,
     }
     return render(request, 'base/pages/main/form.html', context)
 # ----------------------- Yagona Forma ko'rish manzili ----------------------- #

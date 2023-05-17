@@ -16,14 +16,6 @@
     {% else %}
     <span>This Form Private</span>
     {% endif %}
-
-    <a href="?form=requests">requests_</a>
-    <br>
-    {% for y in requests_ %}
-    <br>
-    {{ y.full_name }}
-    <br>
-    {% endfor %}
     {% get_current_language as LANGUAGE_CODE %}
     {% if LANGUAGE_CODE == "uz" %}
     <a href="/en{% url 'base:form' forma.slug %}">Ingliz titliga tarjima qilish</a>
