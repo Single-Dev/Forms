@@ -266,9 +266,14 @@ def single_request_view(request, slug, pk):
 # ----------------------- request view End ----------------------- #
 
 def submit_success_view(request, slug):
-    single = Form.objects.get(slug=slug)
+    request_id = None
+    forma = Form.objects.get(slug=slug)
+    for requests in forma.form_requests.all():
+        if requests.user.username == request.user.username:
+                request_id = requests.id
     context ={
-        "single":single
+        "forma":forma,
+        'request_id': request_id
     }
     return render(request, 'base/pages/helpers/success.html', context)
 

@@ -48,9 +48,11 @@
     </style>
 
     <div class="text-center">
-        <h2 class="text-light">{{single.message}}</h2>
+        <h2 class="text-light">{{forma.message}}</h2>
         <a class="go-home" href="{% url 'profile' request.user %}?tab=requests">View All Requests</a>
+        <a href="{% url 'base:single_request' forma.slug request_id %}">sorvni ko'rish</a>
     </div>
+
 </body>
 
 </html>
