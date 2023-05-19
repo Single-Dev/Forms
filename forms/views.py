@@ -264,16 +264,18 @@ def single_request_view(request, slug, pk):
     }
     return render(request, 'base/pages/main/request.html', context)
 # ----------------------- request view End ----------------------- #
-
+@login_required(login_url='base:login')
 def submit_success_view(request, slug):
     request_id = None
     forma = Form.objects.get(slug=slug)
     for requests in forma.form_requests.all():
         if requests.user.username == request.user.username:
                 request_id = requests.id
+    this_forms_requests = request.user.user_request.filter(form=forma)
     context ={
         "forma":forma,
-        'request_id': request_id
+        'request_id': request_id,
+        'this_forms_requests': this_forms_requests
     }
     return render(request, 'base/pages/helpers/success.html', context)
 
