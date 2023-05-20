@@ -271,7 +271,9 @@ def submit_success_view(request, slug):
     for requests in forma.form_requests.all():
         if requests.user.username == request.user.username:
                 request_id = requests.id
-    this_forms_requests = request.user.user_request.filter(form=forma)
+    this_forms_requests = None
+    if request.GET.get('type') == 'all':
+        this_forms_requests = request.user.user_request.filter(form=forma)
     context ={
         "forma":forma,
         'request_id': request_id,

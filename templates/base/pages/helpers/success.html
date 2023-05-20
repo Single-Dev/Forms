@@ -42,11 +42,19 @@
 
     <div class="text-center">
         <h2 class="text-light">{{forma.message}}</h2>
-        <a class="link" href="{% url 'base:single_request' forma.slug request_id %}">{% trans "Oxirgi sorovimni ko'rish" %}</a>
+        {% if not this_forms_requests %}
+        <a href="?type=all">View All</a>
+        {% else %}
+        <a href="?">View Last</a>
+        {% endif %}
+        {% if this_forms_requests %}
         {% for r in this_forms_requests %}
         <a href="{% url 'base:single_request' forma.slug r.id %}">Ko'rish {{ r.id}}</a>
         <br>
         {% endfor %}
+        {% else %}
+        <a class="link" href="{% url 'base:single_request' forma.slug request_id %}">{% trans "Oxirgi sorovimni ko'rish" %}</a>
+        {% endif %}
     </div>
 
 </body>
