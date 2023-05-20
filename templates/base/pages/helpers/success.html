@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 {% load static %}
+{% load i18n %}
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Success Submit Your Request</title>
+    <title>{% trans 'Sorovningiz yuburildi' %}</title>
     <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
     <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
 </head>
@@ -23,33 +24,25 @@
             min-height: 100vh;
         }
 
-        .go-home {
+        .link {
             text-decoration: none;
             color: #fff;
-            font-size: 2rem;
+            font-size: 1.5rem;
             padding: 5px 10px;
             border-radius: 5px;
+            border: 2px solid black;
             transition: 0.5s all;
         }
 
-        .go-home:hover {
+        .link:hover {
             box-shadow: inset 0px -100px #fff;
             color: #330033;
-        }
-
-        .author {
-            text-decoration: none;
-            transition: 0.2s all;
-            color: #fff;
-        }
-        .author:hover{
-            color: #3d3d3d;
         }
     </style>
 
     <div class="text-center">
         <h2 class="text-light">{{forma.message}}</h2>
-        <a href="{% url 'base:single_request' forma.slug request_id %}">sorvni ko'rish</a>
+        <a class="link" href="{% url 'base:single_request' forma.slug request_id %}">{% trans "Oxirgi sorovimni ko'rish" %}</a>
         {% for r in this_forms_requests %}
         <a href="{% url 'base:single_request' forma.slug r.id %}">Ko'rish {{ r.id}}</a>
         <br>
