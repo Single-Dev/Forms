@@ -16,5 +16,4 @@ urlpatterns = [
     path('submit-success/<str:slug>/', submit_success_view, name="submit_success"),
     path('request/<str:slug>/<int:pk>/', single_request_view, name='single_request'),
     path('notifications/', notifications_view, name='notifications'),
-    path('unsuccess/', unsuccess_view, name='unsuccess_view'),
 ]

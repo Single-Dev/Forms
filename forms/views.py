@@ -272,7 +272,7 @@ def submit_success_view(request, slug):
         if requests.user.username == request.user.username:
                 request_id = requests.id
     this_forms_requests = None
-    if request.GET.get('type') == 'all':
+    if request.GET.get('view') == 'all':
         this_forms_requests = request.user.user_request.filter(form=forma)
     context ={
         "forma":forma,
@@ -281,9 +281,6 @@ def submit_success_view(request, slug):
     }
     return render(request, 'base/pages/helpers/success.html', context)
 
-class UnsuccessView(TemplateView):
-    template_name = 'base/pages/helpers/unsuccess.html'
-unsuccess_view = UnsuccessView.as_view()
 # ----------------------- Notifications view ----------------------- #
 @login_required(login_url='base:login')
 def notifications_view(request):
