@@ -10,13 +10,14 @@ from forms.form import *
 def dashboard_from_view(request, slug):
     user_requests = request.GET.get('user_requests')
     forma = Form.objects.get(slug=slug)
-    requests = forma.form_requests.all()
+    requests_count = forma.form_requests.count()
+    requests = forma.form_requests.all().order_by('-id')[:requests_count]
     # ----- category request by username 
     if user_requests != None:
         if user_requests == "/anonim/":
-            requests =forma.form_requests.filter(as_anonim=True)
+            requests =forma.form_requests.filter(as_anonim=True).order_by('-id')[:requests_count]
         else:
-            requests = forma.form_requests.filter(user__username=user_requests).filter(as_anonim=False)
+            requests = forma.form_requests.filter(user__username=user_requests).filter(as_anonim=False).order_by('-id')[:requests_count]
     # ----- category request by username
     dashboard_obj = forma.dashboard_form
     if not forma.author == request.user:
@@ -38,6 +39,7 @@ def dashboard_from_view(request, slug):
         "requests":requests,
         "senders":senders,
         "ufa": update_forma,
+        'requests_count':requests_count
         # "page_obj":page_obj
     }
     return render(request, "fd/base.html", context)
