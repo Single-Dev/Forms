@@ -3,11 +3,11 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from forms.models import *
 from forms.form import *
-
+from .forms import *
 # ----------------------- Dashboard Form  ----------------------- #
 # ----------------------- Dashboard
 @login_required(login_url="base:login")
-def dashboard_from_view(request, slug):
+def dashboard_form_view(request, slug):
     user_requests = request.GET.get('user_requests')
     forma = Form.objects.get(slug=slug)
     requests_count = forma.form_requests.count()

@@ -71,8 +71,3 @@ class CreateFormRequestTest(forms.ModelForm):
     class Meta:
         model = FormRequest
         fields = ['full_name', 'email', 'as_anonim', "description"]
-
-class FormPermissions(forms.ModelForm):
-    class Meta:
-        model = DashboardForm
-        fields = ['blocked_users', 'uwsr']

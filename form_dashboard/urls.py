@@ -4,7 +4,7 @@ from .views import *
 app_name = "fd"
 
 urlpatterns = [
-    path("requests-<str:slug>/", dashboard_from_view, name='dashboard'),
+    path("requests-<str:slug>/", dashboard_form_view, name='dashboard'),
     path("edit-<str:slug>/", update_form, name='update_form'),
     path("permissions-<str:slug>/", form_permissions, name='form_permissions'),
     path("visits-<str:slug>/", form_visits_view, name='form_visits'),
