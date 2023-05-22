@@ -28,17 +28,17 @@
                                     Anonim
                             </div>
                         </a>
-                        {% for arm in forma.form_requests.all %}
-                        {% if not arm.as_anonim %}
-                        <a href="{% url 'fd:dashboard' forma.slug %}?user_requests={{ arm.user }}" class="bg-white p-3 w-full flex flex-col rounded-md dark:bg-gray-800 shadow">
+                        {% for sender in forma.dashboard_form.sent_the_request.all %}
+                        {% if not sender.as_anonim %}
+                        <a href="{% url 'fd:dashboard' forma.slug %}?user_requests={{ sender }}" class="bg-white p-3 w-full flex flex-col rounded-md dark:bg-gray-800 shadow">
                             <div
                                 class="flex xl:flex-row flex-col items-center font-medium text-gray-900 dark:text-white pb-2 mb-2 xl:border-b border-gray-200 border-opacity-75 dark:border-gray-700 w-full">
-                                <img src="{{ arm.user.profile.image.url }}"
+                                <img src="{{ sender.profile.image.url }}"
                                     class="w-7 h-7 mr-2 rounded-full" alt="profile" />
-                                {% if arm.user.first_name %}{{ arm.user.first_name }} | {% endif %}@{{ arm.user }}
+                                {% if sender.first_name %}{{ sender.first_name }} | {% endif %}@{{ sender }}
                             </div>
                             <div class="flex items-center w-full">
-                                <div class="ml-auto text-xs text-gray-500">UTC: {{ arm.submited_on }}</div>
+                                <div class="ml-auto text-xs text-gray-500">UTC: {{sender}}</div>
                             </div>
                         </a>
                         {% endif %}

@@ -30,15 +30,11 @@ def dashboard_form_view(request, slug):
             update_forma.save()
             return redirect("fd:dashboard", slug)
     # ----------------------- Update Form view  End----------------------- #
-    # ----------------------- Get Senders ----------------------- #
-    sender_1 = forma.form_requests.all()
-    senders =forma.form_requests.all()
-    print(forma.dashboard_form.uwsr.all())
+
     context = {
         "forma":forma,
         "dashboard_obj": dashboard_obj,
         "requests":requests,
-        "senders":senders,
         "ufa": update_forma,
         'requests_count':requests_count
         # "page_obj":page_obj
