@@ -176,8 +176,8 @@ def single_form_view(request, slug):
     forma = Form.objects.get(slug=slug)
     dashboard_obj = forma.dashboard_form
     blocked_users = dashboard_obj.blocked_users.all()
-    uwsra = dashboard_obj.uwsr.all()
-    if not forma.author == request.user and not request.user in blocked_users and not request.user in uwsra:
+    list_of_sent_the_request = dashboard_obj.sent_the_request.all()
+    if not forma.author == request.user and not request.user in blocked_users and not request.user in list_of_sent_the_request:
         dashboard_obj.visits += 1
         dashboard_obj.last_visit = timezone.now()
         dashboard_obj.save()
@@ -186,12 +186,16 @@ def single_form_view(request, slug):
         return render(request, 'base/pages/helpers/404.html')
     
     # Foydalanuvchilar bir marta sororv yuborish uchun
-    user_submited_request_all = forma.form_requests.all()
+    users_who_sent_requests = forma.form_requests.all()
     if not forma.infinite_requests and request.user != forma.author:
-        for user_submited_r in user_submited_request_all:
-            dashboard_obj.uwsr.add(user_submited_r.user.id)
+        for user_who_sent_requests in users_who_sent_requests:
+            dashboard_obj.users_that_cannot_send_requests.add(user_who_sent_requests.user.id)
+    
+    if request.user != forma.author:
+        for user_who_sent_requests in users_who_sent_requests:
+            dashboard_obj.sent_the_request.add(user_who_sent_requests.user.id)
 
-    if request.user in dashboard_obj.uwsr.all():
+    if request.user in dashboard_obj.users_that_cannot_send_requests.all():
         return redirect("base:submit_success", slug)
     # Foydalanuvchilar bir marta sororv yuborish uchun
 

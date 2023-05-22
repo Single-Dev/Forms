@@ -33,6 +33,7 @@ def dashboard_form_view(request, slug):
     # ----------------------- Get Senders ----------------------- #
     sender_1 = forma.form_requests.all()
     senders =forma.form_requests.all()
+    print(forma.dashboard_form.uwsr.all())
     context = {
         "forma":forma,
         "dashboard_obj": dashboard_obj,
