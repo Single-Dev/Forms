@@ -30,7 +30,14 @@ def dashboard_form_view(request, slug):
             update_forma.save()
             return redirect("fd:dashboard", slug)
     # ----------------------- Update Form view  End----------------------- #
-
+    users_who_sent_requests = forma.form_requests.all()
+    # Sorovni anonim yuborganlarni o'chirish
+    # for request_1 in users_who_sent_requests:
+    #     if request_1.as_anonim:
+    #         dashboard_obj.sent_the_request.remove(request_1.user.id)
+    # Faqat sorov yuborgan foydalanuvchilar qo'shish
+    for user_who_sent_requests in users_who_sent_requests:
+        dashboard_obj.sent_the_request.add(user_who_sent_requests.user.id)
     context = {
         "forma":forma,
         "dashboard_obj": dashboard_obj,

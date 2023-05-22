@@ -187,13 +187,14 @@ def single_form_view(request, slug):
     
     # Foydalanuvchilar bir marta sororv yuborish uchun
     users_who_sent_requests = forma.form_requests.all()
+    # Agar infnite requests yoniq bo'lsa yubora olmaydigan foydalanuvcgilar ro'yxatiga qo'shmaydi
     if not forma.infinite_requests and request.user != forma.author:
         for user_who_sent_requests in users_who_sent_requests:
             dashboard_obj.users_that_cannot_send_requests.add(user_who_sent_requests.user.id)
-    
-    if request.user != forma.author:
+    # Agar infnite requests o'chiq bo'lsa yubora olmaydigan foydalanuchilar ro'yxatidan hammani o'chirib tashlaydi
+    else:
         for user_who_sent_requests in users_who_sent_requests:
-            dashboard_obj.sent_the_request.add(user_who_sent_requests.user.id)
+            dashboard_obj.users_that_cannot_send_requests.remove(user_who_sent_requests.user.id)
 
     if request.user in dashboard_obj.users_that_cannot_send_requests.all():
         return redirect("base:submit_success", slug)

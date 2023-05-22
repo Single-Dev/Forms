@@ -59,5 +59,5 @@ class FormRequest(models.Model):
     description = models.TextField(max_length=70)
     submited_on = models.DateTimeField(default=timezone.now)
     def __str__(self):
-        return f'id: {self.id}'
+        return f'id: {self.id} {self.user}'
 
