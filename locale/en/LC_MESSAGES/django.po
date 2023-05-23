@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-13 21:48+0500\n"
-"PO-Revision-Date: 2023-02-13 21:48+0000\n"
-"Last-Translator: BEKZOD Tursunboyev <mygmaildotrcom@gmail.com>\n"
+"POT-Creation-Date: 2023-05-23 10:57+0500\n"
+"PO-Revision-Date: 2023-05-23 11:02+0000\n"
+"Last-Translator: BEKZOD  <mygmaildotrcom@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -19,57 +19,82 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Translated-Using: django-rosetta 0.9.8\n"
 
-#: .\project\settings.py:112
+#: .\project\settings.py:114
 msgid "Uzbek"
 msgstr "Uzbek"
 
-#: .\project\settings.py:113
+#: .\project\settings.py:115
 msgid "English"
 msgstr "Ingliz"
 
-#: .\project\settings.py:114
+#: .\project\settings.py:116
 msgid "Russian"
 msgstr "Russian"
 
-#: .\templates\includes\nav.html:12
+#: .\templates\base\includes\nav.html:12
 msgid "Uy"
 msgstr "Home"
 
-#: .\templates\includes\nav.html:13
-msgid "haqida"
-msgstr "about"
+#: .\templates\base\includes\nav.html:13
+msgid "Nima uchun biz"
+msgstr "Why us"
 
-#: .\templates\includes\nav.html:14
-msgid "ximatlar"
-msgstr "Services"
+#: .\templates\base\includes\nav.html:14
+msgid "Harakatga chaqirish"
+msgstr "Call to action"
 
-#: .\templates\includes\nav.html:15
-msgid "partfel"
-msgstr "portfolio"
-
-#: .\templates\includes\nav.html:30
+#: .\templates\base\includes\nav.html:29
 msgid "Yangi Forma"
 msgstr "New Form"
 
-#: .\templates\includes\nav.html:42
+#: .\templates\base\includes\nav.html:41
 msgid "til"
 msgstr "language"
 
-#: .\templates\includes\nav.html:56
+#: .\templates\base\includes\nav.html:55
 msgid "boshlash"
 msgstr "get started"
 
-#: .\templates\includes\nav.html:57
+#: .\templates\base\includes\nav.html:56
 msgid "kirish"
 msgstr "login"
 
-#: .\templates\includes\nav.html:59
+#: .\templates\base\includes\nav.html:58
 msgid "chiqish"
 msgstr "logout"
 
-#: .\templates\pages\main\notifications.html:34
+#: .\templates\base\pages\helpers\success.html:10
+msgid "Sorovningiz yuborildi"
+msgstr "Your request has been sent"
+
+#: .\templates\base\pages\helpers\success.html:56
+msgid "Oxirgi sorovimni ko'rish"
+msgstr "View my last request"
+
+#: .\templates\base\pages\main\new.html:36
+msgid "Yaratish"
+msgstr "Create"
+
+#: .\templates\base\pages\main\notifications.html:34
 msgid "Asosiy jild top toza!"
-msgstr "Main jild is clear"
+msgstr "The main folder is clean!"
+
+#: .\templates\fd\inc\requests.html:92
+msgid "Anonim sorovlarni cheklash"
+msgstr "Restrict anonymous requests"
+
+#: .\templates\fd\inc\requests.html:94
+msgid "Anonim sorovlarga ruxsat berish"
+msgstr "Allow anonymous requests"
+
+#~ msgid "haqida"
+#~ msgstr "about"
+
+#~ msgid "ximatlar"
+#~ msgstr "Services"
+
+#~ msgid "partfel"
+#~ msgstr "portfolio"
 
 #~ msgid "salom"
 #~ msgstr "Hello"
