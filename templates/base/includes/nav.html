@@ -9,13 +9,13 @@
 
         <nav id="navbar" class="navbar">
             <ul>
-                <li><a class="nav-link scrollto active" href="#hero">{% translate "Uy" %}</a></li>
+                <li><a class="nav-link scrollto active" href="#hero">{% translate "Bosh qism" %}</a></li>
                 <li><a class="nav-link scrollto" href="#why-us">{% translate "Nima uchun biz" %}</a></li>
                 <li><a class="nav-link scrollto" href="#cta">{% translate "Harakatga chaqirish" %}</a></li>
                 <li class="dropdown">
                     <a href="#">
                         <span>
-                            Drop Down
+                            {% trans 'Asboblar' %}
                             {% if n_count > 0 %}
                             *
                             {% endif %}
@@ -24,21 +24,15 @@
                     </a>
                     <ul>
                         {% if request.user.is_authenticated %}
-                        <li><a href="{% url 'profile' request.user %}">Profile (@{{request.user}})</a></li>
+                        <li><a href="{% url 'profile' request.user %}">Profile</a></li>
                         {% endif %}
                         <li><a href="{% url 'base:new' %}">{% trans 'Yangi Forma' %}</a></li>
                         <li><a href="{% url 'base:notifications' %}">Notifications ({{ n_count }})</a></li>
-                        <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i
-                                    class="bi bi-chevron-right"></i></a>
-                            <ul>
-                                <li><a href="#">Deep Drop Down 2</a></li>
-                            </ul>
-                        </li>
                     </ul>
                 </li>
                 <li class="dropdown">
                     <a href="#">
-                        <span>{% trans "til" %}</span>
+                        <span>{% trans "Til" %}</span>
                         <i class="bi bi-chevron-down"></i>
                     </a>
                     <ul>
@@ -50,7 +44,7 @@
                         {% endfor %}
                     </ul>
                 </li>
-                <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+                <li><a class="nav-link scrollto" href="#footer">{% trans 'Pastki qisim' %}</a></li>
                 {% if not request.user.is_authenticated %}
                 <li><a class="getstarted scrollto" href="{% url 'base:signup' %}">{% trans "boshlash" %}</a></li>
                 <li><a class="scrollto" href="{% url 'base:login' %}">{% trans "kirish" %}</a></li>

@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-23 10:57+0500\n"
-"PO-Revision-Date: 2023-05-23 11:02+0000\n"
+"POT-Creation-Date: 2023-05-23 11:19+0500\n"
+"PO-Revision-Date: 2023-05-23 11:21+0000\n"
 "Last-Translator: BEKZOD  <mygmaildotrcom@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -31,35 +31,64 @@ msgstr "Ingliz"
 msgid "Russian"
 msgstr "Russian"
 
+#: .\templates\base\includes\cta.html:8 .\templates\base\includes\cta.html:14
+#: .\templates\base\includes\nav.html:14
+msgid "Harakatga chaqirish"
+msgstr "Call to action"
+
+#: .\templates\base\includes\hero.html:10
+msgid "Biznesingiz uchun yaxshiroq yechimlar"
+msgstr "Better Solutions For Your Business"
+
+#: .\templates\base\includes\hero.html:11
+msgid ""
+"Biz siz bilan aloqaga chqimoqchi bo'lganlar bilan bog'laymiz va buni "
+"rivojlantiramiz"
+msgstr ""
+
+#: .\templates\base\includes\hero.html:13
+#| msgid "boshlash"
+msgid "Boshlash"
+msgstr "Get started"
+
+#: .\templates\base\includes\hero.html:15
+#| msgid "Oxirgi sorovimni ko'rish"
+msgid "Videoni ko'rish"
+msgstr "Watch video"
+
 #: .\templates\base\includes\nav.html:12
-msgid "Uy"
+msgid "Bosh qism"
 msgstr "Home"
 
 #: .\templates\base\includes\nav.html:13
 msgid "Nima uchun biz"
 msgstr "Why us"
 
-#: .\templates\base\includes\nav.html:14
-msgid "Harakatga chaqirish"
-msgstr "Call to action"
+#: .\templates\base\includes\nav.html:18
+msgid "Asboblar"
+msgstr "Tools"
 
 #: .\templates\base\includes\nav.html:29
 msgid "Yangi Forma"
 msgstr "New Form"
 
-#: .\templates\base\includes\nav.html:41
-msgid "til"
-msgstr "language"
+#: .\templates\base\includes\nav.html:35
+msgid "Til"
+msgstr "Language"
 
-#: .\templates\base\includes\nav.html:55
+#: .\templates\base\includes\nav.html:47
+msgid "Pastki qisim"
+msgstr "Footer"
+
+#: .\templates\base\includes\nav.html:49
 msgid "boshlash"
 msgstr "get started"
 
-#: .\templates\base\includes\nav.html:56
+#: .\templates\base\includes\nav.html:50
 msgid "kirish"
 msgstr "login"
 
-#: .\templates\base\includes\nav.html:58
+#: .\templates\base\includes\nav.html:52
 msgid "chiqish"
 msgstr "logout"
 
@@ -86,6 +115,9 @@ msgstr "Restrict anonymous requests"
 #: .\templates\fd\inc\requests.html:94
 msgid "Anonim sorovlarga ruxsat berish"
 msgstr "Allow anonymous requests"
+
+#~ msgid "Uy"
+#~ msgstr "Home"
 
 #~ msgid "haqida"
 #~ msgstr "about"
