@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-23 11:19+0500\n"
-"PO-Revision-Date: 2023-05-23 11:21+0000\n"
+"POT-Creation-Date: 2023-05-23 11:37+0500\n"
+"PO-Revision-Date: 2023-05-23 11:38+0000\n"
 "Last-Translator: BEKZOD  <mygmaildotrcom@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -47,12 +47,10 @@ msgid ""
 msgstr ""
 
 #: .\templates\base\includes\hero.html:13
-#| msgid "boshlash"
 msgid "Boshlash"
 msgstr "Get started"
 
 #: .\templates\base\includes\hero.html:15
-#| msgid "Oxirgi sorovimni ko'rish"
 msgid "Videoni ko'rish"
 msgstr "Watch video"
 
@@ -107,6 +105,10 @@ msgstr "Create"
 #: .\templates\base\pages\main\notifications.html:34
 msgid "Asosiy jild top toza!"
 msgstr "The main folder is clean!"
+
+#: .\templates\fd\base.html:29
+msgid "Anonym"
+msgstr "Anonim"
 
 #: .\templates\fd\inc\requests.html:92
 msgid "Anonim sorovlarni cheklash"

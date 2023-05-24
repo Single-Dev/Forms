@@ -210,7 +210,9 @@
                                 <a href="{% url 'profile' user_p.username %}" class="text-dark text-decoration-none">@{{user_p.username}}</a>
                                 {% endif %}
                             </h4>
-                            <a href="{% url 'base:single_request' ur.form.slug ur.id %}" class="text-dark text-decoration-none">Form: {{ ur.form.title }}</a>
+                            <a href="{% url 'base:form' ur.form.slug %}" class="text-dark text-decoration-none">{{ ur.form.title_en }}</a>
+                            <br>
+                            <a href="{% url 'base:single_request' ur.form.slug ur.id %}" class="text-dark text-decoration-none">View request</a>
                         </div>
                         <hr>
                         {% endfor %}
