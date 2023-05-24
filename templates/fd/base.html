@@ -50,7 +50,7 @@
                     <div
                         class="sm:px-7 sm:pt-7 px-4 pt-4 flex flex-col w-full border-b border-gray-200 bg-white dark:bg-gray-900 dark:text-white dark:border-gray-800 sticky top-0">
                         <div class="flex w-full items-center">
-                            <a href="{% url 'base:form' forma.slug %}" class="flex items-center text-3xl text-gray-900 dark:text-white">
+                            <a href="{% url 'fd:dashboard' forma.slug %}" class="flex items-center text-3xl text-gray-900 dark:text-white">
                                 {{forma.title}}
                             </a>
                             <div class="ml-auto sm:flex hidden items-center justify-end">
@@ -70,7 +70,7 @@
                             </div>
                         </div>
                         <div class="flex items-center space-x-3 sm:mt-7 mt-4">
-                            <a href="#"class="px-3 border-b-2 border-blue-500 text-blue-500 dark:text-white dark:border-white pb-1.5">Requests</a>
+                            <a href="{% url 'fd:dashboard' forma.slug %}"class="px-3 border-b-2 border-blue-500 text-blue-500 dark:text-white dark:border-white pb-1.5">Requests</a>
                             <a href="{% url 'fd:update_form' forma.slug %}" class="px-3 border-b-2 border-transparent text-gray-600 dark:text-gray-400 pb-1.5">Edit Form</a>
                             <a href="{% url 'fd:form_permissions' forma.slug %}" class="px-3 border-b-2 border-transparent text-gray-600 dark:text-gray-400 pb-1.5">Form permissions</a>
                             </div>

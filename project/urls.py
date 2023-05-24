@@ -18,11 +18,11 @@ urlpatterns = [
     re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
     re_path(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),
 ] + i18n_patterns(
-    path('', include('forms.urls')),
-    path('settings/', include('settings.urls')),
-    path('fd/', include('form_dashboard.urls')),
     path('i18n/', include("django.conf.urls.i18n")),
-    prefix_default_language = False
+    path('fd/', include('form_dashboard.urls')),
+    path('settings/', include('settings.urls')),
+    path('', include('forms.urls')),
+    prefix_default_language = True
 )
 
 

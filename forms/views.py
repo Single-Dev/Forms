@@ -21,10 +21,6 @@ def home(request):
     }
     return render(request, 'base/pages/main/home.html', context)
 # ---- Home End ---- #
-# ---- /uz/ resirect ---- #
-def uz_redirect(request):
-    return redirect('base:home')
-# ---- /uz/ resirect end ---- #
 
 
 # Create User Account
